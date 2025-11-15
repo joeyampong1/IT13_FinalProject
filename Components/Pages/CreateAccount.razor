@@ -1,0 +1,71 @@
+﻿@page "/create-account"
+@layout Layout.EmptyLayout
+
+<div class="create-account-page">
+    <div class="create-account-card">
+        <h2 class="create-account-title">Create User Account</h2>
+
+        <EditForm Model="this" OnValidSubmit="HandleSubmit">
+            <DataAnnotationsValidator />
+
+            <div class="form-row">
+                <label>Name</label>
+                <InputText class="form-input" @bind-Value="Name" />
+            </div>
+
+            <div class="form-row">
+                <label>Email</label>
+                <InputText class="form-input" @bind-Value="Email" type="email" />
+            </div>
+
+            <div class="form-row">
+                <label>Username</label>
+                <InputText class="form-input" @bind-Value="UserName" />
+            </div>
+
+            <div class="form-row">
+                <label>Password</label>
+                <InputText class="form-input" @bind-Value="Password" type="password" />
+            </div>
+
+            <div class="form-row">
+                <label>Role</label>
+                <InputSelect class="form-input" @bind-Value="Role">
+                    <option value="">Select role</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Doctor">Doctor</option>
+                    <option value="Nurse">Nurse</option>
+                    <option value="Billing Staff">Billing Staff</option>
+                    <option value="Inventory Staff">Inventory Staff</option>
+                </InputSelect>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" @onclick="GoBack">Back</button>
+                <button type="submit" class="btn-primary">Submit</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    public string? Name { get; set; }
+    public string? Role { get; set; }
+    public string? Email { get; set; }
+    public string? UserName { get; set; }
+    public string? Password { get; set; }
+
+    [Inject]
+    private NavigationManager Navigation { get; set; } = default!;
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/login");
+    }
+
+    private void HandleSubmit()
+    {
+        // TODO: Add your account creation logic here.
+        // After successful creation, navigate or show a message as needed.
+    }
+}

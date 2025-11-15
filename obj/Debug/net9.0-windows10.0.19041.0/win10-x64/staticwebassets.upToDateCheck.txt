@@ -1,0 +1,10 @@
+wwwroot\css\app.css
+wwwroot\css\bootstrap\bootstrap.min.css
+wwwroot\css\bootstrap\bootstrap.min.css.map
+wwwroot\images\Background_login.png
+wwwroot\images\Final_logo-removebg-preview.png
+wwwroot\index.html
+C:\Users\User.DESKTOP-EOONC7Q\source\repos\IT_13FinalProject\IT_13FinalProject\wwwroot\css\app.css
+C:\Users\User.DESKTOP-EOONC7Q\source\repos\IT_13FinalProject\IT_13FinalProject\wwwroot\css\bootstrap\bootstrap.min.css
+C:\Users\User.DESKTOP-EOONC7Q\source\repos\IT_13FinalProject\IT_13FinalProject\wwwroot\css\bootstrap\bootstrap.min.css.map
+C:\Users\User.DESKTOP-EOONC7Q\source\repos\IT_13FinalProject\IT_13FinalProject\wwwroot\index.html

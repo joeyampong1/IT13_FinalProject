@@ -1,0 +1,114 @@
+@page "/patient-management"
+@layout Layout.DashboardLayout
+
+<div class="pm-page">
+    <header class="pm-header">
+        <div>
+            <h1 class="pm-title">Patient Management</h1>
+            <p class="pm-subtitle">Welcome back Admin!</p>
+        </div>
+
+        <div class="dashboard-user-info">
+            <span class="dashboard-user-email">admin@gmail.com</span>
+            <div class="dashboard-user-avatar">👤</div>
+            <span class="dashboard-user-name">Admin</span>
+        </div>
+    </header>
+
+    <section class="pm-overview">
+        <div class="pm-overview-header">
+            <h2 class="pm-section-title">Patient Overview</h2>
+            <div class="pm-show-entries">
+                <span>Show</span>
+                <select>
+                    <option>5</option>
+                    <option>10</option>
+                    <option>25</option>
+                </select>
+                <span>entries</span>
+            </div>
+        </div>
+
+        <div class="pm-filters-row">
+            <div class="pm-alpha-filter">
+                <button class="pm-filter-pill active">All</button>
+                @foreach (var letter in Alphabet)
+                {
+                    <button class="pm-filter-pill">@letter</button>
+                }
+            </div>
+
+            <div class="pm-search-row">
+                <div class="pm-search-box">
+                    <span class="pm-search-icon">🔍</span>
+                    <input class="pm-search-input" placeholder="Search Client" />
+                </div>
+
+                <div class="pm-actions">
+                    <button class="activity-action-btn">Sort</button>
+                    <button class="activity-action-btn">Filters</button>
+                    <button class="pm-patient-btn">+ Patient</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="pm-table-outer">
+            <div class="pm-table-wrapper">
+                <table class="pm-table">
+                    <thead>
+                        <tr>
+                            <th class="pm-col-id">ID</th>
+                            <th>Patient Name<br /><span class="pm-subcol">Email</span></th>
+                            <th>Date of Visit</th>
+                            <th class="pm-col-action">More Info</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var p in SamplePatients)
+                        {
+                            <tr>
+                                <td class="pm-col-id">@p.Id</td>
+                                <td>
+                                    <div class="pm-patient-name">@p.Name</div>
+                                    <div class="pm-patient-email">@p.Email</div>
+                                </td>
+                                <td>@p.DateOfVisit</td>
+                                <td class="pm-col-action">
+                                    <button class="pm-view-btn">View</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="pm-pagination">
+            <button class="pm-page-btn">Previous</button>
+            <button class="pm-page-number active">1</button>
+            <button class="pm-page-number">2</button>
+            <button class="pm-page-number">3</button>
+            <span class="pm-page-dots">...</span>
+            <button class="pm-page-number">8</button>
+            <button class="pm-page-btn">Next</button>
+        </div>
+    </section>
+</div>
+
+@code {
+    private static readonly string[] Alphabet = new[]
+    {
+        "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
+    };
+
+    private record PatientRow(string Id, string Name, string Email, string DateOfVisit);
+
+    private readonly PatientRow[] SamplePatients = new[]
+    {
+        new PatientRow("01", "Himeko Murata", "himeko_murata@gmail.com", "03/09/24"),
+        new PatientRow("02", "Yae Miko", "miko.yae@mail.com", "03/09/24"),
+        new PatientRow("03", "Black Swan", "ms.blkswan@mail.com", "03/09/24"),
+        new PatientRow("04", "Ruan Mei", "theRM_ei@gmail.com", "03/09/24"),
+        new PatientRow("05", "Bronya Rand", "bronya.rr@mail.com", "03/09/24"),
+    };
+}

@@ -1,0 +1,261 @@
+/* ===================== PAGE-SPECIFIC STYLES FOR Login.razor ===================== */
+
+/* ----- Overall page background and centering ----- */
+.login-page[b-ykoxb9uw7r] {
+    min-height: 100vh; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    /* Background image from wwwroot/image with teal overlay */
+    background: 
+        linear-gradient(135deg, rgba(15, 139, 141, 0.5), rgba(12, 113, 111, 0.5)),
+        url("/images/Background_login.png");
+    /* Show more of the image (less zoom) */
+    background-size: 100% 100%;         /* try full image inside frame */
+    background-position: center;
+    background-repeat: no-repeat;    /* no tiling */
+    padding: 16px; 
+    box-sizing: border-box;
+}
+
+/* ----- Main container for left and right panels ----- */
+.login-container[b-ykoxb9uw7r] {
+    display: flex; 
+    flex-direction: row; 
+    width: 100%;
+    max-width: 1100px; 
+    min-height: 480px; 
+    background: rgba(255, 255, 255, 0.04); 
+    border-radius: 12px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+    overflow: hidden; 
+}
+
+/* ----- Left login card ----- */
+.login-card[b-ykoxb9uw7r] {
+    flex: 0 0 360px; 
+    background: #e0f5f4; 
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px; 
+}
+
+/* Inner wrapper to vertically center the logo, inputs and links inside the white panel */
+.login-card-inner[b-ykoxb9uw7r] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    height: 100%;
+    gap: 16px;
+}
+
+/* ----- Logo placeholder / picture box styling ----- */
+.logo-placeholder[b-ykoxb9uw7r] {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 12px; 
+    border-radius: 16px;
+    border: 2px dashed #0f8b8d; 
+    background-color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-image[b-ykoxb9uw7r] {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* ----- Login title text ----- */
+.login-title[b-ykoxb9uw7r] {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: #0f4b4b;
+    margin: 4px 0 12px;
+}
+
+/* ----- Input group wrapper (for icon + input) ----- */
+.input-group[b-ykoxb9uw7r] {
+    position: relative; 
+    margin-bottom: 16px;
+    width: 100%;
+    max-width: 280px; 
+    margin-left: 30px; 
+    margin-right: auto;
+}
+
+/* ----- Text inputs ----- */
+input[type="text"][b-ykoxb9uw7r],
+input[type="password"][b-ykoxb9uw7r] {
+    border-radius: 12px !important;
+    -webkit-border-radius: 12px !important;
+    -moz-border-radius: 12px !important;
+    border: 1px solid #c9e3e1 !important;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+}
+
+/* ----- Text inputs ----- */
+.input-field[b-ykoxb9uw7r] {
+    width: 100%;
+    padding: 12px 30px 12px 16px;
+    border-radius: 12px !important;
+    -webkit-border-radius: 12px !important;
+    -moz-border-radius: 12px !important;
+    border: 1px solid #c9e3e1 !important;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+    background-color: #f4fbfb;
+    transition: all 0.3s ease;
+}
+
+
+.login-card .input-group .input-field:focus[b-ykoxb9uw7r] {
+        border-color: #0f8b8d !important;
+        box-shadow: 0 0 0 2px rgba(15, 139, 141, 0.25);
+    }
+
+.rounded-input[b-ykoxb9uw7r], .rounded-input input[b-ykoxb9uw7r] {
+    border-radius: 12px !important;
+    border: 1px solid #c9e3e1 !important;
+}
+
+/* ----- Icon inside input field ----- */
+.input-icon[b-ykoxb9uw7r] {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #7a9a98;
+    pointer-events: none;
+    margin-right: 35px;
+}
+
+/* ----- Login button styling ----- */
+.login-button[b-ykoxb9uw7r] {
+    width: 80%;
+    padding: 8px 16px;
+    margin-top: 4px;
+    border-radius: 999px; 
+    border: none;
+    background-color: #1B7471;
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 0.7px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    max-width: 280px; 
+    margin-left: auto; 
+    margin-right: auto; 
+    display: block; 
+    font-size: 14px; 
+   
+}
+
+.login-button:hover[b-ykoxb9uw7r] {
+    background-color: #16615f; 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 12px rgba(27, 116, 113, 0.3); 
+}
+
+.login-button:active[b-ykoxb9uw7r] {
+        transform: translateY(0); 
+        box-shadow: 0 2px 6px rgba(27, 116, 113, 0.3); 
+    }
+
+/* ----- Links under the button ----- */
+.login-links[b-ykoxb9uw7r] {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px;
+    font-size: 12px;
+    align-items: center;  
+    text-align: center;
+}
+
+.login-link[b-ykoxb9uw7r] {
+    color: #0f4b4b;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.login-link:hover[b-ykoxb9uw7r] {
+    color: #0c716f;
+}
+
+/* ----- Footer text (terms & privacy) ----- */
+.login-footer-text[b-ykoxb9uw7r] {
+    margin-top: auto; 
+    font-size: 11px;
+    color: #4b6b69;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: center; 
+    text-align: center;
+}
+
+/* ----- Right information panel ----- */
+.info-panel[b-ykoxb9uw7r] {
+    flex: 1; 
+    padding: 40px 48px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.15), transparent 55%),
+                linear-gradient(135deg, #0c716f, #0a5b5b);
+}
+
+/* Inner wrapper to center the text block in the green panel */
+.info-panel-inner[b-ykoxb9uw7r] {
+    max-width: 520px;
+    margin: 0 auto; 
+    text-align: center;
+}
+
+.info-title[b-ykoxb9uw7r] {
+    font-size: 32px;
+    line-height: 1.25;
+    font-weight: 700;
+    max-width: 520px;
+    margin-bottom: 16px;
+}
+
+.info-description[b-ykoxb9uw7r] {
+    font-size: 15px;
+    max-width: 520px;
+    opacity: 0.92;
+}
+
+/* ----- Responsive behavior for smaller screens ----- */
+@media (max-width: 900px) {
+    .login-container[b-ykoxb9uw7r] {
+        flex-direction: column; 
+        min-height: auto;
+    }
+
+    .login-card[b-ykoxb9uw7r] {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    .info-panel[b-ykoxb9uw7r] {
+        padding: 28px 22px 32px;
+    }
+
+    .info-title[b-ykoxb9uw7r] {
+        font-size: 24px;
+    }
+}

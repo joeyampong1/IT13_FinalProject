@@ -1,0 +1,97 @@
+﻿@page "/dashboard"
+@layout Layout.DashboardLayout
+
+<div class="dashboard-page">
+    <header class="dashboard-header">
+        <div>
+            <h1 class="dashboard-title">Dashboard</h1>
+            <p class="dashboard-subtitle">Welcome back Admin!</p>
+        </div>
+
+        <div class="dashboard-user-info">
+            <span class="dashboard-user-email">admin@gmail.com</span>
+            <div class="dashboard-user-avatar">👤</div>
+            <span class="dashboard-user-name">Admin</span>
+        </div>
+    </header>
+
+    <section class="dashboard-notification">
+        <div class="notification-title">Lease Notification</div>
+        <div class="notification-body">
+            <div class="notification-icon">!</div>
+            <div class="notification-text">
+                <div>Low stock detected: Paracetamol 500mg &mdash; only 15 units left.</div>
+                <button class="notification-button">Go to notification</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="dashboard-cards-row">
+        <div class="dashboard-card">
+            <h3>Monthly Revenue</h3>
+            <div class="card-placeholder">[Bar chart placeholder]</div>
+        </div>
+        <div class="dashboard-card">
+            <h3>Patient Weekly Visit</h3>
+            <div class="card-placeholder">[Line chart placeholder]</div>
+        </div>
+        <div class="dashboard-card">
+            <h3>Patient Demographics</h3>
+            <div class="card-placeholder">[Pie chart placeholder]</div>
+        </div>
+        <div class="dashboard-card">
+            <h3>Revenue by Department</h3>
+            <div class="card-placeholder">[Bar chart placeholder]</div>
+        </div>
+    </section>
+
+    <section class="dashboard-activity">
+        <div class="activity-header">
+            <h3>Recent Activity</h3>
+            <div class="activity-search-area">
+                <input class="activity-search" placeholder="Search activity..." />
+                <div class="activity-actions">
+                    <button class="activity-action-btn">Sort</button>
+                    <button class="activity-action-btn">Filters</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="activity-table-wrapper">
+            <table class="activity-table">
+                <thead>
+                    <tr>
+                        <th>Activity</th>
+                        <th>User</th>
+                        <th>Date &amp; Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Registered new patient: Juan Dela Cruz</td>
+                        <td>Receptionist</td>
+                        <td>10:24 AM</td>
+                    </tr>
+                    <tr>
+                        <td>Added Invoice #INV-10321 (₱1,850)</td>
+                        <td>Billing Staff</td>
+                        <td>10:15 AM</td>
+                    </tr>
+                    <tr>
+                        <td>Updated Health Record: Ana Santos</td>
+                        <td>Dr. Reyes</td>
+                        <td>9:59 AM</td>
+                    </tr>
+                    <tr>
+                        <td>Dispensed Paracetamol 500mg (10 tabs)</td>
+                        <td>Pharmacist</td>
+                        <td>9:40 AM</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+@code {
+}

@@ -1,0 +1,207 @@
+.create-account-page[b-immq16zsyb] {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    box-sizing: border-box;
+    /* Same background image as login page */
+    background: linear-gradient(135deg, rgba(15, 139, 141, 0.5), rgba(12, 113, 111, 0.5)), url("/images/Background_login.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.create-account-card[b-immq16zsyb] {
+    width: 100%;
+    max-width: 520px;
+    background-color: #d7fbfb;
+    border-radius: 24px;
+    padding: 32px 40px 28px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+
+.create-account-title[b-immq16zsyb] {
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #115c5a;
+}
+
+.form-row[b-immq16zsyb] {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+    gap: 16px;
+}
+
+.form-row label[b-immq16zsyb] {
+    flex: 0 0 90px;
+    font-size: 14px;
+    color: #0f4b4b;
+}
+
+.form-input[b-immq16zsyb] {
+    flex: 1;
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid #c9e3e1;
+    font-size: 14px;
+    outline: none;
+    background-color: #f4fbfb;
+    box-sizing: border-box;
+}
+
+.form-input:focus[b-immq16zsyb] {
+    border-color: #0f8b8d;
+    box-shadow: 0 0 0 2px rgba(15, 139, 141, 0.25);
+}
+
+.form-actions[b-immq16zsyb] {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+}
+
+.btn-primary[b-immq16zsyb],
+.btn-secondary[b-immq16zsyb] {
+    min-width: 120px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary[b-immq16zsyb] {
+    background-color: #1b7471;
+    color: #ffffff;
+}
+
+.btn-primary:hover[b-immq16zsyb] {
+    background-color: #16615f;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(27, 116, 113, 0.3);
+}
+
+.btn-secondary[b-immq16zsyb] {
+    background-color: #0f8b8d;
+    color: #ffffff;
+}
+
+.btn-secondary:hover[b-immq16zsyb] {
+    background-color: #0c716f;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(15, 139, 141, 0.3);
+}
+
+@media (max-width: 600px) {
+    .create-account-card[b-immq16zsyb] {
+        padding: 24px 20px 20px;
+    }
+
+    .form-row[b-immq16zsyb] {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-row label[b-immq16zsyb] {
+        flex: 0 0 auto;
+    }
+
+    .form-actions[b-immq16zsyb] {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .btn-primary[b-immq16zsyb],
+    .btn-secondary[b-immq16zsyb] {
+        width: 100%;
+    }
+
+    /* ===== CUSTOM DROPDOWN STYLES ===== */
+    .dropdown-wrapper[b-immq16zsyb] {
+        position: relative;
+        flex: 1;
+        width: 100%;
+    }
+
+    .custom-dropdown[b-immq16zsyb] {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        background-color: #f4fbfb;
+        border: 1px solid #c9e3e1 !important;
+        border-radius: 12px !important;
+        padding: 0 12px;
+        height: 42px;
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+
+        .custom-dropdown:hover[b-immq16zsyb] {
+            border-color: #0f8b8d !important;
+        }
+
+    .dropdown-selected[b-immq16zsyb] {
+        color: #333;
+        font-size: 14px;
+        flex: 1;
+    }
+
+    .dropdown-arrow[b-immq16zsyb] {
+        color: #7a9a98;
+        font-size: 12px;
+        transition: transform 0.3s ease;
+        margin-left: 8px;
+    }
+
+    .dropdown-menu[b-immq16zsyb] {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid #c9e3e1;
+        border-radius: 12px;
+        margin-top: 4px;
+        padding: 8px 0;
+        list-style: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+        .dropdown-menu li[b-immq16zsyb] {
+            padding: 10px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #333;
+            transition: background-color 0.2s ease;
+        }
+
+            .dropdown-menu li:hover[b-immq16zsyb] {
+                background-color: #f0f9f9;
+            }
+
+    /* Close dropdown when clicking outside */
+    .dropdown-overlay[b-immq16zsyb] {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 999;
+    }
+
+
+}

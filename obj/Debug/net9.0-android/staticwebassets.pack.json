@@ -1,0 +1,53 @@
+{
+  "Files": [
+    {
+      "Id": "c:\\Users\\User.DESKTOP-EOONC7Q\\source\\repos\\IT_13FinalProject\\IT_13FinalProject\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\IT_13FinalProject.styles.css",
+      "PackagePath": "staticwebassets\\IT_13FinalProject.styles.css"
+    },
+    {
+      "Id": "c:\\Users\\User.DESKTOP-EOONC7Q\\source\\repos\\IT_13FinalProject\\IT_13FinalProject\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "c:\\Users\\User.DESKTOP-EOONC7Q\\source\\repos\\IT_13FinalProject\\IT_13FinalProject\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "c:\\Users\\User.DESKTOP-EOONC7Q\\source\\repos\\IT_13FinalProject\\IT_13FinalProject\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "c:\\Users\\User.DESKTOP-EOONC7Q\\source\\repos\\IT_13FinalProject\\IT_13FinalProject\\wwwroot\\images\\Background_login.png",
+      "PackagePath": "staticwebassets\\images\\Background_login.png"
+    },
+    {
+      "Id": "c:\\Users\\User.DESKTOP-EOONC7Q\\source\\repos\\IT_13FinalProject\\IT_13FinalProject\\wwwroot\\images\\Final_logo-removebg-preview.png",
+      "PackagePath": "staticwebassets\\images\\Final_logo-removebg-preview.png"
+    },
+    {
+      "Id": "c:\\Users\\User.DESKTOP-EOONC7Q\\source\\repos\\IT_13FinalProject\\IT_13FinalProject\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.IT_13FinalProject.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.IT_13FinalProject.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.build.IT_13FinalProject.props",
+      "PackagePath": "build\\IT_13FinalProject.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.buildMultiTargeting.IT_13FinalProject.props",
+      "PackagePath": "buildMultiTargeting\\IT_13FinalProject.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.buildTransitive.IT_13FinalProject.props",
+      "PackagePath": "buildTransitive\\IT_13FinalProject.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
