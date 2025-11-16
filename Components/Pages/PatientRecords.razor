@@ -1,0 +1,121 @@
+@page "/patient-records"
+@layout Layout.DashboardLayout
+
+<div class="pr-page">
+    <!-- Header stays consistent with Health Records -->
+    <header class="dashboard-header">
+        <div>
+            <h1 class="dashboard-title">Health Records</h1>
+            <p class="dashboard-subtitle">Welcome back Admin!</p>
+        </div>
+
+        <div class="dashboard-user-info">
+            <span class="dashboard-user-email">admin@gmail.com</span>
+            <div class="dashboard-user-avatar">👤</div>
+            <span class="dashboard-user-name">Admin</span>
+        </div>
+    </header>
+
+    <!-- ===================== PATIENT RECORDS DETAIL ===================== -->
+    <section class="pr-card">
+        <div class="pr-header">
+            <span class="pr-header-icon">👤</span>
+            <h2 class="pr-header-title">Patient Records</h2>
+        </div>
+
+        <div class="pr-grid pr-grid-3">
+            <!-- Medical History -->
+            <div class="pr-column">
+                <h3 class="pr-section-title">Medical History</h3>
+                <div class="pr-field"><label>Allergies</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Past Illnesses</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Past Surgeries</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Current Medications</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Family History of Illnesses</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Immunization History (optional)</label><div class="pr-value-box"></div></div>
+            </div>
+
+            <!-- Vital Signs -->
+            <div class="pr-column">
+                <h3 class="pr-section-title">Vital Signs</h3>
+                <div class="pr-field"><label>Blood Pressure</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Heart Rate / Pulse Rate</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Respiratory Rate</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Temperature</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Oxygen Saturation (SpO₂)</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Weight</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Height</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Body Mass Index</label><div class="pr-value-box"></div></div>
+            </div>
+
+            <!-- Current Visit Details -->
+            <div class="pr-column">
+                <h3 class="pr-section-title">Current Visit Details</h3>
+                <div class="pr-field"><label>Doctor Name Assigned</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Nurse Name</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Date of Visit / Consultation</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Time In/Out</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Department / Clinic Assigned</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Type of Visit (New / Follow-up)</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Chief Complaint</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Duration of Symptoms</label><div class="pr-value-box"></div></div>
+            </div>
+        </div>
+
+        <div class="pr-grid pr-grid-2 pr-top-margin">
+            <!-- Clinical Findings -->
+            <div class="pr-column">
+                <h3 class="pr-section-title">Clinical Findings</h3>
+                <div class="pr-field pr-field-multi"><label>Subjective Findings</label><div class="pr-value-box pr-value-box-multi"></div></div>
+                <div class="pr-field pr-field-multi"><label>Objective Findings</label><div class="pr-value-box pr-value-box-multi"></div></div>
+                <div class="pr-field pr-field-multi"><label>Assessment / Diagnosis</label><div class="pr-value-box pr-value-box-multi"></div></div>
+                <div class="pr-field"><label>ICD-10 Code</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Additional Tests Order</label><div class="pr-value-box"></div></div>
+                <div class="pr-field pr-field-multi"><label>Doctor's Remarks (Notes)</label><div class="pr-value-box pr-value-box-multi"></div></div>
+                <div class="pr-field pr-field-multi"><label>Nurse Remarks (Notes)</label><div class="pr-value-box pr-value-box-multi"></div></div>
+                <div class="pr-field pr-field-multi"><label>Recommendation (Notes)</label><div class="pr-value-box pr-value-box-multi"></div></div>
+            </div>
+
+            <!-- Treatment / Prescription & Follow-up -->
+            <div class="pr-column">
+                <h3 class="pr-section-title">Treatment / Prescription</h3>
+                <div class="pr-field"><label>Medicine Name</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Dosage</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Frequency</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Duration</label><div class="pr-value-box"></div></div>
+                <div class="pr-field pr-field-multi"><label>Notes / Special Instructions</label><div class="pr-value-box pr-value-box-multi"></div></div>
+
+                <h3 class="pr-section-title pr-section-title-spaced">Follow-up & Outcome</h3>
+                <div class="pr-field"><label>Follow-up Date</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Visit Status</label><div class="pr-value-box"></div></div>
+
+                <h3 class="pr-section-title pr-section-title-spaced">Doctor Approval</h3>
+                <div class="pr-field"><label>Electronic Signature / Name</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Date Approved</label><div class="pr-value-box"></div></div>
+            </div>
+        </div>
+
+        <div class="pr-actions">
+            <button class="pr-btn pr-btn-secondary" @onclick="GoBack">Back</button>
+            <button class="pr-btn pr-btn-primary" @onclick="PrintEhr">
+                <span class="pr-btn-icon">🖨️</span>
+                Print EHR
+            </button>
+        </div>
+    </section>
+</div>
+
+@code {
+    [Inject]
+    private NavigationManager Navigation { get; set; } = default!;
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/health-records");
+    }
+
+    private void PrintEhr()
+    {
+        Navigation.NavigateTo("/patient-ehr-print");
+    }
+}

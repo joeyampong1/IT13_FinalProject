@@ -22,6 +22,13 @@
                 <!-- ========== LOGIN TITLE (OPTIONAL) ========== -->
                 <h2 class="login-title">Sign in to MedFlow</h2>
 
+                <!-- ========== ERROR MESSAGE AREA ========== -->
+                <!-- Shown when the entered credentials are incorrect -->
+                @if (!string.IsNullOrWhiteSpace(ErrorMessage))
+                {
+                    <div class="login-error-message">@ErrorMessage</div>
+                }
+
                 <!-- ========== LOGIN FORM ========== -->
                 <EditForm Model="this" OnValidSubmit="HandleLogin">
                     <DataAnnotationsValidator />
@@ -93,18 +100,36 @@
     // Property bound to the password input
     public string? Password { get; set; }
 
+    // Holds a message when login fails (kept if you want to show inline text later)
+    public string? ErrorMessage { get; set; }
+
     [Inject]
     private NavigationManager Navigation { get; set; } = default!;
+
+    // JS runtime used to show simple alert dialogs (e.g., invalid credentials)
+    [Inject]
+    private IJSRuntime JsRuntime { get; set; } = default!;
 
     // ===================== EVENT HANDLERS =====================
     // This method is called when the form is submitted successfully
     private void HandleLogin()
     {
-        // Temporary hard-coded login to open the dashboard
-        if (string.Equals(UserName, "admin", StringComparison.OrdinalIgnoreCase)
-            && Password == "12345")
+        // Clear any existing error message first
+        ErrorMessage = null;
+
+        // Temporary hard-coded credentials while database auth is not yet wired
+        // Valid login only when username == "admin" and password == "12345".
+        var isValid = string.Equals(UserName, "admin", StringComparison.OrdinalIgnoreCase)
+                      && Password == "12345";
+
+        if (!isValid)
         {
-            Navigation.NavigateTo("/dashboard");
+            // Show a simple dialog when credentials are invalid
+            JsRuntime.InvokeVoidAsync("alert", "Invalid Credentials!");
+            return;
         }
+
+        // Navigate to the dashboard when the credentials are correct
+        Navigation.NavigateTo("/dashboard");
     }
 }

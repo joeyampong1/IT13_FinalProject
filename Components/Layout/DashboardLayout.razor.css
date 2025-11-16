@@ -90,6 +90,37 @@
     background-color: #0b6f70;
 }
 
+/* Expandable user menu item */
+.sidebar-item-expand {
+    justify-content: space-between;
+}
+
+.sidebar-chevron {
+    font-size: 11px;
+    opacity: 0.9;
+}
+
+/* Nested options under User (Role, Permission) */
+.sidebar-subitem {
+    width: 100%;
+    text-align: left;
+    padding: 6px 26px;
+    margin-bottom: 2px;
+    border-radius: 999px;
+    border: none;
+    background-color: rgba(4, 73, 75, 0.12);
+    color: #ffffff;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar-subitem:hover {
+    background-color: rgba(4, 73, 75, 0.25);
+}
+
 .sidebar-logout {
     margin-top: auto;
     width: 100%;

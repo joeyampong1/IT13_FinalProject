@@ -2,10 +2,11 @@
 @layout Layout.DashboardLayout
 
 <div class="pm-page">
-    <header class="pm-header">
+    <!-- Header now matches the Dashboard header layout and styling -->
+    <header class="dashboard-header">
         <div>
-            <h1 class="pm-title">Patient Management</h1>
-            <p class="pm-subtitle">Welcome back Admin!</p>
+            <h1 class="dashboard-title">Patient Management</h1>
+            <p class="dashboard-subtitle">Welcome back Admin!</p>
         </div>
 
         <div class="dashboard-user-info">
@@ -15,87 +16,190 @@
         </div>
     </header>
 
-    <section class="pm-overview">
-        <div class="pm-overview-header">
-            <h2 class="pm-section-title">Patient Overview</h2>
-            <div class="pm-show-entries">
-                <span>Show</span>
-                <select>
-                    <option>5</option>
-                    <option>10</option>
-                    <option>25</option>
-                </select>
-                <span>entries</span>
+    @if (!IsPatientFormVisible)
+    {
+        <!-- ===================== PATIENT OVERVIEW MODE ===================== -->
+        <section class="pm-overview">
+            <div class="pm-overview-header">
+                <h2 class="pm-section-title">Patient Overview</h2>
+                <div class="pm-show-entries">
+                    <span>Show</span>
+                    <select>
+                        <option>5</option>
+                        <option>10</option>
+                        <option>25</option>
+                    </select>
+                    <span>entries</span>
+                </div>
             </div>
-        </div>
 
-        <div class="pm-filters-row">
-            <div class="pm-alpha-filter">
-                <button class="pm-filter-pill active">All</button>
-                @foreach (var letter in Alphabet)
+            <div class="pm-filters-row">
+                <div class="pm-alpha-filter">
+                    <button class="pm-filter-pill active">All</button>
+                    @foreach (var letter in Alphabet)
+                    {
+                        <button class="pm-filter-pill">@letter</button>
+                    }
+                </div>
+
+                <div class="pm-search-row">
+                    <div class="pm-search-box">
+                        <span class="pm-search-icon">🔍</span>
+                        <input class="pm-search-input" placeholder="Search Client" />
+                    </div>
+
+                    <div class="pm-actions">
+                        <button class="activity-action-btn">Sort</button>
+                        <button class="activity-action-btn">Filters</button>
+                        <button class="pm-patient-btn" @onclick="ShowPatientForm">+ Patient</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pm-table-outer">
+                <div class="pm-table-wrapper">
+                    <table class="pm-table">
+                        <thead>
+                            <tr>
+                                <th class="pm-col-id">ID</th>
+                                <th>Patient Name<br /><span class="pm-subcol">Email</span></th>
+                                <th class="pm-col-date">Date of Visit</th>
+                                <th class="pm-col-action">More Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Patients)
+                            {
+                                <tr>
+                                    <td class="pm-col-id">@p.Id</td>
+                                    <td>
+                                        <div class="pm-patient-name">@p.Name</div>
+                                        <div class="pm-patient-email">@p.Email</div>
+                                    </td>
+                                    <td class="pm-col-date">@p.DateOfVisit</td>
+                                    <td class="pm-col-action">
+                                        <button class="pm-view-btn" @onclick="() => ViewPatient(p)">View</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="pm-pagination">
+                <button class="pm-page-btn">Previous</button>
+                <button class="pm-page-number active">1</button>
+                <button class="pm-page-number">2</button>
+                <button class="pm-page-number">3</button>
+                <span class="pm-page-dots">...</span>
+                <button class="pm-page-number">8</button>
+                <button class="pm-page-btn">Next</button>
+            </div>
+        </section>
+    }
+    else
+    {
+        <!-- ===================== PATIENT INFORMATION FORM MODE ===================== -->
+        <section class="pm-patient-form">
+            <div class="pm-form-header">
+                <span class="pm-form-icon">👤</span>
+                <h2 class="pm-form-title">Patient Information</h2>
+            </div>
+
+            <div class="pm-form-grid">
+                <div class="pm-form-field">
+                    <label class="pm-form-label">First Name</label>
+                    <input class="pm-form-input" @bind="FirstName" />
+                </div>
+                <div class="pm-form-field">
+                    <label class="pm-form-label">Civil Status</label>
+                    <input class="pm-form-input" @bind="CivilStatus" />
+                </div>
+
+                <div class="pm-form-field">
+                    <label class="pm-form-label">Middle Name</label>
+                    <input class="pm-form-input" @bind="MiddleName" />
+                </div>
+                <div class="pm-form-field">
+                    <label class="pm-form-label">Occupation</label>
+                    <input class="pm-form-input" @bind="Occupation" />
+                </div>
+
+                <div class="pm-form-field">
+                    <label class="pm-form-label">Last Name</label>
+                    <input class="pm-form-input" @bind="LastName" />
+                </div>
+                <div class="pm-form-field">
+                    <label class="pm-form-label">Nationality</label>
+                    <input class="pm-form-input" @bind="Nationality" />
+                </div>
+
+                <div class="pm-form-field">
+                    <label class="pm-form-label">Address</label>
+                    <input class="pm-form-input" @bind="Address" />
+                </div>
+                <div class="pm-form-field">
+                    <label class="pm-form-label">Religion</label>
+                    <input class="pm-form-input" @bind="Religion" />
+                </div>
+
+                <div class="pm-form-field">
+                    <label class="pm-form-label">Contact Number</label>
+                    <input class="pm-form-input" @bind="ContactNumber" />
+                </div>
+                <div class="pm-form-field">
+                    <label class="pm-form-label">Emergency Contact Name</label>
+                    <input class="pm-form-input" @bind="EmergencyContactName" />
+                </div>
+
+                <div class="pm-form-field">
+                    <label class="pm-form-label">Email Address</label>
+                    <input class="pm-form-input" @bind="EmailAddress" />
+                </div>
+                <div class="pm-form-field">
+                    <label class="pm-form-label">Emergency Contact Relationship</label>
+                    <input class="pm-form-input" @bind="EmergencyContactRelationship" />
+                </div>
+
+                <div class="pm-form-field">
+                    <label class="pm-form-label">Gender</label>
+                    <select class="pm-form-input pm-form-select" @bind="Gender">
+                        <option value="">Select Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="pm-form-field">
+                    <label class="pm-form-label">Emergency Contact Number</label>
+                    <input class="pm-form-input" @bind="EmergencyContactNumber" />
+                </div>
+            </div>
+
+            <div class="pm-form-actions">
+                @if (IsEditMode)
                 {
-                    <button class="pm-filter-pill">@letter</button>
+                    <button class="pm-form-delete" @onclick="DeletePatient">
+                        <span class="pm-form-delete-icon">🗑️</span>
+                        Delete
+                    </button>
+                    <button class="pm-form-save" @onclick="UpdatePatient">Update</button>
+                }
+                else
+                {
+                    <button class="pm-form-back" @onclick="BackToOverview">Back</button>
+                    <button class="pm-form-save" @onclick="SavePatient">Save Patient</button>
                 }
             </div>
-
-            <div class="pm-search-row">
-                <div class="pm-search-box">
-                    <span class="pm-search-icon">🔍</span>
-                    <input class="pm-search-input" placeholder="Search Client" />
-                </div>
-
-                <div class="pm-actions">
-                    <button class="activity-action-btn">Sort</button>
-                    <button class="activity-action-btn">Filters</button>
-                    <button class="pm-patient-btn">+ Patient</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="pm-table-outer">
-            <div class="pm-table-wrapper">
-                <table class="pm-table">
-                    <thead>
-                        <tr>
-                            <th class="pm-col-id">ID</th>
-                            <th>Patient Name<br /><span class="pm-subcol">Email</span></th>
-                            <th>Date of Visit</th>
-                            <th class="pm-col-action">More Info</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var p in SamplePatients)
-                        {
-                            <tr>
-                                <td class="pm-col-id">@p.Id</td>
-                                <td>
-                                    <div class="pm-patient-name">@p.Name</div>
-                                    <div class="pm-patient-email">@p.Email</div>
-                                </td>
-                                <td>@p.DateOfVisit</td>
-                                <td class="pm-col-action">
-                                    <button class="pm-view-btn">View</button>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="pm-pagination">
-            <button class="pm-page-btn">Previous</button>
-            <button class="pm-page-number active">1</button>
-            <button class="pm-page-number">2</button>
-            <button class="pm-page-number">3</button>
-            <span class="pm-page-dots">...</span>
-            <button class="pm-page-number">8</button>
-            <button class="pm-page-btn">Next</button>
-        </div>
-    </section>
+        </section>
+    }
 </div>
 
 @code {
+    private bool IsPatientFormVisible { get; set; }
+    private bool IsEditMode { get; set; }
+
     private static readonly string[] Alphabet = new[]
     {
         "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
@@ -103,7 +207,7 @@
 
     private record PatientRow(string Id, string Name, string Email, string DateOfVisit);
 
-    private readonly PatientRow[] SamplePatients = new[]
+    private List<PatientRow> Patients = new()
     {
         new PatientRow("01", "Himeko Murata", "himeko_murata@gmail.com", "03/09/24"),
         new PatientRow("02", "Yae Miko", "miko.yae@mail.com", "03/09/24"),
@@ -111,4 +215,97 @@
         new PatientRow("04", "Ruan Mei", "theRM_ei@gmail.com", "03/09/24"),
         new PatientRow("05", "Bronya Rand", "bronya.rr@mail.com", "03/09/24"),
     };
+
+    private PatientRow? SelectedPatient;
+
+    // Form fields
+    private string? FirstName { get; set; }
+    private string? MiddleName { get; set; }
+    private string? LastName { get; set; }
+    private string? Address { get; set; }
+    private string? ContactNumber { get; set; }
+    private string? EmailAddress { get; set; }
+    private string? Gender { get; set; }
+    private string? CivilStatus { get; set; }
+    private string? Occupation { get; set; }
+    private string? Nationality { get; set; }
+    private string? Religion { get; set; }
+    private string? EmergencyContactName { get; set; }
+    private string? EmergencyContactRelationship { get; set; }
+    private string? EmergencyContactNumber { get; set; }
+
+    private void ShowPatientForm()
+    {
+        IsEditMode = false;
+        ClearForm();
+        IsPatientFormVisible = true;
+    }
+
+    private void BackToOverview()
+    {
+        IsPatientFormVisible = false;
+        IsEditMode = false;
+        SelectedPatient = null;
+    }
+
+    private void ViewPatient(PatientRow patient)
+    {
+        SelectedPatient = patient;
+        IsEditMode = true;
+        IsPatientFormVisible = true;
+
+        // Simple mapping: split name into parts where possible
+        var parts = (patient.Name ?? string.Empty).Split(' ');
+        FirstName = parts.Length > 0 ? parts[0] : string.Empty;
+        LastName = parts.Length > 1 ? parts[^1] : string.Empty;
+        MiddleName = parts.Length > 2 ? string.Join(" ", parts.Skip(1).Take(parts.Length - 2)) : string.Empty;
+
+        EmailAddress = patient.Email;
+        // Other fields can be filled/edited manually by user
+    }
+
+    private void SavePatient()
+    {
+        // For now just add a new row using First/Last name and email
+        var newId = (Patients.Count + 1).ToString("00");
+        var displayName = string.Join(" ", new[] { FirstName, MiddleName, LastName }.Where(s => !string.IsNullOrWhiteSpace(s)));
+        var email = EmailAddress ?? string.Empty;
+
+        Patients.Add(new PatientRow(newId, displayName, email, DateTime.Now.ToString("MM/dd/yy")));
+        BackToOverview();
+    }
+
+    private void UpdatePatient()
+    {
+        if (SelectedPatient is null)
+        {
+            return;
+        }
+
+        var index = Patients.FindIndex(p => p.Id == SelectedPatient.Id);
+        if (index >= 0)
+        {
+            var displayName = string.Join(" ", new[] { FirstName, MiddleName, LastName }.Where(s => !string.IsNullOrWhiteSpace(s)));
+            var email = EmailAddress ?? string.Empty;
+            Patients[index] = new PatientRow(SelectedPatient.Id, displayName, email, SelectedPatient.DateOfVisit);
+        }
+
+        BackToOverview();
+    }
+
+    private void DeletePatient()
+    {
+        if (SelectedPatient is null)
+        {
+            return;
+        }
+
+        Patients.RemoveAll(p => p.Id == SelectedPatient.Id);
+        BackToOverview();
+    }
+
+    private void ClearForm()
+    {
+        FirstName = MiddleName = LastName = Address = ContactNumber = EmailAddress = Gender = CivilStatus = Occupation = Nationality = Religion = EmergencyContactName = EmergencyContactRelationship = EmergencyContactNumber = string.Empty;
+    }
 }

@@ -15,7 +15,7 @@
         <nav class="sidebar-section">
             <div class="sidebar-section-title">MODULES</div>
             <button class="sidebar-item @(IsPatientManagementActive ? "active" : string.Empty)" @onclick="OnPatientManagementClick">🧑‍⚕️ Patient Management</button>
-            <button class="sidebar-item">📋 Health Record</button>
+            <button class="sidebar-item @(IsHealthRecordActive ? "active" : string.Empty)" @onclick="OnHealthRecordClick">📋 Health Record</button>
             <button class="sidebar-item">💳 Invoicing &amp; Cashiering</button>
             <button class="sidebar-item">🧾 Insurance &amp; Claims</button>
             <button class="sidebar-item">💊 Pharmacy &amp; Inventory</button>
@@ -24,7 +24,17 @@
 
         <nav class="sidebar-section">
             <div class="sidebar-section-title">USER MANAGEMENT</div>
-            <button class="sidebar-item">👤 Admin</button>
+            <button class="sidebar-item sidebar-item-expand" @onclick="ToggleUserMenu">
+                👥 User
+                <span class="sidebar-chevron">@(IsUserMenuExpanded ? "▾" : "▸")</span>
+            </button>
+
+            @if (IsUserMenuExpanded)
+            {
+                <button class="sidebar-subitem">👤 User Profile</button>
+                <button class="sidebar-subitem">🧩 Role</button>
+                <button class="sidebar-subitem">🛡️ Permission</button>
+            }
         </nav>
 
         <nav class="sidebar-section">
@@ -34,7 +44,7 @@
             <button class="sidebar-item">⚙️ Settings</button>
         </nav>
 
-        <button class="sidebar-logout" @onclick="Logout">LOG OUT</button>
+        <button class="sidebar-logout" @onclick="LogoutAsync">LOG OUT</button>
     </aside>
 
     <div class="dashboard-main">
@@ -46,16 +56,40 @@
     [Inject]
     private NavigationManager Navigation { get; set; } = default!;
 
+    // JS runtime used to show a simple browser confirm dialog
+    [Inject]
+    private IJSRuntime JsRuntime { get; set; } = default!;
+
     private bool IsDashboardActive => Navigation.Uri.Contains("/dashboard", StringComparison.OrdinalIgnoreCase);
 
     private bool IsPatientManagementActive => Navigation.Uri.Contains("/patient-management", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsHealthRecordActive =>
+        Navigation.Uri.Contains("/health-records", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/patient-records", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/patient-ehr-print", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsUserMenuExpanded { get; set; }
 
     private void OnDashboardClick() => Navigation.NavigateTo("/dashboard");
 
     private void OnPatientManagementClick() => Navigation.NavigateTo("/patient-management");
 
-    private void Logout()
+    private void OnHealthRecordClick() => Navigation.NavigateTo("/health-records");
+
+    private void ToggleUserMenu()
     {
-        Navigation.NavigateTo("/login", forceLoad: true);
+        IsUserMenuExpanded = !IsUserMenuExpanded;
+    }
+
+    // Shows a confirmation dialog before navigating back to the login page
+    private async Task LogoutAsync()
+    {
+        var confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to log out?");
+
+        if (confirmed)
+        {
+            Navigation.NavigateTo("/login", forceLoad: true);
+        }
     }
 }

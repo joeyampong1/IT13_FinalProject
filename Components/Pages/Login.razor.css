@@ -2,20 +2,28 @@
 
 /* ----- Overall page background and centering ----- */
 .login-page {
-    min-height: 100vh; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    /* Background image from wwwroot/image with teal overlay */
-    background: 
-        linear-gradient(135deg, rgba(15, 139, 141, 0.5), rgba(12, 113, 111, 0.5)),
-        url("/images/Background_login.png");
-    /* Show more of the image (less zoom) */
-    background-size: 100% 100%;         /* try full image inside frame */
-    background-position: center;
-    background-repeat: no-repeat;    /* no tiling */
-    padding: 16px; 
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;          /* needed for ::before overlay */
+    overflow: hidden;            /* hide blur edges */
+    padding: 16px;
     box-sizing: border-box;
+}
+
+/* Blurred background image with teal overlay */
+.login-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(135deg, rgba(15, 139, 141, 0.55), rgba(12, 113, 111, 0.55)),
+        url("/images/Background_login.png") center center no-repeat;
+    background-size: cover;
+    filter: blur(5px);           /* amount of blur */
+    transform: scale(1.05);      /* avoid transparent edges after blur */
+    z-index: -1;                 /* stay behind the content */
 }
 
 /* ----- Main container for left and right panels ----- */
@@ -208,14 +216,28 @@ input[type="password"] {
 
 /* ----- Right information panel ----- */
 .info-panel {
-    flex: 1; 
+    flex: 1; /* Take remaining width */
     padding: 40px 48px;
     color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.15), transparent 55%),
-                linear-gradient(135deg, #0c716f, #0a5b5b);
+    position: relative; /* for ::before background image */
+    overflow: hidden;
+}
+
+/* Blurred clinical background image only for the title/description panel */
+.info-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to bottom, rgba(6, 65, 63, 0.9), rgba(18, 165, 161, 0.7)),
+        url("/images/Title_bg_image.png") center center no-repeat;
+    background-size: cover;
+    filter: blur(3px);           /* slight blur */
+    transform: scale(1.04);      /* avoid transparent edges */
+    z-index: -1;                 /* stay behind the text */
 }
 
 /* Inner wrapper to center the text block in the green panel */
@@ -231,6 +253,7 @@ input[type="password"] {
     font-weight: 700;
     max-width: 520px;
     margin-bottom: 16px;
+    color: #ffffff;
 }
 
 .info-description {
