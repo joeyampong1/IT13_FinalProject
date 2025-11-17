@@ -144,3 +144,400 @@
     box-sizing: border-box;
     overflow-y: auto;
 }
+
+/* Dark mode for the main dashboard area */
+.dashboard-main--dark {
+    background-color: #0f2224 !important;
+    color: #f5f7fa !important;
+}
+
+/* Make common dashboard content respect dark mode text color */
+.dashboard-main--dark .dashboard-page,
+.dashboard-main--dark .dashboard-header,
+.dashboard-main--dark .dashboard-card,
+.dashboard-main--dark .dashboard-activity,
+.dashboard-main--dark .dashboard-notification {
+    color: #f5f7fa;
+}
+
+.dashboard-main--dark .dashboard-header {
+    background-color: #102c30 !important;
+    border-bottom-color: #0b1c1f !important;
+}
+
+.dashboard-main--dark .dashboard-card,
+.dashboard-main--dark .dashboard-activity,
+.dashboard-main--dark .dashboard-notification {
+    background-color: #123036 !important;
+    color: #f5f7fa !important;
+}
+
+.dashboard-main--dark .activity-table th,
+.dashboard-main--dark .activity-table td {
+    color: #f5f7fa !important;
+}
+
+/* Dashboard page specific overrides (cards, notification, search, buttons) */
+.dashboard-main--dark .dashboard-notification {
+    border-radius: 12px;
+}
+
+.dashboard-main--dark .notification-button {
+    background-color: #0f8b8d !important;
+    color: #ffffff !important;
+}
+
+.dashboard-main--dark .notification-button:hover {
+    background-color: #0b6f70 !important;
+}
+
+.dashboard-main--dark .card-placeholder {
+    background-color: #10272b !important;
+    color: #c9d7dc !important;
+}
+
+/* Make generic panels and pages follow dark background */
+.dashboard-main--dark .dashboard-page,
+.dashboard-main--dark .pm-page {
+    background-color: transparent !important;
+}
+
+.dashboard-main--dark .pm-table-outer {
+    background-color: #10272b !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+/* Patient Management – overview and table */
+.dashboard-main--dark .pm-overview {
+    background-color: transparent;
+}
+
+.dashboard-main--dark .pm-section-title,
+.dashboard-main--dark .pm-show-entries,
+.dashboard-main--dark .pm-page-dots {
+    color: #f5f7fa;
+}
+
+.dashboard-main--dark .pm-show-entries select {
+    background-color: #123036;
+    color: #f5f7fa;
+    border-color: #26454b;
+}
+
+.dashboard-main--dark .pm-filter-pill {
+    background-color: #123036;
+    border-color: #26454b;
+    color: #f5f7fa;
+}
+
+.dashboard-main--dark .pm-filter-pill.active,
+.dashboard-main--dark .pm-filter-pill:hover {
+    background-color: #0f8b8d;
+    border-color: #0f8b8d;
+    color: #ffffff;
+}
+
+.dashboard-main--dark .pm-search-box {
+    border-color: #0f8b8d;
+    background-color: #10272b;
+}
+
+.dashboard-main--dark .pm-search-input {
+    background-color: transparent;
+    color: #f5f7fa;
+}
+
+.dashboard-main--dark .pm-table {
+    background-color: #10272b !important;
+}
+
+.dashboard-main--dark .pm-table thead {
+    background-color: #123b41 !important;
+}
+
+.dashboard-main--dark .pm-table tbody tr:nth-child(even) {
+    background-color: #10272b !important;
+}
+
+.dashboard-main--dark .pm-table th,
+.dashboard-main--dark .pm-table td {
+    color: #f5f7fa !important;
+}
+
+.dashboard-main--dark .pm-patient-email {
+    color: #c9d7dc;
+}
+
+.dashboard-main--dark .pm-view-btn {
+    background-color: transparent;
+    color: #7ecf7a;
+    border-color: #7ecf7a;
+}
+
+.dashboard-main--dark .pm-view-btn:hover {
+    background-color: rgba(126, 207, 122, 0.12);
+}
+
+.dashboard-main--dark .pm-pagination {
+    background: rgba(10, 32, 35, 0.96);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.dashboard-main--dark .pm-page-btn,
+.dashboard-main--dark .pm-page-number {
+    background-color: #10272b;
+    border-color: #26454b;
+    color: #f5f7fa;
+}
+
+.dashboard-main--dark .pm-page-number.active {
+    background-color: #0f8b8d;
+    border-color: #0f8b8d;
+}
+
+.dashboard-main--dark .pm-page-btn:hover,
+.dashboard-main--dark .pm-page-number:hover {
+    background-color: #123b41;
+    border-color: #0f8b8d;
+}
+
+/* Patient Management – form */
+.dashboard-main--dark .pm-patient-form {
+    background-color: #10272b;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.dashboard-main--dark .pm-form-title,
+.dashboard-main--dark .pm-form-label {
+    color: #f5f7fa;
+}
+
+.dashboard-main--dark .pm-form-input {
+    background-color: #0b1c1f;
+    border-color: #3a555a;
+    color: #f5f7fa;
+}
+
+.dashboard-main--dark .pm-form-input:focus {
+    border-color: #7ecf7a;
+    box-shadow: 0 0 0 2px rgba(126, 207, 122, 0.25);
+}
+
+.dashboard-main--dark .pm-form-back {
+    background-color: transparent;
+    color: #7ecf7a;
+    border-color: #7ecf7a;
+}
+
+.dashboard-main--dark .pm-form-back:hover {
+    background-color: rgba(126, 207, 122, 0.12);
+}
+
+.dashboard-main--dark .pm-form-save {
+    background-color: #0f8b8d;
+    color: #ffffff;
+}
+
+.dashboard-main--dark .pm-form-save:hover {
+    background-color: #0b6f70;
+}
+
+.dashboard-main--dark .pm-form-delete {
+    background-color: #b45549;
+}
+
+/* Text size adjustments for accessibility (visible difference) */
+.dashboard-main--text-small {
+    font-size: 11px;
+}
+
+.dashboard-main--text-large {
+    font-size: 18px;
+}
+
+.dashboard-main--text-small .dashboard-title {
+    font-size: 24px;
+}
+
+.dashboard-main--text-large .dashboard-title {
+    font-size: 32px;
+}
+
+.dashboard-main--text-small .activity-table th,
+.dashboard-main--text-small .activity-table td,
+.dashboard-main--text-small .pm-table th,
+.dashboard-main--text-small .pm-table td {
+    font-size: 12px;
+}
+
+.dashboard-main--text-large .activity-table th,
+.dashboard-main--text-large .activity-table td,
+.dashboard-main--text-large .pm-table th,
+.dashboard-main--text-large .pm-table td {
+    font-size: 15px;
+}
+
+/* Settings modal */
+.settings-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-top: 310px; /* align more closely with SYSTEM > Settings button */
+    padding-left: 260px; /* sidebar width */
+    box-sizing: border-box;
+    z-index: 20;
+}
+
+/* Keep Settings button visually active while settings window is open */
+.sidebar-item-settings-active {
+    background-color: #0b6f70;
+    color: #7ECF7A;
+}
+
+.settings-modal {
+    width: 360px;
+    max-width: 90vw;
+    background: linear-gradient(180deg, #0f8b8d 0%, #0f7b80 100%);
+    color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    padding: 14px 16px 18px;
+    box-sizing: border-box;
+}
+
+.settings-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.settings-modal-title {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.settings-modal-close {
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.settings-modal-close:hover {
+    opacity: 0.8;
+}
+
+.settings-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.settings-item {
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: none;
+    background-color: rgba(4, 73, 75, 0.25);
+    color: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.settings-item:hover {
+    background-color: rgba(4, 73, 75, 0.45);
+}
+
+.accessibility-modal {
+    width: 260px;
+    max-width: 80vw;
+    margin-left: 6px; /* bring it closer to the main settings window */
+    background: linear-gradient(180deg, #0f8b8d 0%, #0f7b80 100%); /* match Settings modal color */
+    color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    padding: 12px 14px 16px;
+    box-sizing: border-box;
+}
+
+.accessibility-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.accessibility-title {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.accessibility-close {
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.accessibility-close:hover {
+    opacity: 0.8;
+}
+
+.accessibility-section {
+    margin-top: 10px;
+}
+
+.accessibility-section-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.accessibility-options {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.accessibility-option {
+    width: 100%;
+    text-align: left;
+    padding: 6px 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(4, 73, 75, 0.25);
+    color: #ffffff;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.accessibility-option:hover {
+    background-color: rgba(4, 73, 75, 0.45);
+}
+
+/* Small radio-style indicator circle */
+.accessibility-radio {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    box-sizing: border-box;
+}
+
+.accessibility-radio--selected {
+    background-color: #ffffff;
+}

@@ -118,18 +118,52 @@
         ErrorMessage = null;
 
         // Temporary hard-coded credentials while database auth is not yet wired
-        // Valid login only when username == "admin" and password == "12345".
-        var isValid = string.Equals(UserName, "admin", StringComparison.OrdinalIgnoreCase)
+        var isAdmin = string.Equals(UserName, "admin", StringComparison.OrdinalIgnoreCase)
                       && Password == "12345";
 
-        if (!isValid)
+        var isNurse = string.Equals(UserName, "nurse", StringComparison.OrdinalIgnoreCase)
+                      && Password == "12345";
+
+        var isDoctor = string.Equals(UserName, "doctor", StringComparison.OrdinalIgnoreCase)
+                       && Password == "12345";
+
+        var isBilling = string.Equals(UserName, "Billing", StringComparison.OrdinalIgnoreCase)
+                        && Password == "12345";
+
+        var isInventory = string.Equals(UserName, "inventory", StringComparison.OrdinalIgnoreCase)
+                           && Password == "12345";
+
+        if (isAdmin)
         {
-            // Show a simple dialog when credentials are invalid
-            JsRuntime.InvokeVoidAsync("alert", "Invalid Credentials!");
+            Navigation.NavigateTo("/dashboard");
             return;
         }
 
-        // Navigate to the dashboard when the credentials are correct
-        Navigation.NavigateTo("/dashboard");
+        if (isNurse)
+        {
+            Navigation.NavigateTo("/nurse-dashboard");
+            return;
+        }
+
+        if (isDoctor)
+        {
+            Navigation.NavigateTo("/doctor-dashboard");
+            return;
+        }
+
+        if (isBilling)
+        {
+            Navigation.NavigateTo("/billing-dashboard");
+            return;
+        }
+
+        if (isInventory)
+        {
+            Navigation.NavigateTo("/inventory-dashboard");
+            return;
+        }
+
+        // Show a simple dialog when credentials are invalid
+        JsRuntime.InvokeVoidAsync("alert", "Invalid Credentials!");
     }
 }

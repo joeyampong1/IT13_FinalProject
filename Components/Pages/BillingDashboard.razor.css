@@ -4,6 +4,7 @@
     gap: 16px;
 }
 
+/* Reuse the same dashboard page styling as admin/nurse/doctor */
 .dashboard-header {
     display: flex;
     justify-content: space-between;

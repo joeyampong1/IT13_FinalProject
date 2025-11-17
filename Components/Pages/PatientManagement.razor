@@ -35,10 +35,15 @@
 
             <div class="pm-filters-row">
                 <div class="pm-alpha-filter">
-                    <button class="pm-filter-pill active">All</button>
-                    @foreach (var letter in Alphabet)
+                    <button class="pm-filter-pill @(ShowLetters && ActiveLetter is null ? "active" : string.Empty)" @onclick="ToggleLetters">All</button>
+
+                    @if (ShowLetters)
                     {
-                        <button class="pm-filter-pill">@letter</button>
+                        @foreach (var letter in Alphabet)
+                        {
+                            <button class="pm-filter-pill @(ActiveLetter == letter ? "active" : string.Empty)"
+                                    @onclick="() => SelectLetter(letter)">@letter</button>
+                        }
                     }
                 </div>
 
@@ -68,7 +73,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var p in Patients)
+                            @foreach (var p in GetOrderedPatients())
                             {
                                 <tr>
                                     <td class="pm-col-id">@p.Id</td>
@@ -78,7 +83,9 @@
                                     </td>
                                     <td class="pm-col-date">@p.DateOfVisit</td>
                                     <td class="pm-col-action">
-                                        <button class="pm-view-btn" @onclick="() => ViewPatient(p)">View</button>
+                                        <button class="pm-view-btn" @onclick="() => ViewPatient(p)" aria-label="View patient record">
+                                            <span class="pm-view-icon">👁️</span>
+                                        </button>
                                     </td>
                                 </tr>
                             }
@@ -207,6 +214,9 @@
 
     private record PatientRow(string Id, string Name, string Email, string DateOfVisit);
 
+    private bool ShowLetters { get; set; }
+    private string? ActiveLetter { get; set; }
+
     private List<PatientRow> Patients = new()
     {
         new PatientRow("01", "Himeko Murata", "himeko_murata@gmail.com", "03/09/24"),
@@ -307,5 +317,36 @@
     private void ClearForm()
     {
         FirstName = MiddleName = LastName = Address = ContactNumber = EmailAddress = Gender = CivilStatus = Occupation = Nationality = Religion = EmergencyContactName = EmergencyContactRelationship = EmergencyContactNumber = string.Empty;
+    }
+
+    private void ToggleLetters()
+    {
+        // Show or hide the A–Z buttons; reset active letter when toggling
+        ShowLetters = !ShowLetters;
+        ActiveLetter = null;
+    }
+
+    private void SelectLetter(string letter)
+    {
+        ShowLetters = true;
+        ActiveLetter = letter;
+    }
+
+    private IEnumerable<PatientRow> GetOrderedPatients()
+    {
+        if (string.IsNullOrEmpty(ActiveLetter))
+        {
+            return Patients;
+        }
+
+        var upper = ActiveLetter.ToUpperInvariant();
+
+        var startsWithLetter = Patients
+            .Where(p => (p.Name ?? string.Empty).StartsWith(upper, StringComparison.OrdinalIgnoreCase));
+
+        var others = Patients
+            .Where(p => !(p.Name ?? string.Empty).StartsWith(upper, StringComparison.OrdinalIgnoreCase));
+
+        return startsWithLetter.Concat(others);
     }
 }

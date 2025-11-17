@@ -14,16 +14,57 @@
 
         <nav class="sidebar-section">
             <div class="sidebar-section-title">MODULES</div>
-            <button class="sidebar-item @(IsPatientManagementActive ? "active" : string.Empty)" @onclick="OnPatientManagementClick">🧑‍⚕️ Patient Management</button>
-            <button class="sidebar-item @(IsHealthRecordActive ? "active" : string.Empty)" @onclick="OnHealthRecordClick">📋 Health Record</button>
-            <button class="sidebar-item">💳 Invoicing &amp; Cashiering</button>
-            <button class="sidebar-item">🧾 Insurance &amp; Claims</button>
-            <button class="sidebar-item">💊 Pharmacy &amp; Inventory</button>
-            <button class="sidebar-item">📊 Reports / Analytics</button>
+
+            @* Admin modules *@
+            @if (CurrentRole == "Admin")
+            {
+                <button class="sidebar-item @(IsPatientManagementActive ? "active" : string.Empty)" @onclick="OnPatientManagementClick">🧑‍⚕️ Patient Management</button>
+                <button class="sidebar-item @(IsHealthRecordActive ? "active" : string.Empty)" @onclick="OnHealthRecordClick">📋 Health Record</button>
+                <button class="sidebar-item @(IsInvoicingActive ? "active" : string.Empty)" @onclick="OnInvoicingClick">💳 Invoicing &amp; Cashiering</button>
+                <button class="sidebar-item">🧾 Insurance &amp; Claims</button>
+                <button class="sidebar-item">💊 Pharmacy &amp; Inventory</button>
+                <button class="sidebar-item">📊 Reports / Analytics</button>
+            }
+            @* Nurse modules *@
+            else if (CurrentRole == "Nurse")
+            {
+                <button class="sidebar-item @(IsNursePatientListActive ? "active" : string.Empty)" @onclick="OnNursePatientListClick">🧑‍⚕️ Patient List</button>
+                <button class="sidebar-item">📈 Vital Signs Monitoring</button>
+                <button class="sidebar-item">⏰ Medication Schedules</button>
+                <button class="sidebar-item">📝 Nursing Notes</button>
+                <button class="sidebar-item">📨 Request</button>
+                <button class="sidebar-item">📊 Reports</button>
+            }
+            @* Doctor modules *@
+            else if (CurrentRole == "Doctor")
+            {
+                <button class="sidebar-item">🧑‍⚕️ Patient List</button>
+                <button class="sidebar-item">📋 Health Record</button>
+                <button class="sidebar-item">📅 Appointments</button>
+                <button class="sidebar-item">💊 Prescriptions</button>
+                <button class="sidebar-item">🧪 Laboratory Results</button>
+                <button class="sidebar-item">📊 Reports</button>
+            }
+            @* Billing modules *@
+            else if (CurrentRole == "Billing")
+            {
+                <button class="sidebar-item">💳 Billing &amp; Invoicing</button>
+                <button class="sidebar-item">🧾 Insurance &amp; Claims</button>
+                <button class="sidebar-item">📊 Reports</button>
+            }
+            @* Inventory / Pharmacist modules *@
+            else if (CurrentRole == "Inventory")
+            {
+                <button class="sidebar-item">🏥 Pharmacy Inventory</button>
+                <button class="sidebar-item">💊 Prescriptions</button>
+                <button class="sidebar-item">📈 Stock Reports</button>
+            }
         </nav>
 
         <nav class="sidebar-section">
             <div class="sidebar-section-title">USER MANAGEMENT</div>
+
+            @* Admin: full user submenu; others: only User Profile *@
             <button class="sidebar-item sidebar-item-expand" @onclick="ToggleUserMenu">
                 👥 User
                 <span class="sidebar-chevron">@(IsUserMenuExpanded ? "▾" : "▸")</span>
@@ -32,8 +73,12 @@
             @if (IsUserMenuExpanded)
             {
                 <button class="sidebar-subitem">👤 User Profile</button>
-                <button class="sidebar-subitem">🧩 Role</button>
-                <button class="sidebar-subitem">🛡️ Permission</button>
+
+                @if (CurrentRole == "Admin")
+                {
+                    <button class="sidebar-subitem">🧩 Role</button>
+                    <button class="sidebar-subitem">🛡️ Permission</button>
+                }
             }
         </nav>
 
@@ -41,15 +86,75 @@
             <div class="sidebar-section-title">SYSTEM</div>
             <button class="sidebar-item">📜 Audit Logs</button>
             <button class="sidebar-item">🔄 Sync Management</button>
-            <button class="sidebar-item">⚙️ Settings</button>
+            <button class="sidebar-item @(IsSettingsOpen ? "sidebar-item-settings-active" : string.Empty)" @onclick="ToggleSettingsModal">⚙️ Settings</button>
         </nav>
 
         <button class="sidebar-logout" @onclick="LogoutAsync">LOG OUT</button>
     </aside>
 
-    <div class="dashboard-main">
+    <div class="@GetDashboardMainClasses()">
         @Body
     </div>
+
+    @if (IsSettingsOpen)
+    {
+        <div class="settings-overlay" @onclick="CloseSettingsModal">
+            <div class="settings-modal" @onclick:stopPropagation>
+                <div class="settings-modal-header">
+                    <span class="settings-modal-title">Settings</span>
+                    <button class="settings-modal-close" @onclick="CloseSettingsModal">✕</button>
+                </div>
+
+                <div class="settings-modal-body">
+                    <button class="settings-item">🔔 Notification</button>
+                    <button class="settings-item" @onclick="ToggleAccessibilityPanel">♿ Accessibility</button>
+                    <button class="settings-item">💾 Database / Backup</button>
+                    <button class="settings-item">⚙️ System Configuration</button>
+                </div>
+            </div>
+
+            @if (IsAccessibilityOpen)
+            {
+                <div class="accessibility-modal" @onclick:stopPropagation>
+                    <div class="accessibility-header">
+                        <span class="accessibility-title">Display</span>
+                        <button class="accessibility-close" @onclick="CloseAccessibilityPanel">✕</button>
+                    </div>
+
+                    <div class="accessibility-section">
+                        <div class="accessibility-options">
+                            <button class="accessibility-option" @onclick="SetDisplayModeNormal">
+                                <span class="accessibility-radio @(CurrentDisplayMode == "Normal" ? "accessibility-radio--selected" : string.Empty)"></span>
+                                <span>Normal mode</span>
+                            </button>
+                            <button class="accessibility-option" @onclick="SetDisplayModeDark">
+                                <span class="accessibility-radio @(CurrentDisplayMode == "Dark" ? "accessibility-radio--selected" : string.Empty)"></span>
+                                <span>Dark mode</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="accessibility-section">
+                        <div class="accessibility-section-title">Resize Text</div>
+                        <div class="accessibility-options">
+                            <button class="accessibility-option" @onclick="SetTextSizeSmall">
+                                <span class="accessibility-radio @(CurrentTextSize == "Small" ? "accessibility-radio--selected" : string.Empty)"></span>
+                                <span>Small</span>
+                            </button>
+                            <button class="accessibility-option" @onclick="SetTextSizeStandard">
+                                <span class="accessibility-radio @(CurrentTextSize == "Standard" ? "accessibility-radio--selected" : string.Empty)"></span>
+                                <span>Standard</span>
+                            </button>
+                            <button class="accessibility-option" @onclick="SetTextSizeLarge">
+                                <span class="accessibility-radio @(CurrentTextSize == "Large" ? "accessibility-radio--selected" : string.Empty)"></span>
+                                <span>Large</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
 </div>
 
 @code {
@@ -60,27 +165,147 @@
     [Inject]
     private IJSRuntime JsRuntime { get; set; } = default!;
 
-    private bool IsDashboardActive => Navigation.Uri.Contains("/dashboard", StringComparison.OrdinalIgnoreCase);
+    private string CurrentRole
+    {
+        get
+        {
+            var uri = Navigation.Uri.ToLowerInvariant();
+
+            // Nurse: dashboard + nurse-specific pages
+            if (uri.Contains("/nurse-dashboard") || uri.Contains("/nurse-patient-list"))
+                return "Nurse";
+
+            // Doctor: dashboard (extend with other doctor pages as needed)
+            if (uri.Contains("/doctor-dashboard"))
+                return "Doctor";
+
+            // Billing
+            if (uri.Contains("/billing-dashboard"))
+                return "Billing";
+
+            // Inventory
+            if (uri.Contains("/inventory-dashboard"))
+                return "Inventory";
+
+            // Default: Admin dashboard and modules
+            return "Admin";
+        }
+    }
+
+    private bool IsDashboardActive =>
+        Navigation.Uri.Contains("/dashboard", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/nurse-dashboard", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/doctor-dashboard", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/billing-dashboard", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/inventory-dashboard", StringComparison.OrdinalIgnoreCase);
 
     private bool IsPatientManagementActive => Navigation.Uri.Contains("/patient-management", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsNursePatientListActive => Navigation.Uri.Contains("/nurse-patient-list", StringComparison.OrdinalIgnoreCase);
 
     private bool IsHealthRecordActive =>
         Navigation.Uri.Contains("/health-records", StringComparison.OrdinalIgnoreCase)
         || Navigation.Uri.Contains("/patient-records", StringComparison.OrdinalIgnoreCase)
         || Navigation.Uri.Contains("/patient-ehr-print", StringComparison.OrdinalIgnoreCase);
 
-    private bool IsUserMenuExpanded { get; set; }
+    private bool IsInvoicingActive =>
+        Navigation.Uri.Contains("/invoicing-overview", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/receipt-overview", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/invoice-pdf", StringComparison.OrdinalIgnoreCase);
 
-    private void OnDashboardClick() => Navigation.NavigateTo("/dashboard");
+    private bool IsUserMenuExpanded { get; set; }
+    private bool IsSettingsOpen { get; set; }
+    private bool IsAccessibilityOpen { get; set; }
+
+    private string CurrentDisplayMode { get; set; } = "Normal";
+    private string CurrentTextSize { get; set; } = "Standard";
+
+    private void OnDashboardClick()
+    {
+        var target = CurrentRole switch
+        {
+            "Nurse" => "/nurse-dashboard",
+            "Doctor" => "/doctor-dashboard",
+            "Billing" => "/billing-dashboard",
+            "Inventory" => "/inventory-dashboard",
+            _ => "/dashboard"
+        };
+
+        Navigation.NavigateTo(target);
+    }
 
     private void OnPatientManagementClick() => Navigation.NavigateTo("/patient-management");
 
+    private void OnNursePatientListClick() => Navigation.NavigateTo("/nurse-patient-list");
+
     private void OnHealthRecordClick() => Navigation.NavigateTo("/health-records");
+
+    private void OnInvoicingClick() => Navigation.NavigateTo("/invoicing-overview");
 
     private void ToggleUserMenu()
     {
         IsUserMenuExpanded = !IsUserMenuExpanded;
     }
+
+    private void ToggleSettingsModal()
+    {
+        IsSettingsOpen = !IsSettingsOpen;
+        if (!IsSettingsOpen)
+        {
+            IsAccessibilityOpen = false;
+        }
+    }
+
+    private void CloseSettingsModal()
+    {
+        IsSettingsOpen = false;
+        IsAccessibilityOpen = false;
+    }
+
+    private void ToggleAccessibilityPanel()
+    {
+        IsAccessibilityOpen = !IsAccessibilityOpen;
+    }
+
+    private void CloseAccessibilityPanel()
+    {
+        IsAccessibilityOpen = false;
+    }
+
+    private string GetDashboardMainClasses()
+    {
+        var classes = "dashboard-main";
+
+        if (CurrentDisplayMode == "Dark")
+        {
+            classes += " dashboard-main--dark";
+        }
+
+        switch (CurrentTextSize)
+        {
+            case "Small":
+                classes += " dashboard-main--text-small";
+                break;
+            case "Large":
+                classes += " dashboard-main--text-large";
+                break;
+            default:
+                // Standard: no extra class needed
+                break;
+        }
+
+        return classes;
+    }
+
+    private void SetDisplayModeNormal() => CurrentDisplayMode = "Normal";
+
+    private void SetDisplayModeDark() => CurrentDisplayMode = "Dark";
+
+    private void SetTextSizeSmall() => CurrentTextSize = "Small";
+
+    private void SetTextSizeStandard() => CurrentTextSize = "Standard";
+
+    private void SetTextSizeLarge() => CurrentTextSize = "Large";
 
     // Shows a confirmation dialog before navigating back to the login page
     private async Task LogoutAsync()

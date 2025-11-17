@@ -4,7 +4,7 @@
     gap: 16px;
 }
 
-/* Match the Dashboard header layout & styling */
+/* Header match other dashboard pages */
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -13,7 +13,7 @@
     margin: -10px -16px 6px;
     background-color: #f3faf9;
     border-bottom: 1px solid #e0f0ee;
-    position: sticky;   /* keep header visible on scroll */
+    position: sticky;
     top: 0;
     z-index: 5;
 }
@@ -54,27 +54,6 @@
 
 .dashboard-user-name {
     font-weight: 600;
-}
-
-.pm-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 16px;
-    margin: -10px -16px 6px;
-    background-color: #f3faf9;
-    border-bottom: 1px solid #e0f0ee;
-}
-
-.pm-title {
-    font-size: 28px;
-    font-weight: 700;
-    margin: 0;
-}
-
-.pm-subtitle {
-    margin: 4px 0 0;
-    font-size: 14px;
 }
 
 .pm-overview {
@@ -175,7 +154,6 @@
     gap: 8px;
 }
 
-/* Sort / Filters buttons inside Patient Management */
 .pm-actions .activity-action-btn {
     padding: 6px 14px;
     border-radius: 999px;
@@ -187,20 +165,6 @@
 
 .pm-actions .activity-action-btn:hover {
     background-color: #e9f6f5;
-}
-
-.pm-patient-btn {
-    padding: 8px 18px;
-    border-radius: 999px;
-    border: none;
-    background-color: #0f8b8d;
-    color: #ffffff;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.pm-patient-btn:hover {
-    background-color: #0b6f70;
 }
 
 .pm-table-outer {
@@ -226,6 +190,13 @@
     padding: 10px 14px;
     font-size: 13px;
     text-align: left;
+    vertical-align: middle;
+}
+
+/* Force center alignment for the Vital Sign Monitoring column */
+.pm-table th.pm-col-vitals,
+.pm-table td.pm-col-vitals {
+    text-align: center !important;
 }
 
 .pm-table thead {
@@ -240,15 +211,19 @@
     width: 60px;
 }
 
+.pm-col-date {
+    width: 110px;
+    text-align: right;
+}
+
 .pm-col-action {
     width: 80px;
     text-align: center;
 }
 
-/* Narrow Date of Visit column so it sits closer to the More Info (View) buttons */
-.pm-col-date {
-    width: 110px;
-    text-align: right;
+.pm-col-vitals {
+    width: 160px;
+    text-align: center;
 }
 
 .pm-patient-name {
@@ -283,6 +258,22 @@
     background-color: #0b6f70;
 }
 
+.pm-add-btn {
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 1px solid #0f8b8d;
+    background-color: #ffffff;
+    color: #0f8b8d;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0 auto; /* center inside the cell */
+}
+
+.pm-add-btn:hover {
+    background-color: #e9f6f5;
+}
+
 .pm-pagination {
     display: flex;
     justify-content: flex-end;
@@ -290,7 +281,6 @@
     gap: 6px;
     margin-top: 32px;
 
-    /* Float near the bottom-right edge */
     position: fixed;
     right: 28px;
     bottom: 20px;
@@ -302,7 +292,7 @@
 
 .pm-page-btn,
 .pm-page-number {
-    padding: 7px 12px;            /* slightly bigger so they are easier to see */
+    padding: 7px 12px;
     border-radius: 10px;
     border: 1px solid #c9d9dd;
     background-color: #ffffff;
@@ -324,137 +314,4 @@
 
 .pm-page-dots {
     font-size: 12px;
-}
-
-/* ===================== PATIENT INFORMATION FORM ===================== */
-.pm-patient-form {
-    margin-top: 16px;
-    padding: 16px 18px 24px;
-    border-radius: 16px;
-    background-color: #f6fbfb;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-}
-
-.pm-form-header {
-    display: flex;
-    align-items: center;   /* vertically center icon + text */
-    gap: 6px;
-    margin-bottom: 16px;
-}
-
-.pm-form-icon {
-    font-size: 20px;
-    line-height: 1;         /* remove extra vertical space around icon */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.pm-form-title {
-    font-size: 22px;
-    font-weight: 700;
-}
-
-.pm-form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px 32px; /* row gap, column gap */
-    margin-top: 8px;
-}
-
-.pm-form-field {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.pm-form-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: #444;
-}
-
-.pm-form-input {
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid #9ba8ac;
-    font-size: 13px;
-    outline: none;
-    background-color: #ffffff;
-}
-
-.pm-form-input:focus {
-    border-color: #0f8b8d;
-    box-shadow: 0 0 0 2px rgba(15, 139, 141, 0.2);
-}
-
-.pm-form-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23083a3a' viewBox='0 0 16 16'%3E%3Cpath d='M3.204 5h9.592L8 10.481z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 14px;
-}
-
-.pm-form-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    margin-top: 24px;
-}
-
-.pm-form-back,
-.pm-form-save {
-    min-width: 110px;
-    padding: 7px 14px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.pm-form-back {
-    border: 2px solid #0f8b8d;
-    background-color: #ffffff;
-    color: #0f8b8d;
-}
-
-.pm-form-back:hover {
-    background-color: #e9f6f5;
-}
-
-.pm-form-save {
-    border: none;
-    background-color: #0f8b8d;
-    color: #ffffff;
-}
-
-/* Delete button in edit mode */
-.pm-form-delete {
-    min-width: 110px;
-    padding: 7px 14px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    background-color: #b45549;
-    color: #ffffff;
-}
-
-.pm-form-delete:hover {
-    background-color: #993d33;
-}
-
-.pm-form-delete-icon {
-    margin-right: 6px;
-    font-size: 14px;
-    display: inline-flex;
-    align-items: center;
-}
-
-.pm-form-save:hover {
-    background-color: #0b6f70;
 }
