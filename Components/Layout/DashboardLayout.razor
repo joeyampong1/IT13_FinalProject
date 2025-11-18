@@ -9,7 +9,10 @@
 
         <nav class="sidebar-section">
             <div class="sidebar-section-title">MAIN</div>
-            <button class="sidebar-item @(IsDashboardActive ? "active" : string.Empty)" @onclick="OnDashboardClick">🏠 Dashboard</button>
+            <button class="sidebar-item @(IsDashboardActive ? "active" : string.Empty)" @onclick="OnDashboardClick">
+                <span class="sidebar-icon sidebar-icon-home"></span>
+                Dashboard
+            </button>
         </nav>
 
         <nav class="sidebar-section">
@@ -18,46 +21,118 @@
             @* Admin modules *@
             @if (CurrentRole == "Admin")
             {
-                <button class="sidebar-item @(IsPatientManagementActive ? "active" : string.Empty)" @onclick="OnPatientManagementClick">🧑‍⚕️ Patient Management</button>
-                <button class="sidebar-item @(IsHealthRecordActive ? "active" : string.Empty)" @onclick="OnHealthRecordClick">📋 Health Record</button>
-                <button class="sidebar-item @(IsInvoicingActive ? "active" : string.Empty)" @onclick="OnInvoicingClick">💳 Invoicing &amp; Cashiering</button>
-                <button class="sidebar-item">🧾 Insurance &amp; Claims</button>
-                <button class="sidebar-item">💊 Pharmacy &amp; Inventory</button>
-                <button class="sidebar-item">📊 Reports / Analytics</button>
+                <button class="sidebar-item @(IsPatientManagementActive ? "active" : string.Empty)" @onclick="OnPatientManagementClick">
+                    <span class="sidebar-icon sidebar-icon-patient"></span>
+                    Patient Management
+                </button>
+                <button class="sidebar-item @(IsHealthRecordActive ? "active" : string.Empty)" @onclick="OnHealthRecordClick">
+                    <span class="sidebar-icon sidebar-icon-health"></span>
+                    Health Record
+                </button>
+                <button class="sidebar-item @(IsInvoicingActive ? "active" : string.Empty)" @onclick="OnInvoicingClick">
+                    <span class="sidebar-icon sidebar-icon-billing"></span>
+                    Invoicing &amp; Cashiering
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-insurance"></span>
+                    Insurance &amp; Claims
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-pharmacy"></span>
+                    Pharmacy &amp; Inventory
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-reports"></span>
+                    Reports / Analytics
+                </button>
             }
             @* Nurse modules *@
             else if (CurrentRole == "Nurse")
             {
-                <button class="sidebar-item @(IsNursePatientListActive ? "active" : string.Empty)" @onclick="OnNursePatientListClick">🧑‍⚕️ Patient List</button>
-                <button class="sidebar-item">📈 Vital Signs Monitoring</button>
-                <button class="sidebar-item">⏰ Medication Schedules</button>
-                <button class="sidebar-item">📝 Nursing Notes</button>
-                <button class="sidebar-item">📨 Request</button>
-                <button class="sidebar-item">📊 Reports</button>
+                <button class="sidebar-item @(IsNursePatientListActive ? "active" : string.Empty)" @onclick="OnNursePatientListClick">
+                    <span class="sidebar-icon sidebar-icon-patient"></span>
+                    Patient List
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-vitals"></span>
+                    Vital Signs Monitoring
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-medication"></span>
+                    Medication Schedules
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-notes"></span>
+                    Nursing Notes
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-request"></span>
+                    Request
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-reports"></span>
+                    Reports
+                </button>
             }
             @* Doctor modules *@
             else if (CurrentRole == "Doctor")
             {
-                <button class="sidebar-item">🧑‍⚕️ Patient List</button>
-                <button class="sidebar-item">📋 Health Record</button>
-                <button class="sidebar-item">📅 Appointments</button>
-                <button class="sidebar-item">💊 Prescriptions</button>
-                <button class="sidebar-item">🧪 Laboratory Results</button>
-                <button class="sidebar-item">📊 Reports</button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-patient"></span>
+                    Patient List
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-health"></span>
+                    Health Record
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-appointments"></span>
+                    Appointments
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-prescriptions"></span>
+                    Prescriptions
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-lab"></span>
+                    Laboratory Results
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-reports"></span>
+                    Reports
+                </button>
             }
             @* Billing modules *@
             else if (CurrentRole == "Billing")
             {
-                <button class="sidebar-item">💳 Billing &amp; Invoicing</button>
-                <button class="sidebar-item">🧾 Insurance &amp; Claims</button>
-                <button class="sidebar-item">📊 Reports</button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-billing"></span>
+                    Billing &amp; Invoicing
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-insurance"></span>
+                    Insurance &amp; Claims
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-reports"></span>
+                    Reports
+                </button>
             }
             @* Inventory / Pharmacist modules *@
             else if (CurrentRole == "Inventory")
             {
-                <button class="sidebar-item">🏥 Pharmacy Inventory</button>
-                <button class="sidebar-item">💊 Prescriptions</button>
-                <button class="sidebar-item">📈 Stock Reports</button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-inventory"></span>
+                    Pharmacy Inventory
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-prescriptions"></span>
+                    Prescriptions
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-stock"></span>
+                    Stock Reports
+                </button>
             }
         </nav>
 
@@ -66,27 +141,46 @@
 
             @* Admin: full user submenu; others: only User Profile *@
             <button class="sidebar-item sidebar-item-expand" @onclick="ToggleUserMenu">
-                👥 User
+                <span class="sidebar-icon sidebar-icon-user"></span>
+                User
                 <span class="sidebar-chevron">@(IsUserMenuExpanded ? "▾" : "▸")</span>
             </button>
 
             @if (IsUserMenuExpanded)
             {
-                <button class="sidebar-subitem">👤 User Profile</button>
+                <button class="sidebar-subitem">
+                    <span class="sidebar-icon sidebar-icon-user-profile"></span>
+                    User Profile
+                </button>
 
                 @if (CurrentRole == "Admin")
                 {
-                    <button class="sidebar-subitem">🧩 Role</button>
-                    <button class="sidebar-subitem">🛡️ Permission</button>
+                    <button class="sidebar-subitem">
+                        <span class="sidebar-icon sidebar-icon-role"></span>
+                        Role
+                    </button>
+                    <button class="sidebar-subitem">
+                        <span class="sidebar-icon sidebar-icon-permission"></span>
+                        Permission
+                    </button>
                 }
             }
         </nav>
 
         <nav class="sidebar-section">
             <div class="sidebar-section-title">SYSTEM</div>
-            <button class="sidebar-item">📜 Audit Logs</button>
-            <button class="sidebar-item">🔄 Sync Management</button>
-            <button class="sidebar-item @(IsSettingsOpen ? "sidebar-item-settings-active" : string.Empty)" @onclick="ToggleSettingsModal">⚙️ Settings</button>
+            <button class="sidebar-item">
+                <span class="sidebar-icon sidebar-icon-audit"></span>
+                Audit Logs
+            </button>
+            <button class="sidebar-item">
+                <span class="sidebar-icon sidebar-icon-sync"></span>
+                Sync Management
+            </button>
+            <button class="sidebar-item @(IsSettingsOpen ? "sidebar-item-settings-active" : string.Empty)" @onclick="ToggleSettingsModal">
+                <span class="sidebar-icon sidebar-icon-settings"></span>
+                Settings
+            </button>
         </nav>
 
         <button class="sidebar-logout" @onclick="LogoutAsync">LOG OUT</button>

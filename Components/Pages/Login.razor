@@ -36,24 +36,19 @@
                     <!-- ----- USERNAME / EMAIL INPUT ROW ----- -->
                     <div class="input-group">
                         <!-- Input control for username/email -->
-                        <InputText class="input-field" @bind-Value="UserName" placeholder="Username or Email" />
+                        <input class="input-field" @bind="UserName" placeholder="Username or Email" />
 
-                        <!-- Icon on the right side of the input -->
-                        <span class="input-icon">
-                            <!-- Simple user icon using Unicode; replace with SVG if you prefer -->
-                            &#128100;
-                        </span>
+                        <!-- Icon inside the pill input -->
+                        <span class="input-icon input-icon-user"></span>
                     </div>
 
                     <!-- ----- PASSWORD INPUT ROW ----- -->
                     <div class="input-group">
                         <!-- Input control for password -->
-                        <InputText class="input-field" @bind-Value="Password" type="password" placeholder="Password" />
+                        <input class="input-field" @bind="Password" type="password" placeholder="Password" />
 
-                        <!-- Lock icon on the right side -->
-                        <span class="input-icon">
-                            &#128274;
-                        </span>
+                        <!-- Lock icon inside the pill input -->
+                        <span class="input-icon input-icon-lock"></span>
                     </div>
 
                     <!-- ========== LOGIN BUTTON ========== -->

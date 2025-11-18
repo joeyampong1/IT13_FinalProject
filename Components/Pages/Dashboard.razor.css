@@ -12,6 +12,9 @@
     margin: -10px -16px 6px;
     background-color: #f3faf9;
     border-bottom: 1px solid #e0f0ee;
+    position: sticky;
+    top: 0;
+    z-index: 5;
 }
 
 .dashboard-notification-toggle {
@@ -163,6 +166,7 @@
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 14px;
+    margin-top: 4px;
 }
 
 .dashboard-card {
@@ -193,7 +197,7 @@
 }
 
 .dashboard-activity {
-    margin-top: 8px;
+    margin-top: 16px;
 }
 
 .activity-header {
