@@ -243,40 +243,72 @@
     background-color: #0b6f70;
 }
 
-/* Pagination bottom */
- .inv-pagination {
+/* Pagination bottom - match nurse vitals style */
+.inv-pagination {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 6px;
-    margin-top: 20px;
+    margin-top: 32px;
+
+    position: fixed;
+    right: 80px;
+    bottom: 20px;
+    padding: 0;
+    border-radius: 999px;
+    background: transparent;
+    box-shadow: none;
+}
+
+.inv-pagination-toggle {
+    position: fixed;
+    right: 24px;
+    bottom: 18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: none;
+    background-color: transparent;
+    color: #222222;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    cursor: pointer;
+    z-index: 6;
+}
+
+.inv-pagination-toggle:hover {
+    background-color: transparent;
+    color: #000000;
 }
 
 .inv-page-btn,
 .inv-page-number {
-    padding: 6px 12px;
-    border-radius: 999px;
-    border: none;
+    padding: 3px 8px;
+    border-radius: 8px;
+    border: 1px solid #c9d9dd;
     background-color: #ffffff;
-    font-size: 12px;
+    font-size: 11px;
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-.inv-page-btn:hover,
-.inv-page-number:hover {
-    background-color: #e9f6f5;
 }
 
 .inv-page-number-active {
     background-color: #0f8b8d;
     color: #ffffff;
+    border-color: #0f8b8d;
+}
+
+.inv-page-btn:hover,
+.inv-page-number:hover {
+    background-color: #e9f6f5;
+    border-color: #0f8b8d;
 }
 
 .inv-page-dots {
     display: flex;
     align-items: center;
-    font-size: 12px;
 }
 
 @media (max-width: 900px) {

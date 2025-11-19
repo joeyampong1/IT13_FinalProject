@@ -49,58 +49,22 @@
             @* Nurse modules *@
             else if (CurrentRole == "Nurse")
             {
-                <button class="sidebar-item @(IsNursePatientListActive ? "active" : string.Empty)" @onclick="OnNursePatientListClick">
-                    <span class="sidebar-icon sidebar-icon-patient"></span>
-                    Patient List
-                </button>
-                <button class="sidebar-item">
-                    <span class="sidebar-icon sidebar-icon-vitals"></span>
-                    Vital Signs Monitoring
-                </button>
-                <button class="sidebar-item">
-                    <span class="sidebar-icon sidebar-icon-medication"></span>
-                    Medication Schedules
-                </button>
-                <button class="sidebar-item">
-                    <span class="sidebar-icon sidebar-icon-notes"></span>
-                    Nursing Notes
-                </button>
-                <button class="sidebar-item">
-                    <span class="sidebar-icon sidebar-icon-request"></span>
-                    Request
-                </button>
-                <button class="sidebar-item">
-                    <span class="sidebar-icon sidebar-icon-reports"></span>
-                    Reports
-                </button>
+                <button class="sidebar-item @(IsNursePatientListActive ? "active" : string.Empty)" @onclick="OnNursePatientListClick">🧑‍⚕️ Patient List</button>
+                <button class="sidebar-item @(IsNurseVitalsActive ? "active" : string.Empty)" @onclick="OnNurseVitalsClick">📈 Vital Signs Monitoring</button>
+                <button class="sidebar-item">⏰ Medication Schedules</button>
+                <button class="sidebar-item">📝 Nursing Notes</button>
+                <button class="sidebar-item">📨 Request</button>
+                <button class="sidebar-item">📊 Reports</button>
             }
             @* Doctor modules *@
             else if (CurrentRole == "Doctor")
             {
-                <button class="sidebar-item">
-                    <span class="sidebar-icon sidebar-icon-patient"></span>
-                    Patient List
-                </button>
-                <button class="sidebar-item">
-                    <span class="sidebar-icon sidebar-icon-health"></span>
-                    Health Record
-                </button>
-                <button class="sidebar-item">
-                    <span class="sidebar-icon sidebar-icon-appointments"></span>
-                    Appointments
-                </button>
-                <button class="sidebar-item">
-                    <span class="sidebar-icon sidebar-icon-prescriptions"></span>
-                    Prescriptions
-                </button>
-                <button class="sidebar-item">
-                    <span class="sidebar-icon sidebar-icon-lab"></span>
-                    Laboratory Results
-                </button>
-                <button class="sidebar-item">
-                    <span class="sidebar-icon sidebar-icon-reports"></span>
-                    Reports
-                </button>
+                <button class="sidebar-item @(IsDoctorPatientListActive ? "active" : string.Empty)" @onclick="OnDoctorPatientListClick">🧑‍⚕️ Patient List</button>
+                <button class="sidebar-item @(IsDoctorHealthRecordActive ? "active" : string.Empty)" @onclick="OnDoctorHealthRecordClick">📋 Health Record</button>
+                <button class="sidebar-item">📅 Appointments</button>
+                <button class="sidebar-item">💊 Prescriptions</button>
+                <button class="sidebar-item">🧪 Laboratory Results</button>
+                <button class="sidebar-item">📊 Reports</button>
             }
             @* Billing modules *@
             else if (CurrentRole == "Billing")
@@ -187,7 +151,14 @@
     </aside>
 
     <div class="@GetDashboardMainClasses()">
-        @Body
+        @if (ChildContent is not null)
+        {
+            @ChildContent
+        }
+        else
+        {
+            @Body
+        }
     </div>
 
     @if (IsSettingsOpen)
@@ -252,6 +223,9 @@
 </div>
 
 @code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
     [Inject]
     private NavigationManager Navigation { get; set; } = default!;
 
@@ -266,11 +240,22 @@
             var uri = Navigation.Uri.ToLowerInvariant();
 
             // Nurse: dashboard + nurse-specific pages
-            if (uri.Contains("/nurse-dashboard") || uri.Contains("/nurse-patient-list"))
+            if (uri.Contains("/nurse-dashboard")
+                || uri.Contains("/nurse-patient-list")
+                || uri.Contains("/nurse-vitals-list")
+                || uri.Contains("/nurse-vitals")
+                || uri.Contains("/nurse-patient-profile")
+                || uri.Contains("/patient-profile"))
                 return "Nurse";
 
-            // Doctor: dashboard (extend with other doctor pages as needed)
-            if (uri.Contains("/doctor-dashboard"))
+            // Doctor: dashboard and doctor-specific pages
+            if (uri.Contains("/doctor-dashboard")
+                || uri.Contains("/patient-list")
+                || uri.Contains("/doctor-patient-profile")
+                || uri.Contains("/doctor-vitals-info")
+                || uri.Contains("/doctor-consultation")
+                || uri.Contains("/doctor-consultation-edit")
+                || uri.Contains("/doctor-health-records"))
                 return "Doctor";
 
             // Billing
@@ -295,7 +280,26 @@
 
     private bool IsPatientManagementActive => Navigation.Uri.Contains("/patient-management", StringComparison.OrdinalIgnoreCase);
 
-    private bool IsNursePatientListActive => Navigation.Uri.Contains("/nurse-patient-list", StringComparison.OrdinalIgnoreCase);
+    private bool IsNursePatientListActive =>
+        Navigation.Uri.Contains("/nurse-patient-list", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.EndsWith("/nurse-vitals", StringComparison.OrdinalIgnoreCase) // Add form belongs under Patient List (but not list/edit)
+        || Navigation.Uri.Contains("/nurse-patient-profile", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/patient-profile", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsNurseVitalsActive =>
+        Navigation.Uri.Contains("/nurse-vitals-list", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/nurse-vitals-edit", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsDoctorPatientListActive =>
+        Navigation.Uri.Contains("/patient-list", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/doctor-patient-profile", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/doctor-vitals-info", StringComparison.OrdinalIgnoreCase)
+        // Only the ADD consultation form belongs under Patient List (not the edit page)
+        || Navigation.Uri.EndsWith("/doctor-consultation", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsDoctorHealthRecordActive =>
+        Navigation.Uri.Contains("/doctor-health-records", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/doctor-consultation-edit", StringComparison.OrdinalIgnoreCase);
 
     private bool IsHealthRecordActive =>
         Navigation.Uri.Contains("/health-records", StringComparison.OrdinalIgnoreCase)
@@ -331,6 +335,18 @@
     private void OnPatientManagementClick() => Navigation.NavigateTo("/patient-management");
 
     private void OnNursePatientListClick() => Navigation.NavigateTo("/nurse-patient-list");
+
+    private void OnNurseVitalsClick() => Navigation.NavigateTo("/nurse-vitals-list");
+
+    private void OnDoctorPatientListClick()
+    {
+        Navigation.NavigateTo("/patient-list");
+    }
+
+    private void OnDoctorHealthRecordClick()
+    {
+        Navigation.NavigateTo("/doctor-health-records");
+    }
 
     private void OnHealthRecordClick() => Navigation.NavigateTo("/health-records");
 
