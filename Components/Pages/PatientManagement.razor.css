@@ -79,6 +79,7 @@
 
 .pm-overview {
     background-color: transparent;
+    margin-top: 4px;
 }
 
 .pm-overview-header {
@@ -159,7 +160,13 @@
 }
 
 .pm-search-icon {
-    font-size: 14px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Ccircle cx='7' cy='7' r='4.5' stroke='%230f8b8d' stroke-width='1.6'/%3E%3Cline x1='9.8' y1='9.8' x2='13' y2='13' stroke='%230f8b8d' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px 16px;
 }
 
 .pm-search-input {
@@ -208,12 +215,11 @@
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    width: 100%;
 }
 
 .pm-table-wrapper {
+    max-height: 380px;
     overflow-y: auto;
-    width: 100%;
 }
 
 .pm-table {
@@ -276,8 +282,13 @@
 }
 
 .pm-view-icon {
-    font-size: 16px;
-    color: #ffffff;
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M1.5 8C2.5 5.7 4.9 4 8 4c3.1 0 5.5 1.7 6.5 4-1 2.3-3.4 4-6.5 4-3.1 0-5.5-1.7-6.5-4z' stroke='%23ffffff' stroke-width='1.4' fill='none'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%23ffffff'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 14px 14px;
 }
 
 .pm-view-btn:hover {
@@ -289,49 +300,16 @@
     justify-content: flex-end;
     align-items: center;
     gap: 6px;
-    margin-top: 32px;
-
-    /* Float near the bottom-right edge */
-    position: fixed;
-    right: 80px;  /* move pill left so arrow at 24px is outside */
-    bottom: 20px;
-    padding: 0;
-    border-radius: 999px;
-    background: transparent; /* no background pill, just the buttons */
-    box-shadow: none;
-}
-
-.pm-pagination-toggle {
-    position: fixed;
-    right: 24px;  /* slightly left from edge, still outside Next */
-    bottom: 18px;
-    width: 32px;
-    height: 32px;
-    border-radius: 999px;
-    border: none;
-    background-color: transparent; /* remove green circle */
-    color: #222222;                /* small black/near-black arrow */
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: none;
-    cursor: pointer;
-    z-index: 6;
-}
-
-.pm-pagination-toggle:hover {
-    background-color: transparent;
-    color: #000000; /* darker on hover */
+    margin-top: 20px;
 }
 
 .pm-page-btn,
 .pm-page-number {
-    padding: 3px 8px;            /* even smaller, very light */
-    border-radius: 8px;
+    padding: 7px 12px;            /* slightly bigger so they are easier to see */
+    border-radius: 10px;
     border: 1px solid #c9d9dd;
     background-color: #ffffff;
-    font-size: 11px;
+    font-size: 13px;
     cursor: pointer;
 }
 
@@ -354,7 +332,7 @@
 /* ===================== PATIENT INFORMATION FORM ===================== */
 .pm-patient-form {
     margin-top: 16px;
-    padding: 16px 18px 24px;
+    padding: 18px 20px 26px;
     border-radius: 16px;
     background-color: #f6fbfb;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
@@ -428,6 +406,27 @@
     justify-content: flex-end;
     gap: 12px;
     margin-top: 24px;
+}
+
+/* ===================== RESPONSIVE TWEAKS ===================== */
+@media (max-width: 900px) {
+    .pm-page {
+        padding: 8px 10px 20px;
+    }
+
+    .pm-form-grid {
+        grid-template-columns: 1fr;
+        gap: 10px 0;
+    }
+
+    .pm-search-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pm-pagination {
+        justify-content: center;
+    }
 }
 
 .pm-form-back,

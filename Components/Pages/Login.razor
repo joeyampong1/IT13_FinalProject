@@ -1,5 +1,7 @@
 ﻿@page "/"
 @page "/login"
+@layout Layout.EmptyLayout
+@using IT_13FinalProject.Services
 
 <!-- ===================== OVERALL PAGE WRAPPER ===================== -->
 <div class="login-page">
@@ -21,29 +23,38 @@
                 <!-- ========== LOGIN TITLE (OPTIONAL) ========== -->
                 <h2 class="login-title">Sign in to MedFlow</h2>
 
-                <!-- ========== LOGIN FORM (SIMPLIFIED) ========== -->
-                <!-- We use plain inputs and a button with @onclick to ensure the handler always runs. -->
+                <!-- ========== ERROR MESSAGE AREA ========== -->
+                <!-- Shown when the entered credentials are incorrect -->
+                @if (!string.IsNullOrWhiteSpace(ErrorMessage))
+                {
+                    <div class="login-error-message">@ErrorMessage</div>
+                }
 
-                <!-- ----- USERNAME / EMAIL INPUT ROW ----- -->
-                <div class="input-group">
-                    <InputText class="input-field" @bind-Value="UserName" placeholder="Username or Email" />
+                <!-- ========== LOGIN FORM ========== -->
+                <EditForm Model="this" OnValidSubmit="HandleLogin">
+                    <DataAnnotationsValidator />
 
-                    <span class="input-icon">
-                        &#128100;
-                    </span>
-                </div>
+                    <!-- ----- USERNAME / EMAIL INPUT ROW ----- -->
+                    <div class="input-group">
+                        <!-- Input control for username/email -->
+                        <input class="input-field" @bind="UserName" placeholder="Username or Email" />
 
-                <!-- ----- PASSWORD INPUT ROW ----- -->
-                <div class="input-group">
-                    <InputText class="input-field" @bind-Value="Password" type="password" placeholder="Password" />
+                        <!-- Icon inside the pill input -->
+                        <span class="input-icon input-icon-user"></span>
+                    </div>
 
-                    <span class="input-icon">
-                        &#128274;
-                    </span>
-                </div>
+                    <!-- ----- PASSWORD INPUT ROW ----- -->
+                    <div class="input-group">
+                        <!-- Input control for password -->
+                        <input class="input-field" @bind="Password" type="password" placeholder="Password" />
 
-                <!-- ========== LOGIN BUTTON ========== -->
-                <button type="button" class="login-button" @onclick="HandleLogin">LOGIN</button>
+                        <!-- Lock icon inside the pill input -->
+                        <span class="input-icon input-icon-lock"></span>
+                    </div>
+
+                    <!-- ========== LOGIN BUTTON ========== -->
+                    <button type="submit" class="login-button">LOGIN</button>
+                </EditForm>
 
                 <!-- ========== EXTRA LINKS AREA ========== -->
                 <div class="login-links">
@@ -85,31 +96,75 @@
     // Property bound to the password input
     public string? Password { get; set; }
 
+    // Holds a message when login fails (kept if you want to show inline text later)
+    public string? ErrorMessage { get; set; }
+
     [Inject]
     private NavigationManager Navigation { get; set; } = default!;
 
+    // JS runtime used to show simple alert dialogs (e.g., invalid credentials)
     [Inject]
     private IJSRuntime JsRuntime { get; set; } = default!;
 
+    [Inject]
+    private IUserAccountService UserAccountService { get; set; } = default!;
+
     // ===================== EVENT HANDLERS =====================
-    // This method is called when the user clicks LOGIN
-    private async Task HandleLogin()
+    // This method is called when the form is submitted successfully
+    private void HandleLogin()
     {
+        // Clear any existing error message first
+        ErrorMessage = null;
+
+        var userFromService = UserAccountService.ValidateUser(UserName ?? string.Empty, Password ?? string.Empty);
+
+        if (userFromService is not null)
+        {
+            if (string.Equals(userFromService.Role, "Admin", StringComparison.OrdinalIgnoreCase))
+            {
+                Navigation.NavigateTo("/dashboard");
+                return;
+            }
+
+            if (string.Equals(userFromService.Role, "Nurse", StringComparison.OrdinalIgnoreCase))
+            {
+                Navigation.NavigateTo("/nurse-dashboard");
+                return;
+            }
+
+            if (string.Equals(userFromService.Role, "Doctor", StringComparison.OrdinalIgnoreCase))
+            {
+                Navigation.NavigateTo("/doctor-dashboard");
+                return;
+            }
+
+            if (string.Equals(userFromService.Role, "Billing Staff", StringComparison.OrdinalIgnoreCase))
+            {
+                Navigation.NavigateTo("/billing-dashboard");
+                return;
+            }
+
+            if (string.Equals(userFromService.Role, "Inventory Staff", StringComparison.OrdinalIgnoreCase))
+            {
+                Navigation.NavigateTo("/inventory-dashboard");
+                return;
+            }
+        }
 
         // Temporary hard-coded credentials while database auth is not yet wired
-        var isAdmin = string.Equals(UserName, "admin", StringComparison.OrdinalIgnoreCase)
+        var isAdmin = string.Equals(UserName, "Admin", StringComparison.OrdinalIgnoreCase)
                       && Password == "12345";
 
-        var isNurse = string.Equals(UserName, "nurse", StringComparison.OrdinalIgnoreCase)
+        var isNurse = string.Equals(UserName, "Nurse", StringComparison.OrdinalIgnoreCase)
                       && Password == "12345";
 
-        var isDoctor = string.Equals(UserName, "doctor", StringComparison.OrdinalIgnoreCase)
+        var isDoctor = string.Equals(UserName, "Doctor", StringComparison.OrdinalIgnoreCase)
                        && Password == "12345";
 
         var isBilling = string.Equals(UserName, "Billing", StringComparison.OrdinalIgnoreCase)
                         && Password == "12345";
 
-        var isInventory = string.Equals(UserName, "inventory", StringComparison.OrdinalIgnoreCase)
+        var isInventory = string.Equals(UserName, "Inventory", StringComparison.OrdinalIgnoreCase)
                            && Password == "12345";
 
         if (isAdmin)
@@ -142,7 +197,7 @@
             return;
         }
 
-        // When credentials are invalid, show a browser dialog
-        await JsRuntime.InvokeVoidAsync("alert", "Invalid credentials. Please try again.");
+        // Show a simple dialog when credentials are invalid
+        JsRuntime.InvokeVoidAsync("alert", "Invalid Credentials!");
     }
 }

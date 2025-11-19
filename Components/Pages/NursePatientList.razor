@@ -4,7 +4,7 @@
 <div class="pm-page">
     <header class="dashboard-header">
         <div>
-            <h1 class="dashboard-title">Patient List</h1>
+            <h1 class="dashboard-title">Patient Management</h1>
             <p class="dashboard-subtitle">Welcome back Clinical Staff!</p>
         </div>
 
@@ -45,7 +45,7 @@
 
             <div class="pm-search-row">
                 <div class="pm-search-box">
-                    <span class="pm-search-icon">🔍</span>
+                    <span class="pm-search-icon"></span>
                     <input class="pm-search-input" placeholder="Search Patient" />
                 </div>
 
@@ -81,12 +81,12 @@
                                 <td>@p.AssessmentStatus</td>
                                 <td class="pm-col-date">@p.DateOfVisit</td>
                                 <td class="pm-col-action">
-                                    <button class="pm-view-btn" aria-label="View patient record" @onclick="() => GoToPatientProfile(p.Id)">
-                                        <span class="pm-view-icon">👁️</span>
+                                    <button class="pm-view-btn" aria-label="View patient record">
+                                        <span class="pm-view-icon"></span>
                                     </button>
                                 </td>
                                 <td class="pm-col-vitals">
-                                    <button class="pm-add-btn" @onclick="() => GoToVitalsForm(p.Id)">+ Add</button>
+                                    <button class="pm-add-btn">+ Add</button>
                                 </td>
                             </tr>
                         }
@@ -95,29 +95,19 @@
             </div>
         </div>
 
-        <button type="button" class="pm-pagination-toggle" @onclick="TogglePagination" aria-label="Hide or show page buttons">
-            <span>@(ShowPagination ? "›" : "‹")</span>
-        </button>
-
-        @if (ShowPagination)
-        {
-            <div class="pm-pagination">
-                <button class="pm-page-btn">Previous</button>
-                <button class="pm-page-number active">1</button>
-                <button class="pm-page-number">2</button>
-                <button class="pm-page-number">3</button>
-                <span class="pm-page-dots">...</span>
-                <button class="pm-page-number">8</button>
-                <button class="pm-page-btn">Next</button>
-            </div>
-        }
+        <div class="pm-pagination">
+            <button class="pm-page-btn">Previous</button>
+            <button class="pm-page-number active">1</button>
+            <button class="pm-page-number">2</button>
+            <button class="pm-page-number">3</button>
+            <span class="pm-page-dots">...</span>
+            <button class="pm-page-number">8</button>
+            <button class="pm-page-btn">Next</button>
+        </div>
     </section>
 </div>
 
 @code {
-    [Inject]
-    private NavigationManager Navigation { get; set; } = default!;
-
     private static readonly string[] Alphabet = new[]
     {
         "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
@@ -127,7 +117,6 @@
 
     private bool ShowLetters { get; set; }
     private string? ActiveLetter { get; set; }
-    private bool ShowPagination { get; set; } = false;
 
     private List<NursePatientRow> Patients = new()
     {
@@ -166,20 +155,5 @@
             .Where(p => !(p.Name ?? string.Empty).StartsWith(upper, StringComparison.OrdinalIgnoreCase));
 
         return startsWithLetter.Concat(others);
-    }
-
-    private void GoToVitalsForm(string patientId)
-    {
-        Navigation.NavigateTo("/nurse-vitals");
-    }
-
-    private void GoToPatientProfile(string patientId)
-    {
-        Navigation.NavigateTo("/patient-profile");
-    }
-
-    private void TogglePagination()
-    {
-        ShowPagination = !ShowPagination;
     }
 }

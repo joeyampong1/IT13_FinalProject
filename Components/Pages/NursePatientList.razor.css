@@ -1,10 +1,10 @@
 .pm-page {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    gap: 16px;
 }
 
-/* Match the dashboard header layout used by other pages */
+/* Header match other dashboard pages */
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -55,296 +55,6 @@
 .dashboard-user-name {
     font-weight: 600;
 }
-
-.pm-overview {
-    margin-top: 1.5rem;
-    width: 100%;
-}
-
-.pm-overview-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.pm-section-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.pm-show-entries {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.85rem;
-}
-
-.pm-show-entries select {
-    border-radius: 999px;
-    border: 1px solid #cfd8dc;
-    padding: 0.1rem 0.75rem;
-    font-size: 0.85rem;
-}
-
-.pm-filters-row {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-}
-
-.pm-alpha-filter {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
-.pm-filter-pill {
-    border-radius: 999px;
-    border: 1px solid #cfd8dc;
-    background-color: #ffffff;
-    padding: 0.2rem 0.6rem;
-    font-size: 0.75rem;
-    cursor: pointer;
-}
-
-.pm-filter-pill.active {
-    background-color: #7ecf7a;
-    border-color: #7ecf7a;
-    color: #ffffff;
-}
-
-.pm-search-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-}
-
-.pm-search-box {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    border: 2px solid #0f8b8d;
-    background-color: #ffffff;
-}
-
-.pm-search-icon {
-    font-size: 14px;
-}
-
-.pm-search-input {
-    flex: 1;
-    border: none;
-    outline: none;
-    font-size: 13px;
-}
-
-.pm-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.pm-actions .activity-action-btn {
-    padding: 6px 14px;
-    border-radius: 999px;
-    border: 1px solid #0f8b8d;
-    background-color: #ffffff;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.pm-actions .activity-action-btn:hover {
-    background-color: #e9f6f5;
-}
-
-.pm-table-outer {
-    margin-top: 0.75rem;
-    width: 100%;
-}
-
-.pm-table-wrapper {
-    overflow-y: auto;
-    border-radius: 18px;
-    background-color: #ffffff;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-    width: 100%;
-}
-
-.pm-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.85rem;
-}
-
-.pm-table thead th {
-    position: sticky;
-    top: 0;
-    background-color: #f5f9fb;
-    z-index: 1;
-    padding: 0.75rem 1rem;
-    text-align: left;
-    font-weight: 600;
-}
-
-/* Center-align header titles for Assessment Status, Date of Visit, Patient Info, Vital Sign Monitoring */
-.pm-table thead th:nth-child(3),
-.pm-table thead th:nth-child(4),
-.pm-table thead th:nth-child(5),
-.pm-table thead th:nth-child(6) {
-    text-align: center;
-}
-
-.pm-table tbody td {
-    padding: 0.6rem 1rem;
-    border-top: 1px solid #e0e6eb;
-}
-
-/* Center-align Assessment Status column (3rd data column) */
-.pm-table tbody td:nth-child(3) {
-    text-align: center;
-}
-
-/* Ensure Patient Info (5th) and Vital Sign Monitoring (6th) columns are centered */
-.pm-table tbody td:nth-child(5),
-.pm-table tbody td:nth-child(6) {
-    text-align: center;
-}
-
-.pm-col-id {
-    width: 52px;
-}
-
-.pm-col-date {
-    width: 120px;
-    text-align: center;
-}
-
-.pm-col-action,
-.pm-col-vitals {
-    width: 140px;
-    text-align: center;
-}
-
-.pm-patient-name {
-    font-weight: 500;
-}
-
-.pm-patient-email {
-    font-size: 0.78rem;
-    color: #607d8b;
-}
-
-/* eye icon button styled like admin HealthRecords (teal circular) */
-.pm-view-btn {
-    width: 28px;
-    height: 28px;
-    padding: 0;
-    border-radius: 50%;
-    border: none;
-    background-color: #0f8b8d;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-}
-
-.pm-view-icon {
-    font-size: 16px;
-    color: #ffffff;
-}
-
-.pm-view-btn:hover {
-    background-color: #0b6f70;
-}
-
-/* + Add button matches + Patient button style from PatientManagement */
-.pm-add-btn {
-    padding: 4px 12px;      /* smaller, compact pill */
-    border-radius: 999px;
-    border: none;
-    background-color: #0f8b8d;
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 0.72rem;     /* smaller text to match new size */
-    cursor: pointer;
-}
-
-/* Floating pagination similar to HealthRecords: stays visible while table scrolls */
-.pm-pagination {
-    margin-top: 32px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 6px;
-
-    position: fixed;
-    right: 80px;  /* move pill left so arrow at 24px is outside */
-    bottom: 20px;
-    padding: 0;
-    border-radius: 999px;
-    background: transparent; /* no background pill, just the buttons */
-    box-shadow: none;
-}
-
-.pm-pagination-toggle {
-    position: fixed;
-    right: 24px;  /* slightly left from edge, still outside Next */
-    bottom: 18px;
-    width: 32px;
-    height: 32px;
-    border-radius: 999px;
-    border: none;
-    background-color: transparent;
-    color: #222222;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: none;
-    cursor: pointer;
-    z-index: 6;
-}
-
-.pm-pagination-toggle:hover {
-    background-color: transparent;
-    color: #000000;
-}
-
-.pm-page-btn,
-.pm-page-number {
-    padding: 3px 8px;      /* even smaller cute pill */
-    border-radius: 8px;
-    border: 1px solid #c9d9dd;
-    background-color: #ffffff;
-    font-size: 11px;
-    cursor: pointer;
-}
-
-.pm-page-number.active {
-    background-color: #0f8b8d;
-    color: #ffffff;
-    border-color: #0f8b8d;
-}
-
-.pm-page-btn:hover,
-.pm-page-number:hover {
-    background-color: #e9f6f5;
-    border-color: #0f8b8d;
-}
-
-.pm-page-dots {
-    font-size: 12px;
-}
-
-/* ==== Override some styles to match admin HealthRecords layout ==== */
 
 .pm-overview {
     background-color: transparent;
@@ -425,11 +135,16 @@
     border-radius: 10px;
     border: 2px solid #0f8b8d;
     background-color: #ffffff;
-    max-width: none;
 }
 
 .pm-search-icon {
-    font-size: 14px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Ccircle cx='7' cy='7' r='4.5' stroke='%230f8b8d' stroke-width='1.6'/%3E%3Cline x1='9.8' y1='9.8' x2='13' y2='13' stroke='%230f8b8d' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px 16px;
 }
 
 .pm-search-input {
@@ -458,7 +173,6 @@
     background-color: #e9f6f5;
 }
 
-/* Table look aligned with HealthRecords */
 .pm-table-outer {
     margin-top: 14px;
     border-radius: 16px;
@@ -482,6 +196,13 @@
     padding: 10px 14px;
     font-size: 13px;
     text-align: left;
+    vertical-align: middle;
+}
+
+/* Force center alignment for the Vital Sign Monitoring column */
+.pm-table th.pm-col-vitals,
+.pm-table td.pm-col-vitals {
+    text-align: center !important;
 }
 
 .pm-table thead {
@@ -501,6 +222,16 @@
     text-align: right;
 }
 
+.pm-col-action {
+    width: 80px;
+    text-align: center;
+}
+
+.pm-col-vitals {
+    width: 160px;
+    text-align: center;
+}
+
 .pm-patient-name {
     font-weight: 600;
 }
@@ -508,4 +239,82 @@
 .pm-patient-email {
     font-size: 12px;
     color: #666;
+}
+
+.pm-view-btn {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border-radius: 50%;
+    border: none;
+    background-color: #0f8b8d;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.pm-view-icon {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M1.5 8C2.5 5.7 4.9 4 8 4c3.1 0 5.5 1.7 6.5 4-1 2.3-3.4 4-6.5 4-3.1 0-5.5-1.7-6.5-4z' stroke='%23ffffff' stroke-width='1.4' fill='none'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%23ffffff'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 14px 14px;
+}
+
+.pm-view-btn:hover {
+    background-color: #0b6f70;
+}
+
+.pm-add-btn {
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 1px solid #0f8b8d;
+    background-color: #ffffff;
+    color: #0f8b8d;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0 auto; /* center inside the cell */
+}
+
+.pm-add-btn:hover {
+    background-color: #e9f6f5;
+}
+
+.pm-pagination {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+}
+
+.pm-page-btn,
+.pm-page-number {
+    padding: 7px 12px;
+    border-radius: 10px;
+    border: 1px solid #c9d9dd;
+    background-color: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.pm-page-number.active {
+    background-color: #0f8b8d;
+    color: #ffffff;
+    border-color: #0f8b8d;
+}
+
+.pm-page-btn:hover,
+.pm-page-number:hover {
+    background-color: #e9f6f5;
+    border-color: #0f8b8d;
+}
+
+.pm-page-dots {
+    font-size: 12px;
 }
