@@ -1,5 +1,6 @@
-@page "/patient-records"
+@page "/patient-records/{Id}"
 @layout Layout.DashboardLayout
+@using IT_13FinalProject.Services
 
 <div class="pr-page">
     <!-- Header stays consistent with Health Records -->
@@ -27,38 +28,38 @@
             <!-- Medical History -->
             <div class="pr-column">
                 <h3 class="pr-section-title">Medical History</h3>
-                <div class="pr-field"><label>Allergies</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Past Illnesses</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Past Surgeries</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Current Medications</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Family History of Illnesses</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Immunization History (optional)</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Allergies</label><input class="pr-value-box" value="@_record.Allergies" /></div>
+                <div class="pr-field"><label>Past Illnesses</label><input class="pr-value-box" value="@_record.PastIllnesses" /></div>
+                <div class="pr-field"><label>Past Surgeries</label><input class="pr-value-box" value="@_record.PastSurgeries" /></div>
+                <div class="pr-field"><label>Current Medications</label><input class="pr-value-box" value="@_record.CurrentMedications" /></div>
+                <div class="pr-field"><label>Family History of Illnesses</label><input class="pr-value-box" value="@_record.FamilyHistory" /></div>
+                <div class="pr-field"><label>Immunization History (optional)</label><input class="pr-value-box" value="@_record.ImmunizationHistory" /></div>
             </div>
 
             <!-- Vital Signs -->
             <div class="pr-column">
                 <h3 class="pr-section-title">Vital Signs</h3>
-                <div class="pr-field"><label>Blood Pressure</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Heart Rate / Pulse Rate</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Respiratory Rate</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Temperature</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Oxygen Saturation (SpO₂)</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Weight</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Height</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Body Mass Index</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Blood Pressure</label><input class="pr-value-box" value="@_record.BloodPressure" /></div>
+                <div class="pr-field"><label>Heart Rate / Pulse Rate</label><input class="pr-value-box" value="@_record.HeartRate" /></div>
+                <div class="pr-field"><label>Respiratory Rate</label><input class="pr-value-box" value="@_record.RespiratoryRate" /></div>
+                <div class="pr-field"><label>Temperature</label><input class="pr-value-box" value="@_record.Temperature" /></div>
+                <div class="pr-field"><label>Oxygen Saturation (SpO₂)</label><input class="pr-value-box" value="@_record.OxygenSaturation" /></div>
+                <div class="pr-field"><label>Weight</label><input class="pr-value-box" value="@_record.Weight" /></div>
+                <div class="pr-field"><label>Height</label><input class="pr-value-box" value="@_record.Height" /></div>
+                <div class="pr-field"><label>Body Mass Index</label><input class="pr-value-box" value="@_record.BodyMassIndex" /></div>
             </div>
 
             <!-- Current Visit Details -->
             <div class="pr-column">
                 <h3 class="pr-section-title">Current Visit Details</h3>
-                <div class="pr-field"><label>Doctor Name Assigned</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Nurse Name</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Date of Visit / Consultation</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Time In/Out</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Department / Clinic Assigned</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Type of Visit (New / Follow-up)</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Chief Complaint</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Duration of Symptoms</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Doctor Name Assigned</label><input class="pr-value-box" value="@_record.DoctorName" /></div>
+                <div class="pr-field"><label>Nurse Name</label><input class="pr-value-box" value="@_record.NurseName" /></div>
+                <div class="pr-field"><label>Date of Visit / Consultation</label><input class="pr-value-box" value='@(_record.DateOfCheckup?.ToString("MM/dd/yy"))' /></div>
+                <div class="pr-field"><label>Time In/Out</label><input class="pr-value-box" value="@_record.TimeInOut" /></div>
+                <div class="pr-field"><label>Department / Clinic Assigned</label><input class="pr-value-box" value="@_record.Department" /></div>
+                <div class="pr-field"><label>Type of Visit (New / Follow-up)</label><input class="pr-value-box" value="@_record.VisitType" /></div>
+                <div class="pr-field"><label>Chief Complaint</label><input class="pr-value-box" value="@_record.ChiefComplaint" /></div>
+                <div class="pr-field"><label>Duration of Symptoms</label><input class="pr-value-box" value="@_record.SymptomDuration" /></div>
             </div>
         </div>
 
@@ -66,32 +67,32 @@
             <!-- Clinical Findings -->
             <div class="pr-column">
                 <h3 class="pr-section-title">Clinical Findings</h3>
-                <div class="pr-field pr-field-multi"><label>Subjective Findings</label><div class="pr-value-box pr-value-box-multi"></div></div>
-                <div class="pr-field pr-field-multi"><label>Objective Findings</label><div class="pr-value-box pr-value-box-multi"></div></div>
-                <div class="pr-field pr-field-multi"><label>Assessment / Diagnosis</label><div class="pr-value-box pr-value-box-multi"></div></div>
-                <div class="pr-field"><label>ICD-10 Code</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Additional Tests Order</label><div class="pr-value-box"></div></div>
-                <div class="pr-field pr-field-multi"><label>Doctor's Remarks (Notes)</label><div class="pr-value-box pr-value-box-multi"></div></div>
-                <div class="pr-field pr-field-multi"><label>Nurse Remarks (Notes)</label><div class="pr-value-box pr-value-box-multi"></div></div>
-                <div class="pr-field pr-field-multi"><label>Recommendation (Notes)</label><div class="pr-value-box pr-value-box-multi"></div></div>
+                <div class="pr-field pr-field-multi"><label>Subjective Findings</label><textarea class="pr-value-box pr-value-box-multi">@_record.SubjectiveFindings</textarea></div>
+                <div class="pr-field pr-field-multi"><label>Objective Findings</label><textarea class="pr-value-box pr-value-box-multi">@_record.ObjectiveFindings</textarea></div>
+                <div class="pr-field pr-field-multi"><label>Assessment / Diagnosis</label><textarea class="pr-value-box pr-value-box-multi">@_record.AssessmentDiagnosis</textarea></div>
+                <div class="pr-field"><label>ICD-10 Code</label><input class="pr-value-box" value="@_record.ICD10Code" /></div>
+                <div class="pr-field"><label>Additional Tests Order</label><input class="pr-value-box" value="@_record.AdditionalTestsOrder" /></div>
+                <div class="pr-field pr-field-multi"><label>Doctor's Remarks (Notes)</label><textarea class="pr-value-box pr-value-box-multi">@_record.DoctorRemarks</textarea></div>
+                <div class="pr-field pr-field-multi"><label>Nurse Remarks (Notes)</label><textarea class="pr-value-box pr-value-box-multi">@_record.NurseRemarks</textarea></div>
+                <div class="pr-field pr-field-multi"><label>Recommendation (Notes)</label><textarea class="pr-value-box pr-value-box-multi">@_record.Recommendations</textarea></div>
             </div>
 
             <!-- Treatment / Prescription & Follow-up -->
             <div class="pr-column">
                 <h3 class="pr-section-title">Treatment / Prescription</h3>
-                <div class="pr-field"><label>Medicine Name</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Dosage</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Frequency</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Duration</label><div class="pr-value-box"></div></div>
-                <div class="pr-field pr-field-multi"><label>Notes / Special Instructions</label><div class="pr-value-box pr-value-box-multi"></div></div>
+                <div class="pr-field"><label>Medicine Name</label><input class="pr-value-box" value="@_record.MedicineName" /></div>
+                <div class="pr-field"><label>Dosage</label><input class="pr-value-box" value="@_record.Dosage" /></div>
+                <div class="pr-field"><label>Frequency</label><input class="pr-value-box" value="@_record.Frequency" /></div>
+                <div class="pr-field"><label>Duration</label><input class="pr-value-box" value="@_record.Duration" /></div>
+                <div class="pr-field pr-field-multi"><label>Notes / Special Instructions</label><textarea class="pr-value-box pr-value-box-multi">@_record.TreatmentNotes</textarea></div>
 
                 <h3 class="pr-section-title pr-section-title-spaced">Follow-up & Outcome</h3>
-                <div class="pr-field"><label>Follow-up Date</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Visit Status</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Follow-up Date</label><input class="pr-value-box" value='@(_record.FollowUpDate?.ToString("MM/dd/yy"))' /></div>
+                <div class="pr-field"><label>Visit Status</label><input class="pr-value-box" value="@_record.VisitStatus" /></div>
 
                 <h3 class="pr-section-title pr-section-title-spaced">Doctor Approval</h3>
-                <div class="pr-field"><label>Electronic Signature / Name</label><div class="pr-value-box"></div></div>
-                <div class="pr-field"><label>Date Approved</label><div class="pr-value-box"></div></div>
+                <div class="pr-field"><label>Electronic Signature / Name</label><input class="pr-value-box" value="@_record.DoctorSignature" /></div>
+                <div class="pr-field"><label>Date Approved</label><input class="pr-value-box" value='@(_record.ApprovalDate?.ToString("MM/dd/yy"))' /></div>
             </div>
         </div>
 
@@ -106,8 +107,22 @@
 </div>
 
 @code {
+    [Parameter]
+    public string Id { get; set; } = string.Empty;
+
+    private HealthRecord _record = new();
+
+    [Inject]
+    private IHealthRecordService HealthRecordService { get; set; } = default!;
+
     [Inject]
     private NavigationManager Navigation { get; set; } = default!;
+
+    protected override void OnParametersSet()
+    {
+        var existing = HealthRecordService.GetById(Id);
+        _record = existing?.Clone() ?? new HealthRecord();
+    }
 
     private void GoBack()
     {

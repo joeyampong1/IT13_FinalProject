@@ -1,5 +1,6 @@
 @page "/health-records"
 @layout Layout.DashboardLayout
+@using IT_13FinalProject.Services
 
 <div class="pm-page">
     <!-- Header reusing the same style as Dashboard/Patient Management -->
@@ -73,10 +74,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var r in GetOrderedRecords())
+                        @foreach (var row in GetOrderedRecords().Select((record, index) => new { Record = record, Index = index + 1 }))
                         {
+                            var r = row.Record;
                             <tr>
-                                <td class="pm-col-id">@r.Id</td>
+                                <td class="pm-col-id">@row.Index.ToString("00")</td>
                                 <td>
                                     <div class="pm-patient-name">@r.PatientName</div>
                                     <div class="pm-patient-email">@r.PatientEmail</div>
@@ -121,30 +123,28 @@
         "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
     };
 
-    private record HealthRecordRow(string Id, string PatientName, string PatientEmail,
-        string DoctorName, string DoctorEmail,
-        string NurseName, string NurseEmail,
-        string DateOfCheckup, string VisitStatus);
-
     private bool ShowLetters { get; set; }
     private string? ActiveLetter { get; set; }
 
-    private readonly HealthRecordRow[] Records = new HealthRecordRow[]
-    {
-        new HealthRecordRow("01", "Himeko Murata", "himeko_murata@gmail.com", "Dr. Hinata Murata", "dr.hinata@clinic.com", "Nurse Erika", "erika.nurse@clinic.com", "03/09/24", "Pending Assessment"),
-        new HealthRecordRow("02", "Yae Miko", "miko.yae@mail.com", "Dr. Clint Miko", "clint.miko@clinic.com", "Nurse Rika", "rika.nurse@clinic.com", "03/09/24", "Under Nurse Evaluation"),
-        new HealthRecordRow("03", "Black Swan", "ms.blkswan@mail.com", "Dr. Cadita Swan", "cadita.swan@clinic.com", "Nurse Allen", "allen.nurse@clinic.com", "03/09/24", "For Doctor Evaluation"),
-        new HealthRecordRow("04", "Ruan Mei", "theRM_ei@gmail.com", "Dr. Zilong Mei", "zilong.mei@clinic.com", "Nurse Joan", "joan.nurse@clinic.com", "03/09/24", "For Lab / Imaging"),
-        new HealthRecordRow("05", "Bronya Rand", "bronya.rr@mail.com", "Dr. Hanzo Rand", "hanzo.rand@clinic.com", "Nurse Lara", "lara.nurse@clinic.com", "03/09/24", "Discharged"),
-    };
+    private List<HealthRecord> Records { get; set; } = new();
+
+    [Inject]
+    private IHealthRecordService HealthRecordService { get; set; } = default!;
 
     [Inject]
     private NavigationManager Navigation { get; set; } = default!;
 
-    private void ViewRecord(HealthRecordRow record)
+    protected override void OnInitialized()
     {
-        // In future we can pass an ID/querystring; for now just navigate to detail page.
-        Navigation.NavigateTo("/patient-records");
+        Records = HealthRecordService
+            .GetAll()
+            .OrderBy(r => r.PatientName)
+            .ToList();
+    }
+
+    private void ViewRecord(HealthRecord record)
+    {
+        Navigation.NavigateTo($"/patient-records/{record.Id}");
     }
 
     private void ToggleLetters()
@@ -159,7 +159,7 @@
         ActiveLetter = letter;
     }
 
-    private IEnumerable<HealthRecordRow> GetOrderedRecords()
+    private IEnumerable<HealthRecord> GetOrderedRecords()
     {
         if (string.IsNullOrEmpty(ActiveLetter))
         {

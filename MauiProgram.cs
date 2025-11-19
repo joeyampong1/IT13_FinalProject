@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using IT_13FinalProject.Services;
 
 namespace IT_13FinalProject
 {
@@ -15,6 +16,8 @@ namespace IT_13FinalProject
                 });
 
             builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddSingleton<IUserAccountService, InMemoryUserAccountService>();
+            builder.Services.AddSingleton<IHealthRecordService, InMemoryHealthRecordService>();
 
 #if DEBUG
     		builder.Services.AddBlazorWebViewDeveloperTools();

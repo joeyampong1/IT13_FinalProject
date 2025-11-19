@@ -245,18 +245,11 @@
 
 /* Pagination bottom */
  .inv-pagination {
-    position: fixed;
-    right: 28px;
-    bottom: 18px;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     gap: 6px;
     margin-top: 20px;
-    background-color: #f6fbfb;
-    padding: 6px 10px;
-    border-radius: 999px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
-    z-index: 5;
 }
 
 .inv-page-btn,

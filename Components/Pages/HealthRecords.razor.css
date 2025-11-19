@@ -266,21 +266,12 @@
 }
 
 /* Pagination reused, but we can keep it simple here */
-/* Floating pagination for Health Records (bottom-right, always visible) */
 .pm-pagination {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 6px;
-    margin-top: 32px;
-
-    position: fixed;
-    right: 28px;
-    bottom: 20px;
-    padding: 4px 8px;
-    border-radius: 999px;
-    background: rgba(245, 251, 252, 0.96);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    margin-top: 20px;
 }
 
 .pm-page-btn,
