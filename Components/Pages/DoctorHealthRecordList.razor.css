@@ -1,12 +1,10 @@
-/* Reuse Patient Management overview styles for Health Records */
-
 .pm-page {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-/* Header matches Dashboard/Patient Management */
+/* Header match other dashboard pages */
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -58,7 +56,6 @@
     font-weight: 600;
 }
 
-/* Overview section reused */
 .pm-overview {
     background-color: transparent;
 }
@@ -170,7 +167,6 @@
     background-color: #e9f6f5;
 }
 
-/* Table styling */
 .pm-table-outer {
     margin-top: 14px;
     border-radius: 16px;
@@ -182,6 +178,8 @@
 .pm-table-wrapper {
     overflow-y: auto;
     width: 100%;
+    /* Make only the rows scroll: height adapts to window, controls above stay fixed */
+    max-height: calc(100vh - 260px);
 }
 
 .pm-table {
@@ -195,6 +193,13 @@
     padding: 10px 14px;
     font-size: 13px;
     text-align: left;
+    vertical-align: middle;
+}
+
+/* Force center alignment for the action column */
+.pm-table th.pm-col-action,
+.pm-table td.pm-col-action {
+    text-align: center !important;
 }
 
 .pm-table thead {
@@ -209,18 +214,14 @@
     width: 60px;
 }
 
-.pm-col-action {
-    width: 80px;
-    text-align: center;
-}
-
 .pm-col-date {
     width: 110px;
     text-align: right;
 }
 
-.pm-col-status {
-    width: 170px;
+.pm-col-action {
+    width: 80px;
+    text-align: center;
 }
 
 .pm-patient-name {
@@ -255,14 +256,12 @@
     background-color: #0b6f70;
 }
 
-/* Pagination reused, but we can keep it simple here */
-/* Floating pagination for Health Records (bottom-right, always visible) */
 .pm-pagination {
+    margin-top: 32px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 6px;
-    margin-top: 32px;
 
     position: fixed;
     right: 80px;  /* move pill left so arrow at 24px is outside */

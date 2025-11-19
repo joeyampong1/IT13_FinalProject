@@ -1,6 +1,5 @@
 ﻿@page "/"
 @page "/login"
-@layout Layout.EmptyLayout
 
 <!-- ===================== OVERALL PAGE WRAPPER ===================== -->
 <div class="login-page">
@@ -22,43 +21,29 @@
                 <!-- ========== LOGIN TITLE (OPTIONAL) ========== -->
                 <h2 class="login-title">Sign in to MedFlow</h2>
 
-                <!-- ========== ERROR MESSAGE AREA ========== -->
-                <!-- Shown when the entered credentials are incorrect -->
-                @if (!string.IsNullOrWhiteSpace(ErrorMessage))
-                {
-                    <div class="login-error-message">@ErrorMessage</div>
-                }
+                <!-- ========== LOGIN FORM (SIMPLIFIED) ========== -->
+                <!-- We use plain inputs and a button with @onclick to ensure the handler always runs. -->
 
-                <!-- ========== LOGIN FORM ========== -->
-                <EditForm Model="this" OnValidSubmit="HandleLogin">
-                    <DataAnnotationsValidator />
+                <!-- ----- USERNAME / EMAIL INPUT ROW ----- -->
+                <div class="input-group">
+                    <InputText class="input-field" @bind-Value="UserName" placeholder="Username or Email" />
 
-                    <!-- ----- USERNAME / EMAIL INPUT ROW ----- -->
-                    <div class="input-group">
-                        <!-- Input control for username/email -->
-                        <InputText class="input-field" @bind-Value="UserName" placeholder="Username or Email" />
+                    <span class="input-icon">
+                        &#128100;
+                    </span>
+                </div>
 
-                        <!-- Icon on the right side of the input -->
-                        <span class="input-icon">
-                            <!-- Simple user icon using Unicode; replace with SVG if you prefer -->
-                            &#128100;
-                        </span>
-                    </div>
+                <!-- ----- PASSWORD INPUT ROW ----- -->
+                <div class="input-group">
+                    <InputText class="input-field" @bind-Value="Password" type="password" placeholder="Password" />
 
-                    <!-- ----- PASSWORD INPUT ROW ----- -->
-                    <div class="input-group">
-                        <!-- Input control for password -->
-                        <InputText class="input-field" @bind-Value="Password" type="password" placeholder="Password" />
+                    <span class="input-icon">
+                        &#128274;
+                    </span>
+                </div>
 
-                        <!-- Lock icon on the right side -->
-                        <span class="input-icon">
-                            &#128274;
-                        </span>
-                    </div>
-
-                    <!-- ========== LOGIN BUTTON ========== -->
-                    <button type="submit" class="login-button">LOGIN</button>
-                </EditForm>
+                <!-- ========== LOGIN BUTTON ========== -->
+                <button type="button" class="login-button" @onclick="HandleLogin">LOGIN</button>
 
                 <!-- ========== EXTRA LINKS AREA ========== -->
                 <div class="login-links">
@@ -100,22 +85,16 @@
     // Property bound to the password input
     public string? Password { get; set; }
 
-    // Holds a message when login fails (kept if you want to show inline text later)
-    public string? ErrorMessage { get; set; }
-
     [Inject]
     private NavigationManager Navigation { get; set; } = default!;
 
-    // JS runtime used to show simple alert dialogs (e.g., invalid credentials)
     [Inject]
     private IJSRuntime JsRuntime { get; set; } = default!;
 
     // ===================== EVENT HANDLERS =====================
-    // This method is called when the form is submitted successfully
-    private void HandleLogin()
+    // This method is called when the user clicks LOGIN
+    private async Task HandleLogin()
     {
-        // Clear any existing error message first
-        ErrorMessage = null;
 
         // Temporary hard-coded credentials while database auth is not yet wired
         var isAdmin = string.Equals(UserName, "admin", StringComparison.OrdinalIgnoreCase)
@@ -163,7 +142,7 @@
             return;
         }
 
-        // Show a simple dialog when credentials are invalid
-        JsRuntime.InvokeVoidAsync("alert", "Invalid Credentials!");
+        // When credentials are invalid, show a browser dialog
+        await JsRuntime.InvokeVoidAsync("alert", "Invalid credentials. Please try again.");
     }
 }

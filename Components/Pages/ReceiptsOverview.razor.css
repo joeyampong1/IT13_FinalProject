@@ -230,7 +230,7 @@
 /* Pagination bottom */
 .inv-pagination {
     position: fixed;
-    right: 28px;
+    right: 80px;  /* move pill left so arrow at 24px is outside */
     bottom: 18px;
     display: flex;
     justify-content: flex-end;
@@ -243,15 +243,39 @@
     z-index: 5;
 }
 
+.inv-pagination-toggle {
+    position: fixed;
+    right: 24px;  /* slightly left from edge, still outside Next */
+    bottom: 18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: none;
+    background-color: transparent;
+    color: #222222;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    cursor: pointer;
+    z-index: 6;
+}
+
+.inv-pagination-toggle:hover {
+    background-color: transparent;
+    color: #000000;
+}
+
 .inv-page-btn,
 .inv-page-number {
-    padding: 6px 12px;
+    padding: 3px 8px;      /* even smaller cute pill */
     border-radius: 999px;
     border: none;
     background-color: #ffffff;
-    font-size: 12px;
+    font-size: 10px;
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .inv-page-btn:hover,

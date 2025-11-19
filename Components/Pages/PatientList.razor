@@ -1,4 +1,4 @@
-@page "/nurse-patient-list"
+@page "/patient-list"
 @layout Layout.DashboardLayout
 
 <div class="pm-page">
@@ -9,7 +9,7 @@
         </div>
 
         <div class="dashboard-user-info">
-            <span class="dashboard-user-email">nurse@gmail.com</span>
+            <span class="dashboard-user-email">doctor@gmail.com</span>
             <div class="dashboard-user-avatar">👤</div>
             <span class="dashboard-user-name">Clinical</span>
         </div>
@@ -63,10 +63,12 @@
                         <tr>
                             <th class="pm-col-id">ID</th>
                             <th>Patient Name<br /><span class="pm-subcol">Email</span></th>
+                            <th>Nurse Assist<br /><span class="pm-subcol">Email</span></th>
                             <th>Assessment Status</th>
                             <th class="pm-col-date">Date of Visit</th>
                             <th class="pm-col-action">Patient Info</th>
-                            <th class="pm-col-vitals">Vital Sign Monitoring</th>
+                            <th class="pm-col-vitals">Vital Signs</th>
+                            <th class="pm-col-vitals">Health Records</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,15 +80,24 @@
                                     <div class="pm-patient-name">@p.Name</div>
                                     <div class="pm-patient-email">@p.Email</div>
                                 </td>
+                                <td>
+                                    <div class="pm-patient-name">@p.NurseAssistName</div>
+                                    <div class="pm-patient-email">@p.NurseAssistEmail</div>
+                                </td>
                                 <td>@p.AssessmentStatus</td>
                                 <td class="pm-col-date">@p.DateOfVisit</td>
                                 <td class="pm-col-action">
-                                    <button class="pm-view-btn" aria-label="View patient record" @onclick="() => GoToPatientProfile(p.Id)">
+                                    <button class="pm-view-btn" aria-label="View patient info" @onclick="() => GoToPatientProfile(p.Id)">
                                         <span class="pm-view-icon">👁️</span>
                                     </button>
                                 </td>
                                 <td class="pm-col-vitals">
-                                    <button class="pm-add-btn" @onclick="() => GoToVitalsForm(p.Id)">+ Add</button>
+                                    <button class="pm-view-btn" aria-label="View vital signs" @onclick="() => ViewVitals(p.Id)">
+                                        <span class="pm-view-icon">👁️</span>
+                                    </button>
+                                </td>
+                                <td class="pm-col-vitals">
+                                    <button class="pm-add-btn" @onclick="() => GoToHealthRecords(p.Id)">+ Add</button>
                                 </td>
                             </tr>
                         }
@@ -123,19 +134,24 @@
         "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
     };
 
-    private record NursePatientRow(string Id, string Name, string Email, string AssessmentStatus, string DateOfVisit);
+    private record DoctorPatientRow(string Id, string Name, string Email, string NurseAssistName, string NurseAssistEmail, string AssessmentStatus, string DateOfVisit);
 
     private bool ShowLetters { get; set; }
     private string? ActiveLetter { get; set; }
     private bool ShowPagination { get; set; } = false;
 
-    private List<NursePatientRow> Patients = new()
+    private List<DoctorPatientRow> Patients = new()
     {
-        new NursePatientRow("01", "Himeko Murata", "himeko_murata@gmail.com", "New Patient", "03/09/24"),
-        new NursePatientRow("02", "Yae Miko", "miko.yae@mail.com", "New Patient", "03/09/24"),
-        new NursePatientRow("03", "Black Swan", "ms.blkswan@mail.com", "New Patient", "03/09/24"),
-        new NursePatientRow("04", "Ruan Mei", "theRM_ei@gmail.com", "New Patient", "03/09/24"),
-        new NursePatientRow("05", "Bronya Rand", "bronya.rr@mail.com", "New Patient", "03/09/24"),
+        new DoctorPatientRow("01", "Himeko Murata", "himeko_murata@gmail.com", "Himeko Murata", "himeko_murata@gmail.com", "Awaiting Consultation", "03/09/24"),
+        new DoctorPatientRow("02", "Yae Miko", "miko.yae@mail.com", "Yae Miko", "miko.yae@gmail.com", "Vital Signs Taken", "03/09/24"),
+        new DoctorPatientRow("03", "Black Swan", "ms.blkswan@mail.com", "Black Swan", "ms.blkswan@mail.com", "For Doctor Evaluation", "03/09/24"),
+        new DoctorPatientRow("04", "Ruan Mei", "theRM_ei@gmail.com", "Ruan Mei", "theRM_ei@gmail.com", "For Doctor Evaluation", "03/09/24"),
+        new DoctorPatientRow("05", "Bronya Rand", "bronya.rr@mail.com", "Bronya Rand", "bronya.rr@mail.com", "Awaiting Consultation", "03/09/24"),
+        new DoctorPatientRow("06", "Kafka", "kafka@mail.com", "Kafka", "kafka@mail.com", "Completed Consultation", "04/09/24"),
+        new DoctorPatientRow("07", "Dan Heng", "danheng@mail.com", "Dan Heng", "danheng@mail.com", "Follow-up Required", "04/09/24"),
+        new DoctorPatientRow("08", "March 7th", "march7@mail.com", "March 7th", "march7@mail.com", "Awaiting Consultation", "05/09/24"),
+        new DoctorPatientRow("09", "Gepard", "gepard@mail.com", "Gepard", "gepard@mail.com", "Completed Consultation", "05/09/24"),
+        new DoctorPatientRow("10", "Serval", "serval@mail.com", "Serval", "serval@mail.com", "Awaiting Consultation", "05/09/24"),
     };
 
     private void ToggleLetters()
@@ -150,7 +166,7 @@
         ActiveLetter = letter;
     }
 
-    private IEnumerable<NursePatientRow> GetOrderedPatients()
+    private IEnumerable<DoctorPatientRow> GetOrderedPatients()
     {
         if (string.IsNullOrEmpty(ActiveLetter))
         {
@@ -175,7 +191,17 @@
 
     private void GoToPatientProfile(string patientId)
     {
-        Navigation.NavigateTo("/patient-profile");
+        Navigation.NavigateTo("/doctor-patient-profile");
+    }
+
+    private void ViewVitals(string patientId)
+    {
+        Navigation.NavigateTo("/doctor-vitals-info");
+    }
+
+    private void GoToHealthRecords(string patientId)
+    {
+        Navigation.NavigateTo("/doctor-consultation");
     }
 
     private void TogglePagination()

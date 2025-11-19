@@ -208,11 +208,12 @@
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    width: 100%;
 }
 
 .pm-table-wrapper {
-    max-height: 380px;
     overflow-y: auto;
+    width: 100%;
 }
 
 .pm-table {
@@ -292,21 +293,45 @@
 
     /* Float near the bottom-right edge */
     position: fixed;
-    right: 28px;
+    right: 80px;  /* move pill left so arrow at 24px is outside */
     bottom: 20px;
-    padding: 4px 8px;
+    padding: 0;
     border-radius: 999px;
-    background: rgba(245, 251, 252, 0.96);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    background: transparent; /* no background pill, just the buttons */
+    box-shadow: none;
+}
+
+.pm-pagination-toggle {
+    position: fixed;
+    right: 24px;  /* slightly left from edge, still outside Next */
+    bottom: 18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: none;
+    background-color: transparent; /* remove green circle */
+    color: #222222;                /* small black/near-black arrow */
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    cursor: pointer;
+    z-index: 6;
+}
+
+.pm-pagination-toggle:hover {
+    background-color: transparent;
+    color: #000000; /* darker on hover */
 }
 
 .pm-page-btn,
 .pm-page-number {
-    padding: 7px 12px;            /* slightly bigger so they are easier to see */
-    border-radius: 10px;
+    padding: 3px 8px;            /* even smaller, very light */
+    border-radius: 8px;
     border: 1px solid #c9d9dd;
     background-color: #ffffff;
-    font-size: 13px;
+    font-size: 11px;
     cursor: pointer;
 }
 
