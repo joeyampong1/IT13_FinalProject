@@ -67,7 +67,8 @@
                         <thead>
                             <tr>
                                 <th class="pm-col-id">ID</th>
-                                <th>Patient Name<br /><span class="pm-subcol">Email</span></th>
+                                <th class="pm-col-name">Patient Name</th>
+                                <th class="pm-col-email">Email</th>
                                 <th class="pm-col-date">Date of Visit</th>
                                 <th class="pm-col-action">More Info</th>
                             </tr>
@@ -77,8 +78,10 @@
                             {
                                 <tr>
                                     <td class="pm-col-id">@p.Id</td>
-                                    <td>
+                                    <td class="pm-col-name">
                                         <div class="pm-patient-name">@p.Name</div>
+                                    </td>
+                                    <td class="pm-col-email">
                                         <div class="pm-patient-email">@p.Email</div>
                                     </td>
                                     <td class="pm-col-date">@p.DateOfVisit</td>
@@ -232,6 +235,11 @@
         new PatientRow("03", "Black Swan", "ms.blkswan@mail.com", "03/09/24"),
         new PatientRow("04", "Ruan Mei", "theRM_ei@gmail.com", "03/09/24"),
         new PatientRow("05", "Bronya Rand", "bronya.rr@mail.com", "03/09/24"),
+        new PatientRow("06", "Kafka", "kafka@mail.com", "04/09/24"),
+        new PatientRow("07", "Dan Heng", "danheng@mail.com", "04/09/24"),
+        new PatientRow("08", "March 7th", "march7@mail.com", "05/09/24"),
+        new PatientRow("09", "Gepard", "gepard@mail.com", "05/09/24"),
+        new PatientRow("10", "Serval", "serval@mail.com", "05/09/24"),
     };
 
     private PatientRow? SelectedPatient;

@@ -225,41 +225,48 @@
 .pm-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #ffffff;
 }
 
 .pm-table th,
 .pm-table td {
-    padding: 10px 14px;
-    font-size: 13px;
-    text-align: left;
+padding: 6px 10px;
+font-size: 13px;
+text-align: left;
 }
 
 .pm-table thead {
-    background-color: #f4fbfb;
+background-color: #f4fbfb;
 }
 
 .pm-table tbody tr:nth-child(even) {
-    background-color: #f9fcfc;
+background-color: #f9fcfc;
 }
 
 .pm-col-id {
-    width: 60px;
+width: 60px;
+}
+
+.pm-col-name {
+white-space: nowrap;
+}
+
+.pm-col-email {
+white-space: nowrap;
 }
 
 .pm-col-action {
-    width: 80px;
-    text-align: center;
+width: 80px;
+text-align: center;
 }
 
-/* Narrow Date of Visit column so it sits closer to the More Info (View) buttons */
+/* Date of Visit column: keep it compact and right-aligned without forcing a large width */
 .pm-col-date {
-    width: 110px;
-    text-align: right;
+text-align: right;
+white-space: nowrap;
 }
 
 .pm-patient-name {
-    font-weight: 600;
+font-weight: 600;
 }
 
 .pm-patient-email {
