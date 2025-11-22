@@ -49,22 +49,58 @@
             @* Nurse modules *@
             else if (CurrentRole == "Nurse")
             {
-                <button class="sidebar-item @(IsNursePatientListActive ? "active" : string.Empty)" @onclick="OnNursePatientListClick">🧑‍⚕️ Patient List</button>
-                <button class="sidebar-item @(IsNurseVitalsActive ? "active" : string.Empty)" @onclick="OnNurseVitalsClick">📈 Vital Signs Monitoring</button>
-                <button class="sidebar-item">⏰ Medication Schedules</button>
-                <button class="sidebar-item">📝 Nursing Notes</button>
-                <button class="sidebar-item">📨 Request</button>
-                <button class="sidebar-item">📊 Reports</button>
+                <button class="sidebar-item @(IsNursePatientListActive ? "active" : string.Empty)" @onclick="OnNursePatientListClick">
+                    <span class="sidebar-icon sidebar-icon-patient"></span>
+                    Patient List
+                </button>
+                <button class="sidebar-item @(IsNurseVitalsActive ? "active" : string.Empty)" @onclick="OnNurseVitalsClick">
+                    <span class="sidebar-icon sidebar-icon-vitals"></span>
+                    Vital Signs Monitoring
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-medication"></span>
+                    Medication Schedules
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-notes"></span>
+                    Nursing Notes
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-request"></span>
+                    Request
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-reports"></span>
+                    Reports
+                </button>
             }
             @* Doctor modules *@
             else if (CurrentRole == "Doctor")
             {
-                <button class="sidebar-item @(IsDoctorPatientListActive ? "active" : string.Empty)" @onclick="OnDoctorPatientListClick">🧑‍⚕️ Patient List</button>
-                <button class="sidebar-item @(IsDoctorHealthRecordActive ? "active" : string.Empty)" @onclick="OnDoctorHealthRecordClick">📋 Health Record</button>
-                <button class="sidebar-item">📅 Appointments</button>
-                <button class="sidebar-item">💊 Prescriptions</button>
-                <button class="sidebar-item">🧪 Laboratory Results</button>
-                <button class="sidebar-item">📊 Reports</button>
+                <button class="sidebar-item @(IsDoctorPatientListActive ? "active" : string.Empty)" @onclick="OnDoctorPatientListClick">
+                    <span class="sidebar-icon sidebar-icon-patient"></span>
+                    Patient List
+                </button>
+                <button class="sidebar-item @(IsDoctorHealthRecordActive ? "active" : string.Empty)" @onclick="OnDoctorHealthRecordClick">
+                    <span class="sidebar-icon sidebar-icon-health"></span>
+                    Health Record
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-appointments"></span>
+                    Appointments
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-prescriptions"></span>
+                    Prescriptions
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-lab"></span>
+                    Laboratory Results
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-reports"></span>
+                    Reports
+                </button>
             }
             @* Billing modules *@
             else if (CurrentRole == "Billing")
@@ -171,10 +207,22 @@
                 </div>
 
                 <div class="settings-modal-body">
-                    <button class="settings-item">🔔 Notification</button>
-                    <button class="settings-item" @onclick="ToggleAccessibilityPanel">♿ Accessibility</button>
-                    <button class="settings-item">💾 Database / Backup</button>
-                    <button class="settings-item">⚙️ System Configuration</button>
+                    <button class="settings-item">
+                        <span class="sidebar-icon sidebar-icon-request"></span>
+                        Notification
+                    </button>
+                    <button class="settings-item" @onclick="ToggleAccessibilityPanel">
+                        <span class="sidebar-icon sidebar-icon-user"></span>
+                        Accessibility
+                    </button>
+                    <button class="settings-item">
+                        <span class="sidebar-icon sidebar-icon-sync"></span>
+                        Database / Backup
+                    </button>
+                    <button class="settings-item">
+                        <span class="sidebar-icon sidebar-icon-settings"></span>
+                        System Configuration
+                    </button>
                 </div>
             </div>
 
