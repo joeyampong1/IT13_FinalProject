@@ -109,7 +109,7 @@
         new("Bronya Rand", "60,000 php", "03/01/24", "Paid"),
     };
 
-    private bool ShowPagination { get; set; } = false;
+    private bool ShowPagination { get; set; } = true;
 
     private void GoToBills()
     {
@@ -118,7 +118,7 @@
 
     private void ViewReceipt(ReceiptRow receipt)
     {
-        Navigation.NavigateTo("/receipt-pdf");
+        Navigation.NavigateTo("/receipt-pdf?source=admin");
     }
 
     private void TogglePagination()

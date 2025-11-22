@@ -51,7 +51,18 @@
 
     private void GoBack()
     {
-        Navigation.NavigateTo("/receipt-overview");
+        var uri = Navigation.Uri;
+
+        var fromBilling = uri.Contains("source=billing", StringComparison.OrdinalIgnoreCase);
+
+        if (fromBilling)
+        {
+            Navigation.NavigateTo("/billing-patient-overview");
+        }
+        else
+        {
+            Navigation.NavigateTo("/receipt-overview");
+        }
     }
 
     private async Task DownloadPdf()

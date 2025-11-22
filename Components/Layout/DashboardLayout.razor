@@ -33,7 +33,7 @@
                     <span class="sidebar-icon sidebar-icon-billing"></span>
                     Invoicing &amp; Cashiering
                 </button>
-                <button class="sidebar-item">
+                <button class="sidebar-item @(IsAdminInsuranceActive ? "active" : string.Empty)" @onclick="OnAdminInsuranceClick">
                     <span class="sidebar-icon sidebar-icon-insurance"></span>
                     Insurance &amp; Claims
                 </button>
@@ -69,11 +69,11 @@
             @* Billing modules *@
             else if (CurrentRole == "Billing")
             {
-                <button class="sidebar-item">
+                <button class="sidebar-item @(IsBillingInvoicingActive ? "active" : string.Empty)" @onclick="OnBillingInvoicingClick">
                     <span class="sidebar-icon sidebar-icon-billing"></span>
                     Billing &amp; Invoicing
                 </button>
-                <button class="sidebar-item">
+                <button class="sidebar-item @(IsBillingInsuranceActive ? "active" : string.Empty)" @onclick="OnBillingInsuranceClick">
                     <span class="sidebar-icon sidebar-icon-insurance"></span>
                     Insurance &amp; Claims
                 </button>
@@ -258,8 +258,15 @@
                 || uri.Contains("/doctor-health-records"))
                 return "Doctor";
 
-            // Billing
-            if (uri.Contains("/billing-dashboard"))
+            // Billing (including PDFs opened from Billing via source=billing)
+            if (uri.Contains("/billing-dashboard")
+                || uri.Contains("/billing-patient-overview")
+                || uri.Contains("/billing-computation")
+                || uri.Contains("/billing-cashiering")
+                || uri.Contains("/billing-insurance-claims")
+                || uri.Contains("/billing-insurance-request")
+                || (uri.Contains("/receipt-pdf") && uri.Contains("source=billing"))
+                || (uri.Contains("/invoice-pdf") && uri.Contains("source=billing")))
                 return "Billing";
 
             // Inventory
@@ -309,7 +316,23 @@
     private bool IsInvoicingActive =>
         Navigation.Uri.Contains("/invoicing-overview", StringComparison.OrdinalIgnoreCase)
         || Navigation.Uri.Contains("/receipt-overview", StringComparison.OrdinalIgnoreCase)
-        || Navigation.Uri.Contains("/invoice-pdf", StringComparison.OrdinalIgnoreCase);
+        || Navigation.Uri.Contains("/invoice-pdf", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/receipt-pdf", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsAdminInsuranceActive =>
+        Navigation.Uri.Contains("/admin-insurance-claims", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsBillingInvoicingActive =>
+        Navigation.Uri.Contains("/billing-patient-overview", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/billing-computation", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/billing-cashiering", StringComparison.OrdinalIgnoreCase)
+        || ((Navigation.Uri.Contains("/receipt-pdf", StringComparison.OrdinalIgnoreCase)
+             || Navigation.Uri.Contains("/invoice-pdf", StringComparison.OrdinalIgnoreCase))
+            && Navigation.Uri.Contains("source=billing", StringComparison.OrdinalIgnoreCase));
+
+    private bool IsBillingInsuranceActive =>
+        Navigation.Uri.Contains("/billing-insurance-claims", StringComparison.OrdinalIgnoreCase)
+        || Navigation.Uri.Contains("/billing-insurance-request", StringComparison.OrdinalIgnoreCase);
 
     private bool IsUserMenuExpanded { get; set; }
     private bool IsSettingsOpen { get; set; }
@@ -351,6 +374,12 @@
     private void OnHealthRecordClick() => Navigation.NavigateTo("/health-records");
 
     private void OnInvoicingClick() => Navigation.NavigateTo("/invoicing-overview");
+
+    private void OnBillingInvoicingClick() => Navigation.NavigateTo("/billing-patient-overview");
+
+    private void OnBillingInsuranceClick() => Navigation.NavigateTo("/billing-insurance-claims");
+
+    private void OnAdminInsuranceClick() => Navigation.NavigateTo("/admin-insurance-claims");
 
     private void ToggleUserMenu()
     {

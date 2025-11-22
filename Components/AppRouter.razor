@@ -1,5 +1,7 @@
 @using IT_13FinalProject.Components.Pages
 @using IT_13FinalProject.Components.Layout
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Routing
 @inject NavigationManager Navigation
 
 @code {
@@ -20,7 +22,12 @@
     private string GetCurrentPath()
     {
         var relative = Navigation.ToBaseRelativePath(Navigation.Uri);
-        return relative.Trim('/').ToLowerInvariant();
+
+        // Strip query string and fragment so routes with parameters (e.g. "billing-dashboard?view=overview")
+        // still match the base path ("billing-dashboard") in the routing table below.
+        var pathOnly = relative.Split('?', '#')[0];
+
+        return pathOnly.Trim('/').ToLowerInvariant();
     }
 }
 
@@ -58,6 +65,42 @@ else if (path == "billing-dashboard")
 {
     <DashboardLayout>
         <BillingDashboard />
+    </DashboardLayout>
+}
+else if (path == "billing-patient-overview")
+{
+    <DashboardLayout>
+        <BillingPatientOverview />
+    </DashboardLayout>
+}
+else if (path == "billing-computation")
+{
+    <DashboardLayout>
+        <BillingComputation />
+    </DashboardLayout>
+}
+else if (path == "billing-insurance-claims")
+{
+    <DashboardLayout>
+        <BillingInsuranceClaims />
+    </DashboardLayout>
+}
+else if (path == "billing-insurance-request")
+{
+    <DashboardLayout>
+        <BillingInsuranceRequest />
+    </DashboardLayout>
+}
+else if (path == "admin-insurance-claims")
+{
+    <DashboardLayout>
+        <AdminInsuranceClaims />
+    </DashboardLayout>
+}
+else if (path == "billing-cashiering")
+{
+    <DashboardLayout>
+        <BillingCashiering />
     </DashboardLayout>
 }
 else if (path == "inventory-dashboard")
