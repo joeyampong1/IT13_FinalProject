@@ -244,19 +244,21 @@
     background-color: #0b6f70;
 }
 
-/* Pagination bottom */
+/* Pagination bottom - match nurse vitals style */
 .inv-pagination {
-<<<<<<< HEAD
-    position: fixed;
-    right: 80px;  /* move pill left so arrow at 24px is outside */
-    bottom: 18px;
-=======
->>>>>>> b0f7358fbbba01c5202869ac850b264010d8c2d1
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 6px;
-    margin-top: 20px;
+    margin-top: 32px;
+
+    position: fixed;
+    right: 80px;
+    bottom: 20px;
+    padding: 0;
+    border-radius: 999px;
+    background: transparent;
+    box-shadow: none;
 }
 
 .inv-pagination-toggle {
@@ -286,22 +288,23 @@
 .inv-page-btn,
 .inv-page-number {
     padding: 3px 8px;      /* even smaller cute pill */
-    border-radius: 999px;
-    border: none;
+    border-radius: 8px;
+    border: 1px solid #c9d9dd;
     background-color: #ffffff;
-    font-size: 10px;
+    font-size: 11px;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .inv-page-btn:hover,
 .inv-page-number:hover {
     background-color: #e9f6f5;
+    border-color: #0f8b8d;
 }
 
 .inv-page-number-active {
     background-color: #0f8b8d;
     color: #ffffff;
+    border-color: #0f8b8d;
 }
 
 .inv-page-dots {

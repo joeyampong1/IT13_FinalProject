@@ -271,16 +271,48 @@
     justify-content: flex-end;
     align-items: center;
     gap: 6px;
-    margin-top: 20px;
+    margin-top: 32px;
+
+    position: fixed;
+    right: 80px;
+    bottom: 20px;
+    padding: 0;
+    border-radius: 999px;
+    background: transparent;
+    box-shadow: none;
+}
+
+.pm-pagination-toggle {
+    position: fixed;
+    right: 24px;
+    bottom: 18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: none;
+    background-color: transparent;
+    color: #222222;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    cursor: pointer;
+    z-index: 6;
+}
+
+.pm-pagination-toggle:hover {
+    background-color: transparent;
+    color: #000000;
 }
 
 .pm-page-btn,
 .pm-page-number {
-    padding: 7px 12px;
-    border-radius: 10px;
+    padding: 3px 8px;
+    border-radius: 8px;
     border: 1px solid #c9d9dd;
     background-color: #ffffff;
-    font-size: 13px;
+    font-size: 11px;
     cursor: pointer;
 }
 
