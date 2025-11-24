@@ -121,11 +121,11 @@
             @* Inventory / Pharmacist modules *@
             else if (CurrentRole == "Inventory")
             {
-                <button class="sidebar-item">
+                <button class="sidebar-item @(IsInventoryPharmacyActive ? "active" : string.Empty)" @onclick="OnInventoryPharmacyClick">
                     <span class="sidebar-icon sidebar-icon-inventory"></span>
                     Pharmacy Inventory
                 </button>
-                <button class="sidebar-item">
+                <button class="sidebar-item @(IsInventoryPrescriptionsActive ? "active" : string.Empty)" @onclick="OnInventoryPrescriptionsClick">
                     <span class="sidebar-icon sidebar-icon-prescriptions"></span>
                     Prescriptions
                 </button>
@@ -318,7 +318,9 @@
                 return "Billing";
 
             // Inventory
-            if (uri.Contains("/inventory-dashboard"))
+            if (uri.Contains("/inventory-dashboard")
+                || uri.Contains("/pharmacy-inventory")
+                || uri.Contains("/inventory-prescriptions"))
                 return "Inventory";
 
             // Default: Admin dashboard and modules
@@ -382,6 +384,12 @@
         Navigation.Uri.Contains("/billing-insurance-claims", StringComparison.OrdinalIgnoreCase)
         || Navigation.Uri.Contains("/billing-insurance-request", StringComparison.OrdinalIgnoreCase);
 
+    private bool IsInventoryPharmacyActive =>
+        Navigation.Uri.Contains("/pharmacy-inventory", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsInventoryPrescriptionsActive =>
+        Navigation.Uri.Contains("/inventory-prescriptions", StringComparison.OrdinalIgnoreCase);
+
     private bool IsUserMenuExpanded { get; set; }
     private bool IsSettingsOpen { get; set; }
     private bool IsAccessibilityOpen { get; set; }
@@ -428,6 +436,10 @@
     private void OnBillingInsuranceClick() => Navigation.NavigateTo("/billing-insurance-claims");
 
     private void OnAdminInsuranceClick() => Navigation.NavigateTo("/admin-insurance-claims");
+
+    private void OnInventoryPharmacyClick() => Navigation.NavigateTo("/pharmacy-inventory");
+
+    private void OnInventoryPrescriptionsClick() => Navigation.NavigateTo("/inventory-prescriptions");
 
     private void ToggleUserMenu()
     {
