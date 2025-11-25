@@ -121,6 +121,18 @@ else if (path == "pharmacy-inventory")
         <PharmacyInventory />
     </DashboardLayout>
 }
+else if (path == "admin-pharmacy-inventory")
+{
+    <DashboardLayout>
+        <AdminPharmacyInventory />
+    </DashboardLayout>
+}
+else if (path == "admin-reports-analytics")
+{
+    <DashboardLayout>
+        <AdminReportsAnalytics />
+    </DashboardLayout>
+}
 else if (path == "patient-management")
 {
     <DashboardLayout>
@@ -223,6 +235,12 @@ else if (path == "doctor-health-records")
         <DoctorHealthRecordList />
     </DashboardLayout>
 }
+else if (path == "doctor-prescriptions")
+{
+    <DashboardLayout>
+        <DoctorPrescriptions />
+    </DashboardLayout>
+}
 else if (path == "patient-records")
 {
     <DashboardLayout>
@@ -233,6 +251,12 @@ else if (path == "patient-ehr-print")
 {
     <DashboardLayout>
         <PatientEhrPdf />
+    </DashboardLayout>
+}
+else if (path == "user-profile")
+{
+    <DashboardLayout>
+        <UserProfile />
     </DashboardLayout>
 }
 else if (path == "forgot-password")
