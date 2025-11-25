@@ -34,19 +34,6 @@
             </div>
 
             <div class="pm-filters-row">
-                <div class="pm-alpha-filter">
-                    <button class="pm-filter-pill @(ShowLetters && ActiveLetter is null ? "active" : string.Empty)" @onclick="ToggleLetters">All</button>
-
-                    @if (ShowLetters)
-                    {
-                        @foreach (var letter in Alphabet)
-                        {
-                            <button class="pm-filter-pill @(ActiveLetter == letter ? "active" : string.Empty)"
-                                    @onclick="() => SelectLetter(letter)">@letter</button>
-                        }
-                    }
-                </div>
-
                 <div class="pm-search-row">
                     <div class="pm-search-box">
                         <span class="pm-search-icon"></span>
@@ -197,9 +184,9 @@
             <div class="pm-form-actions">
                 @if (IsEditMode)
                 {
-                    <button class="pm-form-delete" @onclick="DeletePatient">
-                        <span class="pm-form-delete-icon">🗑️</span>
-                        Delete
+                    <button class="pm-form-delete" @onclick="ClearForm">
+                        <span class="pm-form-delete-icon"></span>
+                        Clear
                     </button>
                     <button class="pm-form-save" @onclick="UpdatePatient">Update</button>
                 }

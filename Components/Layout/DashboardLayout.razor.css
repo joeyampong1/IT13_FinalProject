@@ -1,7 +1,7 @@
  .dashboard-layout {
     display: flex;
     height: 100vh;
-    overflow: hidden;
+    overflow: hidden; 
     background-color: #f3faf9;
 }
 

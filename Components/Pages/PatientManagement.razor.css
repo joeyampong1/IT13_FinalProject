@@ -344,11 +344,12 @@ font-weight: 600;
 
 .pm-page-btn,
 .pm-page-number {
-    padding: 3px 8px;
-    border-radius: 8px;
+    min-width: 40px;
+    padding: 6px 14px;
+    border-radius: 999px;
     border: 1px solid #c9d9dd;
     background-color: #ffffff;
-    font-size: 11px;
+    font-size: 12px;
     cursor: pointer;
 }
 

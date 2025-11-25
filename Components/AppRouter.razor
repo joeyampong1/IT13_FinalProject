@@ -223,10 +223,11 @@ else if (path == "doctor-health-records")
         <DoctorHealthRecordList />
     </DashboardLayout>
 }
-else if (path == "patient-records")
+else if (path.StartsWith("patient-records/"))
 {
+    var id = path.Substring("patient-records/".Length);
     <DashboardLayout>
-        <PatientRecords />
+        <PatientRecords Id="@id" />
     </DashboardLayout>
 }
 else if (path == "patient-ehr-print")

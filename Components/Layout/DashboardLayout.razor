@@ -342,7 +342,6 @@
         || Navigation.Uri.EndsWith("/nurse-vitals", StringComparison.OrdinalIgnoreCase) // Add form belongs under Patient List (but not list/edit)
         || Navigation.Uri.Contains("/nurse-patient-profile", StringComparison.OrdinalIgnoreCase)
         || Navigation.Uri.Contains("/patient-profile", StringComparison.OrdinalIgnoreCase);
-
     private bool IsNurseVitalsActive =>
         Navigation.Uri.Contains("/nurse-vitals-list", StringComparison.OrdinalIgnoreCase)
         || Navigation.Uri.Contains("/nurse-vitals-edit", StringComparison.OrdinalIgnoreCase);
