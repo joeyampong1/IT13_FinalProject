@@ -204,7 +204,6 @@ select.form-input {
     min-width: 120px;
     padding: 8px 18px;
     border-radius: 999px;
-    border: none;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -220,25 +219,26 @@ select.form-input {
 }
 
 .btn-primary {
-    background-color: #1b7471;
-    color: #ffffff;
-}
-
-.btn-primary:hover {
-    background-color: #16615f;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(27, 116, 113, 0.3);
-}
-
-.btn-secondary {
+    border: none;
     background-color: #0f8b8d;
     color: #ffffff;
 }
 
-.btn-secondary:hover {
-    background-color: #0c716f;
+.btn-primary:hover {
+    background-color: #0b6f70;
     transform: translateY(-1px);
     box-shadow: 0 4px 10px rgba(15, 139, 141, 0.3);
+}
+
+.btn-secondary {
+    border: 2px solid #0f8b8d;
+    background-color: #ffffff;
+    color: #0f8b8d;
+}
+
+.btn-secondary:hover {
+    background-color: #e9f6f5;
+    transform: translateY(-1px);
 }
 
 @media (max-width: 600px) {
