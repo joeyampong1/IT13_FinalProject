@@ -37,11 +37,11 @@
                     <span class="sidebar-icon sidebar-icon-insurance"></span>
                     Insurance &amp; Claims
                 </button>
-                <button class="sidebar-item">
+                <button class="sidebar-item @(IsAdminPharmacyInventoryActive ? "active" : string.Empty)" @onclick="OnAdminPharmacyInventoryClick">
                     <span class="sidebar-icon sidebar-icon-pharmacy"></span>
                     Pharmacy &amp; Inventory
                 </button>
-                <button class="sidebar-item">
+                <button class="sidebar-item @(IsAdminReportsActive ? "active" : string.Empty)" @onclick="OnAdminReportsClick">
                     <span class="sidebar-icon sidebar-icon-reports"></span>
                     Reports / Analytics
                 </button>
@@ -89,7 +89,7 @@
                     <span class="sidebar-icon sidebar-icon-appointments"></span>
                     Appointments
                 </button>
-                <button class="sidebar-item">
+                <button class="sidebar-item @(IsDoctorPrescriptionsActive ? "active" : string.Empty)" @onclick="OnDoctorPrescriptionsClick">
                     <span class="sidebar-icon sidebar-icon-prescriptions"></span>
                     Prescriptions
                 </button>
@@ -148,7 +148,7 @@
 
             @if (IsUserMenuExpanded)
             {
-                <button class="sidebar-subitem">
+                <button class="sidebar-subitem @(IsUserProfileActive ? "active" : string.Empty)" @onclick="OnUserProfileClick">
                     <span class="sidebar-icon sidebar-icon-user-profile"></span>
                     User Profile
                 </button>
@@ -303,7 +303,8 @@
                 || uri.Contains("/doctor-vitals-info")
                 || uri.Contains("/doctor-consultation")
                 || uri.Contains("/doctor-consultation-edit")
-                || uri.Contains("/doctor-health-records"))
+                || uri.Contains("/doctor-health-records")
+                || uri.Contains("/doctor-prescriptions"))
                 return "Doctor";
 
             // Billing (including PDFs opened from Billing via source=billing)
@@ -337,6 +338,12 @@
 
     private bool IsPatientManagementActive => Navigation.Uri.Contains("/patient-management", StringComparison.OrdinalIgnoreCase);
 
+    private bool IsAdminPharmacyInventoryActive =>
+        Navigation.Uri.Contains("/admin-pharmacy-inventory", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsAdminReportsActive =>
+        Navigation.Uri.Contains("/admin-reports-analytics", StringComparison.OrdinalIgnoreCase);
+
     private bool IsNursePatientListActive =>
         Navigation.Uri.Contains("/nurse-patient-list", StringComparison.OrdinalIgnoreCase)
         || Navigation.Uri.EndsWith("/nurse-vitals", StringComparison.OrdinalIgnoreCase) // Add form belongs under Patient List (but not list/edit)
@@ -356,6 +363,9 @@
     private bool IsDoctorHealthRecordActive =>
         Navigation.Uri.Contains("/doctor-health-records", StringComparison.OrdinalIgnoreCase)
         || Navigation.Uri.Contains("/doctor-consultation-edit", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsDoctorPrescriptionsActive =>
+        Navigation.Uri.Contains("/doctor-prescriptions", StringComparison.OrdinalIgnoreCase);
 
     private bool IsHealthRecordActive =>
         Navigation.Uri.Contains("/health-records", StringComparison.OrdinalIgnoreCase)
@@ -389,6 +399,9 @@
     private bool IsInventoryPrescriptionsActive =>
         Navigation.Uri.Contains("/inventory-prescriptions", StringComparison.OrdinalIgnoreCase);
 
+    private bool IsUserProfileActive =>
+        Navigation.Uri.Contains("/user-profile", StringComparison.OrdinalIgnoreCase);
+
     private bool IsUserMenuExpanded { get; set; }
     private bool IsSettingsOpen { get; set; }
     private bool IsAccessibilityOpen { get; set; }
@@ -411,6 +424,10 @@
     }
 
     private void OnPatientManagementClick() => Navigation.NavigateTo("/patient-management");
+
+    private void OnAdminPharmacyInventoryClick() => Navigation.NavigateTo("/admin-pharmacy-inventory");
+
+    private void OnAdminReportsClick() => Navigation.NavigateTo("/admin-reports-analytics");
 
     private void OnNursePatientListClick() => Navigation.NavigateTo("/nurse-patient-list");
 
@@ -439,6 +456,10 @@
     private void OnInventoryPharmacyClick() => Navigation.NavigateTo("/pharmacy-inventory");
 
     private void OnInventoryPrescriptionsClick() => Navigation.NavigateTo("/inventory-prescriptions");
+
+    private void OnDoctorPrescriptionsClick() => Navigation.NavigateTo("/doctor-prescriptions");
+
+    private void OnUserProfileClick() => Navigation.NavigateTo("/user-profile");
 
     private void ToggleUserMenu()
     {
