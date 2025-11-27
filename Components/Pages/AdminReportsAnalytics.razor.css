@@ -137,19 +137,19 @@
 }
 
 .ara-icon-report::before {
-    content: "📊";
+    content: "Chart";
 }
 
 .ara-icon-quickreports::before {
-    content: "📈";
+    content: "Trend";
 }
 
 .ara-icon-deptgrid::before {
-    content: "🏥";
+    content: "Hospital";
 }
 
 .ara-icon-recent::before {
-    content: "⏱";
+    content: "Time";
 }
 
 .ara-config-grid {
@@ -506,3 +506,5 @@
         grid-template-columns: minmax(0, 1fr);
     }
 }
+
+

@@ -59,7 +59,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var r in GetOrderedRows())
+                        @foreach (var r in ActiveLetter.HasValue ? GetOrderedRows(ActiveLetter.Value) : Rows)
                         {
                             <tr>
                                 <td class="pm-col-id">@r.Id</td>
@@ -105,16 +105,18 @@
     [Inject]
     private NavigationManager Navigation { get; set; } = default!;
 
-    private static readonly string[] Alphabet = new[]
-    {
-        "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
-    };
+    
 
     private record VitalRow(string Id, string PatientName, string PatientEmail, string AssessmentStatus, string DateOfVisit, string VitalStatus);
 
-    private bool ShowLetters { get; set; }
-    private string? ActiveLetter { get; set; }
+    
+    
     private bool ShowPagination { get; set; } = true;
+    private bool ShowLetters { get; set; } = false;
+    private char? ActiveLetter { get; set; }
+    
+    private readonly char[] Alphabet =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
     private readonly VitalRow[] Rows = new VitalRow[]
     {
@@ -125,26 +127,18 @@
         new("05", "Bronya Rand", "bronya.rr@mail.com", "Completed", "03/09/24", "Complete"),
     };
 
-    private void ToggleLetters()
-    {
-        ShowLetters = !ShowLetters;
-        ActiveLetter = null;
-    }
+    
 
-    private void SelectLetter(string letter)
-    {
-        ShowLetters = true;
-        ActiveLetter = letter;
-    }
+    
 
-    private IEnumerable<VitalRow> GetOrderedRows()
+    private IEnumerable<VitalRow> GetOrderedRows(char letter)
     {
-        if (string.IsNullOrEmpty(ActiveLetter))
+        if (string.IsNullOrEmpty(letter.ToString()))
         {
             return Rows;
         }
 
-        var upper = ActiveLetter.ToUpperInvariant();
+        var upper = letter.ToString().ToUpper();
 
         var startsWithLetter = Rows
             .Where(r => (r.PatientName ?? string.Empty).StartsWith(upper, StringComparison.OrdinalIgnoreCase));
@@ -160,8 +154,25 @@
         ShowPagination = !ShowPagination;
     }
 
+    private void GoToVitalsForm(string patientId)
+    {
+        Navigation.NavigateTo("/nurse-vitals");
+    }
+
+    private void SelectLetter(char letter)
+    {
+        ShowLetters = true;
+        ActiveLetter = letter;
+    }
+
     private void OpenVitals(VitalRow row)
     {
         Navigation.NavigateTo("/nurse-vitals-edit");
     }
 }
+
+
+
+
+
+

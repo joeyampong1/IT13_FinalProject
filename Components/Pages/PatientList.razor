@@ -10,7 +10,7 @@
 
         <div class="dashboard-user-info">
             <span class="dashboard-user-email">doctor@gmail.com</span>
-            <div class="dashboard-user-avatar">👤</div>
+            <div class="dashboard-user-avatar">U</div>
             <span class="dashboard-user-name">Clinical</span>
         </div>
     </header>
@@ -59,7 +59,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var p in GetOrderedPatients())
+                        @foreach (var p in ActiveLetter.HasValue ? GetOrderedPatients(ActiveLetter.Value) : Patients)
                         {
                             <tr>
                                 <td class="pm-col-id">@p.Id</td>
@@ -116,16 +116,17 @@
     [Inject]
     private NavigationManager Navigation { get; set; } = default!;
 
-    private static readonly string[] Alphabet = new[]
-    {
-        "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
-    };
-
+    
     private record DoctorPatientRow(string Id, string Name, string Email, string NurseAssistName, string NurseAssistEmail, string AssessmentStatus, string DateOfVisit);
 
-    private bool ShowLetters { get; set; }
-    private string? ActiveLetter { get; set; }
+    
+    
     private bool ShowPagination { get; set; } = true;
+    private bool ShowLetters { get; set; } = false;
+    private char? ActiveLetter { get; set; }
+    
+    private readonly char[] Alphabet =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
     private List<DoctorPatientRow> Patients = new()
     {
@@ -141,26 +142,18 @@
         new DoctorPatientRow("10", "Serval", "serval@mail.com", "Serval", "serval@mail.com", "Awaiting Consultation", "05/09/24"),
     };
 
-    private void ToggleLetters()
-    {
-        ShowLetters = !ShowLetters;
-        ActiveLetter = null;
-    }
+    
 
-    private void SelectLetter(string letter)
-    {
-        ShowLetters = true;
-        ActiveLetter = letter;
-    }
+    
 
-    private IEnumerable<DoctorPatientRow> GetOrderedPatients()
+    private IEnumerable<DoctorPatientRow> GetOrderedPatients(char letter)
     {
-        if (string.IsNullOrEmpty(ActiveLetter))
+        if (string.IsNullOrEmpty(letter.ToString()))
         {
             return Patients;
         }
 
-        var upper = ActiveLetter.ToUpperInvariant();
+        var upper = letter.ToString().ToUpper();
 
         var startsWithLetter = Patients
             .Where(p => (p.Name ?? string.Empty).StartsWith(upper, StringComparison.OrdinalIgnoreCase));
@@ -191,8 +184,24 @@
         Navigation.NavigateTo("/doctor-consultation");
     }
 
+    private void SelectLetter(char letter)
+    {
+        ShowLetters = true;
+        ActiveLetter = letter;
+    }
+
     private void TogglePagination()
     {
         ShowPagination = !ShowPagination;
     }
 }
+
+
+
+
+
+
+
+
+
+

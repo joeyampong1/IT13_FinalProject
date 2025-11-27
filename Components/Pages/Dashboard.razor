@@ -1,4 +1,4 @@
-﻿@page "/dashboard"
+@page "/dashboard"
 @layout Layout.DashboardLayout
 
 <div class="dashboard-page @(IsNotificationDismissed ? "dashboard-no-notification" : string.Empty)">
@@ -10,7 +10,7 @@
 
         <div class="dashboard-user-info">
             <span class="dashboard-user-email">admin@gmail.com</span>
-            <div class="dashboard-user-avatar">👤</div>
+            <div class="dashboard-user-avatar">U</div>
             <span class="dashboard-user-name">Admin</span>
         </div>
     </header>
@@ -18,7 +18,7 @@
     @if (IsNotificationDismissed)
     {
         <div class="dashboard-notification-toggle" @onclick="ShowNotificationBar">
-            <span class="notification-toggle-icon">▾</span>
+            <span class="notification-toggle-icon">?</span>
         </div>
     }
 
@@ -30,13 +30,13 @@
                 <div class="notification-controls">
                     @if (IsNotificationCollapsed)
                     {
-                        <span class="notification-control-icon" @onclick="ShowNotification">▢</span>
+                        <span class="notification-control-icon" @onclick="ShowNotification">?</span>
                     }
                     else
                     {
-                        <span class="notification-control-icon" @onclick="HideNotification">▭</span>
+                        <span class="notification-control-icon" @onclick="HideNotification">?</span>
                     }
-                    <span class="notification-control-icon" @onclick="ExitNotification">✕</span>
+                    <span class="notification-control-icon" @onclick="ExitNotification">?</span>
                 </div>
             </div>
 
@@ -63,7 +63,7 @@
                     <div class="graph-track">
                         <div class="graph-fill" style=$"width:@MonthlyRevenuePercent%"></div>
                     </div>
-                    <div class="graph-caption">@MonthlyRevenuePercent% of target ₱200,000</div>
+                    <div class="graph-caption">@MonthlyRevenuePercent% of target ?200,000</div>
                 </div>
             </div>
         </div>
@@ -118,7 +118,7 @@
                             <div class="dept-bar-track">
                                 <div class="dept-bar-fill" style=$"width:@GetDepartmentPercent(RevenueValues[i])%"></div>
                             </div>
-                            <span class="dept-value">₱@RevenueValues[i].ToString("N0")</span>
+                            <span class="dept-value">?@RevenueValues[i].ToString("N0")</span>
                         </div>
                     }
                 </div>
@@ -154,7 +154,7 @@
                         <td>10:24 AM</td>
                     </tr>
                     <tr>
-                        <td>Added Invoice #INV-10321 (₱1,850)</td>
+                        <td>Added Invoice #INV-10321 (?1,850)</td>
                         <td>Billing Staff</td>
                         <td>10:15 AM</td>
                     </tr>
@@ -180,7 +180,7 @@
 
     private decimal TotalMonthlyRevenue => 15000m + 25000m + 29000m + 18000m + 60000m;
 
-    private string TotalMonthlyRevenueDisplay => $"₱{TotalMonthlyRevenue:N0}";
+    private string TotalMonthlyRevenueDisplay => $"?{TotalMonthlyRevenue:N0}";
 
     private readonly int[] WeeklyVisits = new[] { 24, 32, 28, 30, 26, 18, 12 };
     private readonly string[] Weekdays = new[] { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
@@ -284,7 +284,7 @@
                 }
             }
 
-            return $"₱{max:N0}";
+            return $"?{max:N0}";
         }
     }
 
@@ -326,3 +326,13 @@
         IsNotificationCollapsed = false;
     }
 }
+
+
+
+
+
+
+
+
+
+

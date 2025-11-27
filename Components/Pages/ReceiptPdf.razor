@@ -31,11 +31,11 @@
         </div>
         <div class="inv-pdf-actions-right">
             <button class="inv-pdf-btn inv-pdf-btn-secondary" @onclick="DownloadPdf">
-                <span class="inv-pdf-btn-icon">📥</span>
+                <span class="inv-pdf-btn-icon">DL</span>
                 Download PDF file
             </button>
             <button class="inv-pdf-btn inv-pdf-btn-primary" @onclick="PrintPdf">
-                <span class="inv-pdf-btn-icon">🖨️</span>
+                <span class="inv-pdf-btn-icon">Print</span>
                 Print
             </button>
         </div>
@@ -75,3 +75,13 @@
         await JsRuntime.InvokeVoidAsync("open", "/pdfs/patient-invoice.pdf", "_blank");
     }
 }
+
+
+
+
+
+
+
+
+
+

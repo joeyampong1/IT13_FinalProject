@@ -11,7 +11,7 @@
 
         <div class="dashboard-user-info">
             <span class="dashboard-user-email">admin@gmail.com</span>
-            <div class="dashboard-user-avatar">👤</div>
+            <div class="dashboard-user-avatar">U</div>
             <span class="dashboard-user-name">Admin</span>
         </div>
     </header>
@@ -38,11 +38,11 @@
         </div>
         <div class="ehr-actions-right">
             <button class="ehr-btn ehr-btn-secondary" @onclick="DownloadPdf">
-                <span class="ehr-btn-icon">📥</span>
+                <span class="ehr-btn-icon">DL</span>
                 Download PDF file
             </button>
             <button class="ehr-btn ehr-btn-primary" @onclick="PrintPdf">
-                <span class="ehr-btn-icon">🖨️</span>
+                <span class="ehr-btn-icon">Print</span>
                 Print
             </button>
         </div>
@@ -97,3 +97,13 @@
         await JsRuntime.InvokeVoidAsync("open", CurrentPdfUrl, "_blank");
     }
 }
+
+
+
+
+
+
+
+
+
+

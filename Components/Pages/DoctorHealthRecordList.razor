@@ -56,7 +56,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var r in GetOrderedRecords())
+                        @foreach (var r in ActiveLetter.HasValue ? GetOrderedRecords(ActiveLetter.Value) : Records)
                         {
                             <tr>
                                 <td class="pm-col-id">@r.Id</td>
@@ -98,16 +98,18 @@
 </div>
 
 @code {
-    private static readonly string[] Alphabet = new[]
-    {
-        "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
-    };
+    
 
     private record DoctorHealthRecordRow(string Id, string PatientName, string PatientEmail, string AssessmentStatus, string DateOfVisit);
 
-    private bool ShowLetters { get; set; }
-    private string? ActiveLetter { get; set; }
+    
+    
     private bool ShowPagination { get; set; } = true;
+    private bool ShowLetters { get; set; } = false;
+    private char? ActiveLetter { get; set; }
+    
+    private readonly char[] Alphabet =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
     private readonly DoctorHealthRecordRow[] Records = new DoctorHealthRecordRow[]
     {
@@ -126,26 +128,29 @@
         Navigation.NavigateTo("/doctor-consultation-edit");
     }
 
-    private void ToggleLetters()
-    {
-        ShowLetters = !ShowLetters;
-        ActiveLetter = null;
-    }
-
-    private void SelectLetter(string letter)
+    private void SelectLetter(char letter)
     {
         ShowLetters = true;
         ActiveLetter = letter;
     }
 
-    private IEnumerable<DoctorHealthRecordRow> GetOrderedRecords()
+    private void TogglePagination()
     {
-        if (string.IsNullOrEmpty(ActiveLetter))
+        ShowPagination = !ShowPagination;
+    }
+
+    
+
+    
+
+    private IEnumerable<DoctorHealthRecordRow> GetOrderedRecords(char letter)
+    {
+        if (string.IsNullOrEmpty(letter.ToString()))
         {
             return Records;
         }
 
-        var upper = ActiveLetter.ToUpperInvariant();
+        var upper = letter.ToString().ToUpper();
 
         var startsWithLetter = Records
             .Where(r => (r.PatientName ?? string.Empty).StartsWith(upper, StringComparison.OrdinalIgnoreCase));
@@ -155,9 +160,14 @@
 
         return startsWithLetter.Concat(others);
     }
-
-    private void TogglePagination()
-    {
-        ShowPagination = !ShowPagination;
-    }
 }
+
+
+
+
+
+
+
+
+
+

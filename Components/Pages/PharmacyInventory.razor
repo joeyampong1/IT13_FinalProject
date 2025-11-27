@@ -31,14 +31,14 @@
 
         <div class="pi-filters-row">
             <div class="pi-alpha-filter">
-                <button class="pi-filter-pill @(ShowLetters && ActiveLetter is null ? "active" : string.Empty)" @onclick="ToggleLetters">All</button>
+                <button class="pi-filter-pill false" >All</button>
 
                 @if (ShowLetters)
                 {
                     @foreach (var letter in Alphabet)
                     {
-                        <button class="pi-filter-pill @(ActiveLetter == letter ? "active" : string.Empty)"
-                                @onclick="() => SelectLetter(letter)">@letter</button>
+                        <button class="pi-filter-pill @("")"
+                                >@letter</button>
                     }
                 }
             </div>
@@ -427,13 +427,23 @@
 </div>
 
 @code {
+    private bool ShowPagination { get; set; } = true;
+    private bool ShowAddItemPanel { get; set; }
+    private bool ShowEditItemPanel { get; set; }
+    private bool ShowStockInPanel { get; set; }
+    private bool ShowStockOutPanel { get; set; }
+    private bool ShowLetters { get; set; } = false;
+    private char? ActiveLetter { get; set; }
+    
     private readonly char[] Alphabet =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
-    private bool ShowLetters { get; set; }
-    private char? ActiveLetter { get; set; }
+    private string? SelectedStockName { get; set; }
+    private string? StockOutReason { get; set; }
+    private string? StockOutPrescriptionNo { get; set; }
+    private string? StockOutNotes { get; set; }
 
-    private record StockRow(
+    public record StockRow(
         string Name,
         string Category,
         int Stock,
@@ -450,32 +460,15 @@
         new StockRow("Bandages", "First Aid", 2, "₱2.00", "03/09/24", "critical", "Critical"),
     };
 
-    private bool ShowPagination { get; set; } = true;
-    private bool ShowAddItemPanel { get; set; }
-    private bool ShowEditItemPanel { get; set; }
-    private bool ShowStockInPanel { get; set; }
-    private bool ShowStockOutPanel { get; set; }
-
-    private string? SelectedStockName { get; set; }
-    private string? StockOutReason { get; set; }
-    private string? StockOutPrescriptionNo { get; set; }
-    private string? StockOutNotes { get; set; }
-
-    private void TogglePagination()
-    {
-        ShowPagination = !ShowPagination;
-    }
-
-    private void ToggleLetters()
-    {
-        ShowLetters = !ShowLetters;
-        ActiveLetter = null;
-    }
-
     private void SelectLetter(char letter)
     {
         ShowLetters = true;
         ActiveLetter = letter;
+    }
+
+    private void TogglePagination()
+    {
+        ShowPagination = !ShowPagination;
     }
 
     private void OpenAddItemPanel()
@@ -523,3 +516,13 @@
         ShowStockOutPanel = false;
     }
 }
+
+
+
+
+
+
+
+
+
+

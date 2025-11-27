@@ -57,7 +57,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var p in GetOrderedPatients())
+                        @foreach (var p in ActiveLetter.HasValue ? GetOrderedPatients(ActiveLetter.Value) : Patients)
                         {
                             <tr>
                                 <td class="pm-col-id">@p.Id</td>
@@ -102,16 +102,18 @@
 </div>
 
 @code {
-    private static readonly string[] Alphabet = new[]
-    {
-        "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
-    };
+    
 
     private record NursePatientRow(string Id, string Name, string Email, string AssessmentStatus, string DateOfVisit);
 
-    private bool ShowLetters { get; set; }
-    private string? ActiveLetter { get; set; }
+    
+    
     private bool ShowPagination { get; set; } = true;
+    private bool ShowLetters { get; set; } = false;
+    private char? ActiveLetter { get; set; }
+    
+    private readonly char[] Alphabet =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
     private List<NursePatientRow> Patients = new()
     {
@@ -122,26 +124,18 @@
         new NursePatientRow("05", "Bronya Rand", "bronya.rr@mail.com", "New Patient", "03/09/24"),
     };
 
-    private void ToggleLetters()
-    {
-        ShowLetters = !ShowLetters;
-        ActiveLetter = null;
-    }
+    
 
-    private void SelectLetter(string letter)
-    {
-        ShowLetters = true;
-        ActiveLetter = letter;
-    }
+    
 
-    private IEnumerable<NursePatientRow> GetOrderedPatients()
+    private IEnumerable<NursePatientRow> GetOrderedPatients(char letter)
     {
-        if (string.IsNullOrEmpty(ActiveLetter))
+        if (string.IsNullOrEmpty(letter.ToString()))
         {
             return Patients;
         }
 
-        var upper = ActiveLetter.ToUpperInvariant();
+        var upper = letter.ToString().ToUpper();
 
         var startsWithLetter = Patients
             .Where(p => (p.Name ?? string.Empty).StartsWith(upper, StringComparison.OrdinalIgnoreCase));
@@ -169,4 +163,20 @@
     {
         Navigation.NavigateTo("/nurse-vitals");
     }
+
+    private void SelectLetter(char letter)
+    {
+        ShowLetters = true;
+        ActiveLetter = letter;
+    }
 }
+
+
+
+
+
+
+
+
+
+

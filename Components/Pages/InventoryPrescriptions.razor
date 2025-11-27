@@ -31,14 +31,14 @@
 
         <div class="ip-filters-row">
             <div class="ip-alpha-filter">
-                <button class="ip-filter-pill @(ShowLetters && ActiveLetter is null ? "active" : string.Empty)" @onclick="ToggleLetters">All</button>
+                <button class="ip-filter-pill false" >All</button>
 
                 @if (ShowLetters)
                 {
                     @foreach (var letter in Alphabet)
                     {
-                        <button class="ip-filter-pill @(ActiveLetter == letter ? "active" : string.Empty)"
-                                @onclick="() => SelectLetter(letter)">@letter</button>
+                        <button class="ip-filter-pill @("")"
+                                >@letter</button>
                     }
                 }
             </div>
@@ -180,18 +180,18 @@
 </div>
 
 @code {
+    private bool ShowPagination { get; set; } = true;
+    private bool ShowPrescriptionPanel { get; set; }
+    private bool ShowLetters { get; set; } = false;
+    private PrescriptionRow? SelectedPrescription { get; set; }
+    
     private readonly char[] Alphabet =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
-    private bool ShowLetters { get; set; }
-    private char? ActiveLetter { get; set; }
-    private bool ShowPagination { get; set; } = true;
-    private bool ShowPrescriptionPanel { get; set; }
-    private PrescriptionRow? SelectedPrescription { get; set; }
-
-    private record PrescriptionRow(
+    public record PrescriptionRow(
         string Patient,
         string Doctor,
+        string Medication,
         string Items,
         string StatusKey,
         string StatusLabel,
@@ -200,22 +200,10 @@
 
     private readonly PrescriptionRow[] Prescriptions = new[]
     {
-        new PrescriptionRow("Juan Dela Cruz", "Dr. Lee", "Amoxicillin", "active", "Active", "2:30 PM"),
-        new PrescriptionRow("Maria Santos", "Dr. Smith", "Amoxicillin", "pending", "Pending", "2:15 PM"),
-        new PrescriptionRow("Pedro Reyes", "Dr. Smith", "Paracetamol", "pending", "Pending", "3:00 PM"),
+        new PrescriptionRow("Juan Dela Cruz", "Dr. Lee", "Amoxicillin", "Amoxicillin 500mg", "active", "Active", "2:30 PM"),
+        new PrescriptionRow("Maria Santos", "Dr. Smith", "Amoxicillin", "Amoxicillin 250mg", "pending", "Pending", "2:15 PM"),
+        new PrescriptionRow("Pedro Reyes", "Dr. Smith", "Paracetamol", "Paracetamol 500mg", "pending", "Pending", "3:00 PM"),
     };
-
-    private void ToggleLetters()
-    {
-        ShowLetters = !ShowLetters;
-        ActiveLetter = null;
-    }
-
-    private void SelectLetter(char letter)
-    {
-        ShowLetters = true;
-        ActiveLetter = letter;
-    }
 
     private void TogglePagination()
     {
@@ -234,3 +222,13 @@
         SelectedPrescription = null;
     }
 }
+
+
+
+
+
+
+
+
+
+

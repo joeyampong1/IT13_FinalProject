@@ -10,7 +10,7 @@
 
         <div class="dashboard-user-info">
             <span class="dashboard-user-email">billing@gmail.com</span>
-            <div class="dashboard-user-avatar">👤</div>
+            <div class="dashboard-user-avatar">U</div>
             <span class="dashboard-user-name">Billing staff</span>
         </div>
     </header>
@@ -30,19 +30,6 @@
         </div>
 
         <div class="pm-filters-row">
-            <div class="pm-alpha-filter">
-                <button class="pm-filter-pill @(ShowLetters && ActiveLetter is null ? "active" : string.Empty)" @onclick="ToggleLetters">All</button>
-
-                @if (ShowLetters)
-                {
-                    @foreach (var letter in Alphabet)
-                    {
-                        <button class="pm-filter-pill @(ActiveLetter == letter ? "active" : string.Empty)"
-                                @onclick="() => SelectLetter(letter)">@letter</button>
-                    }
-                }
-            </div>
-
             <div class="pm-search-row">
                 <div class="pm-search-box">
                     <span class="pm-search-icon"></span>
@@ -117,15 +104,12 @@
     [Inject]
     private NavigationManager Navigation { get; set; } = default!;
 
-    private static readonly string[] Alphabet = new[]
-    {
-        "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
-    };
+    
 
     private record BillingRow(string PatientName, string PatientEmail, string AssessmentStatus, string DateOfVisit);
 
-    private bool ShowLetters { get; set; }
-    private string? ActiveLetter { get; set; }
+    
+    
     private bool ShowPagination { get; set; } = true;
 
     private readonly BillingRow[] Bills = new BillingRow[]
@@ -137,34 +121,13 @@
         new("Bronya Rand", "bronya.rr@mail.com", "For Discharge", "03/09/24"),
     };
 
-    private void ToggleLetters()
-    {
-        ShowLetters = !ShowLetters;
-        ActiveLetter = null;
-    }
+    
 
-    private void SelectLetter(string letter)
-    {
-        ShowLetters = true;
-        ActiveLetter = letter;
-    }
+    
 
     private IEnumerable<BillingRow> GetOrderedRows()
     {
-        if (string.IsNullOrEmpty(ActiveLetter))
-        {
-            return Bills;
-        }
-
-        var upper = ActiveLetter.ToUpperInvariant();
-
-        var startsWithLetter = Bills
-            .Where(r => (r.PatientName ?? string.Empty).StartsWith(upper, StringComparison.OrdinalIgnoreCase));
-
-        var others = Bills
-            .Where(r => !(r.PatientName ?? string.Empty).StartsWith(upper, StringComparison.OrdinalIgnoreCase));
-
-        return startsWithLetter.Concat(others);
+        return Bills;
     }
 
     private void TogglePagination()
@@ -177,3 +140,13 @@
         Navigation.NavigateTo("/billing-computation");
     }
 }
+
+
+
+
+
+
+
+
+
+

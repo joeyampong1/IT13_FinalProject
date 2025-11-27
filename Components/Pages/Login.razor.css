@@ -116,27 +116,32 @@ input[type="password"] {
 /* ----- Text inputs ----- */
 .input-field {
     width: 100%;
-    padding: 12px 44px 12px 16px;  /* extra right padding for the end icon */
+    height: 32px !important;
+    padding: 6px 12px 6px 12px !important;  /* smaller padding */
     border-radius: 12px !important;
     -webkit-border-radius: 12px !important;
     -moz-border-radius: 12px !important;
-    border: 3px solid #0f8b8d !important;  /* thicker, more prominent border */
-    font-size: 15px; /* slightly larger for better readability */
-    outline: none;
-    box-sizing: border-box;
-    background-color: #f4fbfb;
+    border: 2px solid #0d9ca2 !important;  /* teal border to match create account */
+    font-size: 13px !important; /* updated font size */
+    outline: none !important;
+    box-sizing: border-box !important;
+    background: #f7ffff !important;  /* same soft background */
     transition: all 0.3s ease;
+    color: #0f4b4b !important;
 }
 
 
 /* Always use teal border for login inputs */
 .login-card .input-group .input-field {
-        border: 3px solid #0f8b8d !important;
+        border: 2px solid #0d9ca2 !important;
+        height: 32px !important;
+        padding: 6px 12px 6px 12px !important;
+        background: #f7ffff !important;
     }
 
 .login-card .input-group .input-field:focus {
-        border-color: #0f8b8d !important;
-        box-shadow: 0 0 0 2px rgba(15, 139, 141, 0.25);
+        border-color: #0d9ca2 !important;
+        box-shadow: 0 0 0 3px rgba(13, 156, 162, 0.15) !important;
     }
 
 .rounded-input, .rounded-input input {
@@ -173,12 +178,13 @@ input[type="password"] {
 .login-button {
     width: 100%;              /* same centering behavior as inputs */
     max-width: 300px;         /* match input field width */
-    padding: 9px 16px;
+    height: 32px !important;   /* same height as text fields */
+    padding: 6px 12px !important;  /* same padding as text fields */
     margin-top: 4px;
-    border-radius: 999px; 
-    border: none;
-    background-color: #0f8b8d;
-    color: #ffffff;
+    border-radius: 12px !important;  /* same border radius as text fields */
+    border: none;  /* no border like original */
+    background-color: #0f8b8d;  /* original filled color */
+    color: #ffffff;  /* original white text */
     font-weight: 600;
     letter-spacing: 0.7px;
     cursor: pointer;
@@ -187,19 +193,20 @@ input[type="password"] {
     margin-left: auto;
     margin-right: auto; 
     display: block; 
-    font-size: 14px; 
+    font-size: 13px !important;  /* updated font size */
+    outline: none !important;
 }
 
 .login-button:hover {
-    background-color: #0b6f70; 
+    background-color: #0b6f70;  /* original hover color */
     transform: translateY(-2px); 
-    box-shadow: 0 4px 12px rgba(27, 116, 113, 0.3); 
+    box-shadow: 0 4px 12px rgba(27, 116, 113, 0.3);  /* original hover shadow */
 }
 
 .login-button:active {
-        transform: translateY(0); 
-        box-shadow: 0 2px 6px rgba(27, 116, 113, 0.3); 
-    }
+    transform: translateY(0); 
+    box-shadow: none; 
+}
 
 /* ----- Links under the button ----- */
 .login-links {
@@ -302,3 +309,5 @@ input[type="password"] {
         font-size: 24px;
     }
 }
+
+

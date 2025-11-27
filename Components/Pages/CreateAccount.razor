@@ -21,39 +21,33 @@
                 <div class="form-grid">
                     <div class="form-field">
                         <label for="nameInput">Full name</label>
-                        <InputText id="nameInput" class="form-input" @bind-Value="Name" />
+                        <InputText id="nameInput" class="form-input" @bind-Value="Name" style="height: 32px !important; border: 2px solid #0d9ca2 !important; border-radius: 12px !important; background: #f7ffff !important; padding: 6px 12px 6px 12px !important; font-size: 15px !important; color: #0f4b4b !important; outline: none !important; box-shadow: none !important; -webkit-box-shadow: none !important; -moz-box-shadow: none !important;" />
                         <ValidationMessage For="@(() => Name)" />
                     </div>
 
                     <div class="form-field">
                         <label for="emailInput">Work email</label>
-                        <InputText id="emailInput" class="form-input" @bind-Value="Email" type="email" />
-                        <div class="form-helper">We’ll use this for important account notices.</div>
+                        <InputText id="emailInput" class="form-input" @bind-Value="Email" type="email" style="height: 32px !important; border: 2px solid #0d9ca2 !important; border-radius: 12px !important; background: #f7ffff !important; padding: 6px 12px 6px 12px !important; font-size: 15px !important; color: #0f4b4b !important; outline: none !important; box-shadow: none !important; -webkit-box-shadow: none !important; -moz-box-shadow: none !important;" />
+                        <div class="form-helper">We'll use this for important account notices.</div>
                         <ValidationMessage For="@(() => Email)" />
                     </div>
 
                     <div class="form-field">
                         <label for="usernameInput">Username</label>
-                        <InputText id="usernameInput" class="form-input" @bind-Value="UserName" />
+                        <InputText id="usernameInput" class="form-input" @bind-Value="UserName" style="height: 32px !important; border: 2px solid #0d9ca2 !important; border-radius: 12px !important; background: #f7ffff !important; padding: 6px 12px 6px 12px !important; font-size: 15px !important; color: #0f4b4b !important; outline: none !important; box-shadow: none !important; -webkit-box-shadow: none !important; -moz-box-shadow: none !important;" />
                         <ValidationMessage For="@(() => UserName)" />
                     </div>
 
                     <div class="form-field">
                         <label for="passwordInput">Password</label>
-                        <InputText id="passwordInput" class="form-input" @bind-Value="Password" type="password" />
+                        <InputText id="passwordInput" class="form-input" @bind-Value="Password" type="password" style="height: 32px !important; border: 2px solid #0d9ca2 !important; border-radius: 12px !important; background: #f7ffff !important; padding: 6px 12px 6px 12px !important; font-size: 15px !important; color: #0f4b4b !important; outline: none !important; box-shadow: none !important; -webkit-box-shadow: none !important; -moz-box-shadow: none !important;" />
                         <div class="form-helper">Use 8+ characters with a mix of letters and numbers.</div>
                         <ValidationMessage For="@(() => Password)" />
                     </div>
 
                     <div class="form-field">
-                        <label for="confirmPasswordInput">Confirm password</label>
-                        <InputText id="confirmPasswordInput" class="form-input" @bind-Value="ConfirmPassword" type="password" />
-                        <ValidationMessage For="@(() => ConfirmPassword)" />
-                    </div>
-
-                    <div class="form-field">
                         <label for="roleSelect">Role</label>
-                        <InputSelect id="roleSelect" class="form-input" @bind-Value="Role">
+                        <InputSelect id="roleSelect" class="form-input" @bind-Value="Role" style="height: 32px !important; border: 2px solid #0d9ca2 !important; border-radius: 12px !important; background: #f7ffff !important; padding: 6px 12px 6px 12px !important; font-size: 15px !important; color: #0f4b4b !important; outline: none !important; box-shadow: none !important; -webkit-box-shadow: none !important; -moz-box-shadow: none !important;">
                             <option value="">Select role</option>
                             <option value="Admin">Admin</option>
                             <option value="Doctor">Doctor</option>

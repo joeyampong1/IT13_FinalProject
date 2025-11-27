@@ -31,14 +31,14 @@
 
         <div class="ip-filters-row">
             <div class="ip-alpha-filter">
-                <button class="ip-filter-pill @(ShowLetters && ActiveLetter is null ? "active" : string.Empty)" @onclick="ToggleLetters">All</button>
+                <button class="ip-filter-pill false" >All</button>
 
                 @if (ShowLetters)
                 {
                     @foreach (var letter in Alphabet)
                     {
-                        <button class="ip-filter-pill @(ActiveLetter == letter ? "active" : string.Empty)"
-                                @onclick="() => SelectLetter(letter)">@letter</button>
+                        <button class="ip-filter-pill @("")"
+                                >@letter</button>
                     }
                 }
             </div>
@@ -461,26 +461,27 @@
 </div>
 
 @code {
+    private bool ShowPagination { get; set; } = true;
+    private bool ShowLetters { get; set; } = false;
+    private bool ShowPrescriptionForm { get; set; }
+    private bool ShowEditForm { get; set; }
+    
     private readonly char[] Alphabet =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
-    private bool ShowLetters { get; set; }
     private char? ActiveLetter { get; set; }
-    private bool ShowPagination { get; set; } = true;
-    private bool ShowPrescriptionForm { get; set; }
-    private bool ShowEditForm { get; set; }
-
+    private int? EditingMedicationIndex { get; set; }
+    private DoctorPrescriptionRow? SelectedPrescription { get; set; }
+    
     private string CurrentMedication { get; set; } = string.Empty;
     private string CurrentDosage { get; set; } = string.Empty;
     private string CurrentQuantity { get; set; } = string.Empty;
     private string CurrentFrequency { get; set; } = string.Empty;
     private string CurrentDuration { get; set; } = string.Empty;
+    
+    private List<MedicationEntry> MedicationEntries { get; set; } = new List<MedicationEntry>();
 
-    private List<MedicationEntry> MedicationEntries { get; set; } = new();
-    private int? EditingMedicationIndex { get; set; }
-    private DoctorPrescriptionRow? SelectedPrescription { get; set; }
-
-    private record DoctorPrescriptionRow(
+    public record DoctorPrescriptionRow(
         string Patient,
         string Doctor,
         string Diagnosis,
@@ -497,11 +498,7 @@
         new DoctorPrescriptionRow("Ruan Mei", "Dr. Cruz", "Fever", "Paracetamol", "pending", "Pending", "03/09/24"),
     };
 
-    private void ToggleLetters()
-    {
-        ShowLetters = !ShowLetters;
-        ActiveLetter = null;
-    }
+    
 
     private void SelectLetter(char letter)
     {
@@ -579,7 +576,7 @@
         ResetCurrentMedicationInputs();
     }
 
-    private record MedicationEntry(
+    public record MedicationEntry(
         string Medication,
         string Dosage,
         string Quantity,
@@ -619,3 +616,13 @@
         EditingMedicationIndex = index;
     }
 }
+
+
+
+
+
+
+
+
+
+
