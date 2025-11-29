@@ -100,6 +100,26 @@
       <LastWriteTime>Sat, 15 Nov 2025 15:40:09 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Final_logo-removebg-preview.png'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Title_bg_image.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>IT_13FinalProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>/</BasePath>
+      <RelativePath>images/Title_bg_image.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>2eknrrr37u</Fingerprint>
+      <Integrity>BoKbYya1UMDPJgHif/POM8u+JtNQYRxCVAiq3swVchg=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <FileLength>259162</FileLength>
+      <LastWriteTime>Sun, 16 Nov 2025 09:12:44 GMT</LastWriteTime>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Title_bg_image.png'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\index.html'))">
       <SourceType>Package</SourceType>
       <SourceId>IT_13FinalProject</SourceId>
@@ -117,7 +137,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <FileLength>867</FileLength>
-      <LastWriteTime>Tue, 11 Nov 2025 02:43:27 GMT</LastWriteTime>
+      <LastWriteTime>Tue, 18 Nov 2025 12:31:45 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\index.html'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\IT_13FinalProject.styles.css'))">
@@ -132,12 +152,12 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName>ScopedCss</AssetTraitName>
       <AssetTraitValue>ApplicationBundle</AssetTraitValue>
-      <Fingerprint>g34j68b28t</Fingerprint>
-      <Integrity>fLEayjeVr8dYlPcR7mHBK+mvKyMaWdarl1JrZveDPos=</Integrity>
+      <Fingerprint>6inu0aq5pt</Fingerprint>
+      <Integrity>guXTirdKnLnAA300yndnvuzB4QFM0B80vrcKX8ZkbFo=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>32346</FileLength>
-      <LastWriteTime>Sat, 15 Nov 2025 20:17:27 GMT</LastWriteTime>
+      <FileLength>265564</FileLength>
+      <LastWriteTime>Sat, 29 Nov 2025 15:32:30 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\IT_13FinalProject.styles.css'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>

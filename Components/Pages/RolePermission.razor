@@ -1,0 +1,458 @@
+@page "/roles-permissions"
+@layout Layout.DashboardLayout
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Routing
+@inject NavigationManager Navigation
+
+<div class="roles-permissions-page">
+    <div class="rp-header">
+        <div>
+            <h1>Roles & Permissions</h1>
+            <p>Manage user roles and their access permissions</p>
+        </div>
+        <div class="rp-header-actions">
+            <div class="rp-search-box">
+                <span class="rp-search-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.33333 12.6667C10.2789 12.6667 12.6667 10.2789 12.6667 7.33333C12.6667 4.38781 10.2789 2 7.33333 2C4.38781 2 2 4.38781 2 7.33333C2 10.2789 4.38781 12.6667 7.33333 12.6667Z" stroke="#718096" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 14L11.1 11.1" stroke="#718096" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <input type="text" class="rp-search-input" placeholder="Search roles..." />
+            </div>
+            <button class="rp-add-btn" @onclick="ShowAddRoleModal">
+                <span class="rp-icon rp-icon-add">+</span>
+                Add New Role
+            </button>
+        </div>
+    </div>
+
+    <div class="rp-table-container">
+        <table class="rp-table">
+            <thead>
+                <tr>
+                    <th>ROLE NAME</th>
+                    <th>DESCRIPTION</th>
+                    <th>USERS</th>
+                    <th>PERMISSIONS</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var role in roles)
+                {
+                    <tr>
+                        <td>
+                            <div class="rp-role-info">
+                                <span class="rp-role-icon">
+                                    @GetRoleIcon(role.Name)
+                                </span>
+                                <span>@role.Name</span>
+                            </div>
+                        </td>
+                        <td>@role.Description</td>
+                        <td>@role.UserCount users</td>
+                        <td>
+                            <div class="rp-permissions">
+                                @foreach (var permission in role.Permissions.Take(3))
+                                {
+                                    <span class="rp-permission-tag">@permission</span>
+                                }
+                                @if (role.Permissions.Count > 3)
+                                {
+                                    <span class="rp-more-permissions">+@(role.Permissions.Count - 3) more</span>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rp-actions-cell">
+                                <button class="rp-action-btn rp-edit" @onclick="() => EditRole(role)">
+                                    <span class="rp-icon rp-icon-edit"></span>
+                                </button>
+                                @if (role.Name != "Admin")
+                                {
+                                    <button class="rp-action-btn rp-delete" @onclick="() => ShowDeleteConfirm(role)">
+                                        <span class="rp-icon rp-icon-delete"></span>
+                                    </button>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+@if (showAddEditModal)
+{
+    <div class="rp-modal-overlay" @onclick="CloseModal">
+        <div class="rp-modal" @onclick:stopPropagation>
+            <div class="rp-modal-header">
+                <h3>@(editingRole == null ? "Add New Role" : "Edit Role")</h3>
+                <button class="rp-close-btn" @onclick="CloseModal">&times;</button>
+            </div>
+            <div class="rp-modal-body">
+                <div class="rp-form-group">
+                    <label>Role Name</label>
+                    <input type="text" class="rp-form-control" @bind="roleName" />
+                </div>
+                <div class="rp-form-group">
+                    <label>Description</label>
+                    <textarea class="rp-form-control" @bind="roleDescription"></textarea>
+                </div>
+                <div class="rp-form-group">
+                    <label>Permissions</label>
+                    <div class="rp-permissions-grid">
+                        @foreach (var permission in allPermissions)
+                        {
+                            <label class="rp-checkbox-container">
+                                <input type="checkbox" 
+                                       checked="@(selectedPermissions.Contains(permission))"
+                                       @onchange="(e) => TogglePermission(permission, (bool)e.Value)" />
+                                <span class="rp-checkmark"></span>
+                                @permission
+                            </label>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="rp-modal-footer">
+                <button class="rp-btn rp-btn-secondary" @onclick="CloseModal">Cancel</button>
+                <button class="rp-btn rp-btn-primary" @onclick="SaveRole">
+                    @(editingRole == null ? "Create Role" : "Save Changes")
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (showDeleteModal)
+{
+    <div class="rp-modal-overlay" @onclick="CloseDeleteModal">
+        <div class="rp-delete-modal" @onclick:stopPropagation>
+            <div class="rp-delete-icon">
+                <span class="rp-icon rp-icon-warning"></span>
+            </div>
+            <h3>Delete Role</h3>
+            <p>Are you sure you want to delete the role <strong>@roleToDelete?.Name</strong>? This action cannot be undone.</p>
+            <div class="rp-delete-actions">
+                <button class="rp-btn rp-btn-secondary" @onclick="CloseDeleteModal">Cancel</button>
+                <button class="rp-btn rp-btn-danger" @onclick="DeleteRole">Delete</button>
+            </div>
+        </div>
+    </div>
+}
+</div>
+
+@code {
+    [Inject] 
+    private string CurrentRole
+    {
+        get
+        {
+            try
+            {
+                var uri = Navigation?.Uri?.ToLowerInvariant() ?? string.Empty;
+                if (uri.Contains("doctor-")) return "Doctor";
+                if (uri.Contains("nurse-")) return "Nurse";
+                if (uri.Contains("billing-")) return "Billing";
+                if (uri.Contains("inventory-")) return "Inventory";
+                return "Admin";
+            }
+            catch
+            {
+                return "Admin"; // Default to Admin if there's any error
+            }
+        }
+    }
+
+    private void GoToUserProfile()
+    {
+        try 
+        {
+            if (Navigation == null) return;
+            
+            var role = (CurrentRole ?? string.Empty).ToLowerInvariant();
+            var target = "/user-profile";
+            
+            switch (role)
+            {
+                case "doctor":
+                    target = "/doctor-user-profile";
+                    break;
+                case "nurse":
+                    target = "/nurse-user-profile";
+                    break;
+                case "billing":
+                    target = "/billing-user-profile";
+                    break;
+                case "inventory":
+                    target = "/inventory-user-profile";
+                    break;
+            }
+            
+            Navigation.NavigateTo(target, forceLoad: true);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Navigation error: {ex.Message}");
+            Navigation?.NavigateTo("/user-profile", forceLoad: true);
+        }
+    }
+
+    private List<Role> roles = new();
+    private bool showAddEditModal = false;
+    private bool showDeleteModal = false;
+    private Role? editingRole = null;
+    private Role? roleToDelete = null;
+    private string roleName = "";
+    private string roleDescription = "";
+    private List<string> selectedPermissions = new();
+    
+    private List<string> allPermissions = new()
+    {
+        // Patient Management
+        "Patient Registration",
+        "Patient Records",
+        "Patient History",
+        "Patient Billing",
+        "Patient Discharge",
+        "Patient Transfer",
+        "Patient Admission",
+        "Patient Appointment",
+        "Patient Prescription",
+        "Patient Test",
+        "Patient Diagnosis",
+        "Patient Treatment",
+        "Patient Vitals",
+        "Patient Notes",
+        "Patient Documents",
+        "Patient Reports",
+        
+        // Doctor
+        "Doctor Appointment",
+        "Doctor Prescription",
+        "Doctor Test",
+        "Doctor Diagnosis",
+        "Doctor Treatment",
+        "Doctor Vitals",
+        "Doctor Notes",
+        "Doctor Documents",
+        "Doctor Reports",
+        
+        // Nurse
+        "Nurse Appointment",
+        "Nurse Prescription",
+        "Nurse Test",
+        "Nurse Diagnosis",
+        "Nurse Treatment",
+        "Nurse Vitals",
+        "Nurse Notes",
+        "Nurse Documents",
+        "Nurse Reports",
+        
+        // Billing
+        "Billing",
+        "Payment",
+        "Invoice",
+        "Expense",
+        "Tax",
+        "Discount",
+        "Refund",
+        "Insurance",
+        "Payment Report",
+        "Expense Report",
+        "Tax Report",
+        "Income Report",
+        
+        // Inventory
+        "Inventory",
+        "Purchase",
+        "Supplier",
+        "Stock",
+        "Stock Transfer",
+        "Stock Adjustment",
+        "Stock Report",
+        "Purchase Report",
+        "Supplier Report",
+        
+        // User Management
+        "User Management",
+        "Role Management",
+        "Permission Management",
+        "User Activity",
+        "User Report",
+        
+        // Settings
+        "General Settings",
+        "Email Settings",
+        "SMS Settings",
+        "Notification Settings",
+        "Payment Settings",
+        "Tax Settings",
+        "Backup & Restore",
+        "Update System"
+    };
+
+    protected override void OnInitialized()
+    {
+        // Sample data - replace with actual data from your backend
+        roles = new()
+        {
+            new()
+            {
+                Name = "Admin",
+                Description = "Full system access with all permissions",
+                UserCount = 3,
+                Permissions = allPermissions
+            },
+            new()
+            {
+                Name = "Doctor",
+                Description = "Medical staff with full patient care access",
+                UserCount = 8,
+                Permissions = allPermissions.Where(p => p.Contains("Patient") || p.Contains("Doctor") || p == "Appointment").ToList()
+            },
+            new()
+            {
+                Name = "Nurse",
+                Description = "Nursing staff with patient care support access",
+                UserCount = 15,
+                Permissions = allPermissions.Where(p => p.Contains("Patient") || p.Contains("Nurse") || p == "Appointment").ToList()
+            },
+            new()
+            {
+                Name = "Billing Staff",
+                Description = "Handles financial transactions and billing",
+                UserCount = 5,
+                Permissions = allPermissions.Where(p => p.Contains("Billing") || p.Contains("Payment") || p.Contains("Invoice") || p.Contains("Expense") || p.Contains("Tax") || p.Contains("Report")).ToList()
+            },
+            new()
+            {
+                Name = "Inventory Staff",
+                Description = "Manages medical supplies, inventory and purchases",
+                UserCount = 4,
+                Permissions = allPermissions.Where(p => p.Contains("Inventory") || p.Contains("Stock") || p.Contains("Purchase") || p.Contains("Supplier") || p.Contains("Report")).ToList()
+            },
+            new()
+            {
+                Name = "Receptionist",
+                Description = "Handles front desk operations and appointments",
+                UserCount = 6,
+                Permissions = new() { "Patient Registration", "Patient Appointment", "Patient Records", "Appointment" }
+            }
+        };
+    }
+
+    private void ShowAddRoleModal()
+    {
+        editingRole = null;
+        roleName = "";
+        roleDescription = "";
+        selectedPermissions.Clear();
+        showAddEditModal = true;
+    }
+
+    private void EditRole(Role role)
+    {
+        editingRole = role;
+        roleName = role.Name;
+        roleDescription = role.Description;
+        selectedPermissions = new List<string>(role.Permissions);
+        showAddEditModal = true;
+    }
+
+    private void CloseModal()
+    {
+        showAddEditModal = false;
+    }
+
+    private void SaveRole()
+    {
+        // Here you would typically save to your backend
+        if (editingRole == null)
+        {
+            // Add new role
+            roles.Add(new Role
+            {
+                Name = roleName,
+                Description = roleDescription,
+                Permissions = new List<string>(selectedPermissions),
+                UserCount = 0
+            });
+        }
+        else
+        {
+            // Update existing role
+            var existingRole = roles.FirstOrDefault(r => r.Name == editingRole.Name);
+            if (existingRole != null)
+            {
+                existingRole.Name = roleName;
+                existingRole.Description = roleDescription;
+                existingRole.Permissions = new List<string>(selectedPermissions);
+            }
+        }
+        
+        showAddEditModal = false;
+        StateHasChanged();
+    }
+
+    private void TogglePermission(string permission, bool isSelected)
+    {
+        if (isSelected && !selectedPermissions.Contains(permission))
+        {
+            selectedPermissions.Add(permission);
+        }
+        else if (!isSelected && selectedPermissions.Contains(permission))
+        {
+            selectedPermissions.Remove(permission);
+        }
+    }
+
+    private void ShowDeleteConfirm(Role role)
+    {
+        roleToDelete = role;
+        showDeleteModal = true;
+    }
+
+    private void CloseDeleteModal()
+    {
+        showDeleteModal = false;
+        roleToDelete = null;
+    }
+
+    private void DeleteRole()
+    {
+        if (roleToDelete != null)
+        {
+            roles.RemoveAll(r => r.Name == roleToDelete.Name);
+            showDeleteModal = false;
+            roleToDelete = null;
+            StateHasChanged();
+        }
+    }
+
+    private string GetRoleIcon(string roleName)
+    {
+        return roleName switch
+        {
+            "Admin" => "👑",
+            "Doctor" => "👨‍⚕️",
+            "Nurse" => "👩‍⚕️",
+            "Billing" => "💵",
+            "Inventory" => "📦",
+            _ => "👤"
+        };
+    }
+
+    public class Role
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public int UserCount { get; set; }
+        public List<string> Permissions { get; set; } = new();
+    }
+
+
+
+}
