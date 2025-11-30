@@ -9,7 +9,7 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = IT_13FinalProject
 build_property.RootNamespace = IT_13FinalProject
-build_property.ProjectDir = c:\Users\User.DESKTOP-EOONC7Q\source\repos\IT_13FinalProject\IT_13FinalProject\
+build_property.ProjectDir = C:\Users\User.DESKTOP-EOONC7Q\source\repos\IT_13FinalProject\IT_13FinalProject\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.CsWinRTAotOptimizerEnabled = true
@@ -23,369 +23,369 @@ build_property.CsWinRTUseWindowsUIXamlProjections = false
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = c:\Users\User.DESKTOP-EOONC7Q\source\repos\IT_13FinalProject\IT_13FinalProject
+build_property.MSBuildProjectDirectory = C:\Users\User.DESKTOP-EOONC7Q\source\repos\IT_13FinalProject\IT_13FinalProject
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/App.xaml]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/App.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = IT_13FinalProject.App.xaml
 build_metadata.AdditionalFiles.TargetPath = App.xaml
 build_metadata.AdditionalFiles.RelativePath = App.xaml
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/MainPage.xaml]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = IT_13FinalProject.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/AppRouter.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/AppRouter.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHBSb3V0ZXIucmF6b3I=
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/PatientEhrPrint.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/PatientEhrPrint.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQYXRpZW50RWhyUHJpbnQucmF6b3I=
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/TestHome.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/TestHome.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUZXN0SG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Routes.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Routes.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/_Imports.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/_Imports.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Layout/DashboardLayout.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Layout/DashboardLayout.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcRGFzaGJvYXJkTGF5b3V0LnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-ivwb3g8wt4
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Layout/EmptyLayout.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Layout/EmptyLayout.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcRW1wdHlMYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-ygxeu5y9hp
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Layout/MainLayout.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-4wawq2kdy8
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Layout/NavMenu.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-6ee27v6sai
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/AdminInsuranceClaims.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/AdminInsuranceClaims.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pbkluc3VyYW5jZUNsYWltcy5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-9ljwv033up
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/AdminPharmacyInventory.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/AdminPharmacyInventory.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pblBoYXJtYWN5SW52ZW50b3J5LnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-2q3qf6ft0f
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/AdminReportsAnalytics.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/AdminReportsAnalytics.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pblJlcG9ydHNBbmFseXRpY3MucmF6b3I=
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-t751c9znup
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/AuditLogs.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/AuditLogs.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBdWRpdExvZ3MucmF6b3I=
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-6oegbl05is
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/BillingCashiering.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/BillingCashiering.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xCaWxsaW5nQ2FzaGllcmluZy5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-8x46c9ccgl
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/BillingComputation.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/BillingComputation.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xCaWxsaW5nQ29tcHV0YXRpb24ucmF6b3I=
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-jqi0jhv75t
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/BillingDashboard.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/BillingDashboard.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xCaWxsaW5nRGFzaGJvYXJkLnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-6z3hedhxy3
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/BillingInsuranceClaims.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/BillingInsuranceClaims.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xCaWxsaW5nSW5zdXJhbmNlQ2xhaW1zLnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-p1hh4szjey
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/BillingInsuranceRequest.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/BillingInsuranceRequest.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xCaWxsaW5nSW5zdXJhbmNlUmVxdWVzdC5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-v5date8r4e
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/BillingPatientOverview.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/BillingPatientOverview.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xCaWxsaW5nUGF0aWVudE92ZXJ2aWV3LnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-pvrlfqqfyg
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/CreateAccount.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/CreateAccount.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDcmVhdGVBY2NvdW50LnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-immq16zsyb
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/Dashboard.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/Dashboard.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEYXNoYm9hcmQucmF6b3I=
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-3viwouuks3
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/DoctorConsultEdit.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/DoctorConsultEdit.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEb2N0b3JDb25zdWx0RWRpdC5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-kggejzlwcb
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/DoctorConsultForm.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/DoctorConsultForm.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEb2N0b3JDb25zdWx0Rm9ybS5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-3ymve298ug
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/DoctorDashboard.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/DoctorDashboard.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEb2N0b3JEYXNoYm9hcmQucmF6b3I=
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-jlepjt6nwu
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/DoctorHealthRecordList.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/DoctorHealthRecordList.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEb2N0b3JIZWFsdGhSZWNvcmRMaXN0LnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-eefu8o2zjz
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/DoctorPrescriptions.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/DoctorPrescriptions.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEb2N0b3JQcmVzY3JpcHRpb25zLnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-crn1xede4o
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/DoctorVitalsInfo.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/DoctorVitalsInfo.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEb2N0b3JWaXRhbHNJbmZvLnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-x93kiu7sz9
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/ForgotPassword.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/ForgotPassword.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xGb3Jnb3RQYXNzd29yZC5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-l3st9p56g2
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/HealthRecords.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/HealthRecords.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIZWFsdGhSZWNvcmRzLnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-edl4qnsfp8
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/InventoryDashboard.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/InventoryDashboard.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xJbnZlbnRvcnlEYXNoYm9hcmQucmF6b3I=
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-vy4f31qz5g
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/InventoryPrescriptions.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/InventoryPrescriptions.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xJbnZlbnRvcnlQcmVzY3JpcHRpb25zLnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-1vbyxdmumf
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/InvoicePdf.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/InvoicePdf.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xJbnZvaWNlUGRmLnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-y3cjkh0w0w
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/InvoicingOverview.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/InvoicingOverview.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xJbnZvaWNpbmdPdmVydmlldy5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-9eoszoyj3b
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/Login.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/Login.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dpbi5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-ykoxb9uw7r
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/NurseDashboard.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/NurseDashboard.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOdXJzZURhc2hib2FyZC5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-kb9felgr1u
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/NursePatientList.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/NursePatientList.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOdXJzZVBhdGllbnRMaXN0LnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-cj6m8soney
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/NursePatientProfile.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/NursePatientProfile.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOdXJzZVBhdGllbnRQcm9maWxlLnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-awpn4v8j7k
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/NurseVitalsEdit.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/NurseVitalsEdit.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOdXJzZVZpdGFsc0VkaXQucmF6b3I=
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-bt8xstqhrx
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/NurseVitalsForm.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/NurseVitalsForm.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOdXJzZVZpdGFsc0Zvcm0ucmF6b3I=
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-togv6cpdwq
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/NurseVitalsList.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/NurseVitalsList.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOdXJzZVZpdGFsc0xpc3QucmF6b3I=
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-mn0iqb13zr
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/PatientEhrPdf.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/PatientEhrPdf.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQYXRpZW50RWhyUGRmLnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-ktjmu6pzvc
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/PatientList.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/PatientList.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQYXRpZW50TGlzdC5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-4lyplrior2
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/PatientManagement.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/PatientManagement.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQYXRpZW50TWFuYWdlbWVudC5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-ow83v5c52o
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/PatientProfile.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/PatientProfile.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQYXRpZW50UHJvZmlsZS5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-a99noxyyuf
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/PatientRecords.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/PatientRecords.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQYXRpZW50UmVjb3Jkcy5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-6ga1c7s5d5
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/PharmacyInventory.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/PharmacyInventory.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQaGFybWFjeUludmVudG9yeS5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-x6w3yfdxb9
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/ReceiptPdf.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/ReceiptPdf.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSZWNlaXB0UGRmLnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-nz43w87h1f
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/ReceiptsOverview.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/ReceiptsOverview.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSZWNlaXB0c092ZXJ2aWV3LnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-uilgach2xa
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/RolePermission.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/RolePermission.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSb2xlUGVybWlzc2lvbi5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-yu5k6nz3z2
 
-[c:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/UserProfile.razor]
+[C:/Users/User.DESKTOP-EOONC7Q/source/repos/IT_13FinalProject/IT_13FinalProject/Components/Pages/UserProfile.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2VyUHJvZmlsZS5yYXpvcg==
