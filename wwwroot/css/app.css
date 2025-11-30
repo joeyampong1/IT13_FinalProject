@@ -1,4 +1,7 @@
 ﻿/*#if (SampleContent)*/
+/* Import UI Consistency Rules - MUST BE FIRST */
+@import url('./ui-consistency.css');
+
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
