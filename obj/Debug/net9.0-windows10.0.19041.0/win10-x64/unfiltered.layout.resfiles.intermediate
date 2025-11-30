@@ -5,6 +5,7 @@ Components\Layout\NavMenu.razor.css
 Components\Pages\AdminInsuranceClaims.razor.css
 Components\Pages\AdminPharmacyInventory.razor.css
 Components\Pages\AdminReportsAnalytics.razor.css
+Components\Pages\AuditLogs.razor.css
 Components\Pages\BillingCashiering.razor.css
 Components\Pages\BillingComputation.razor.css
 Components\Pages\BillingDashboard.razor.css
@@ -45,12 +46,12 @@ Components\Pages\UserProfile.razor.css
 wwwroot\css\app.css.gz
 wwwroot\css\bootstrap\bootstrap.min.css.gz
 wwwroot\IT_13FinalProject.styles.css.gz
-wwwroot\IT_13FinalProject.6inu0aq5pt.bundle.scp.css.gz
+wwwroot\IT_13FinalProject.nhnwde4ib1.bundle.scp.css.gz
 wwwroot\index.html.gz
 wwwroot\css\app.css.br
 wwwroot\css\bootstrap\bootstrap.min.css.br
 wwwroot\IT_13FinalProject.styles.css.br
-wwwroot\IT_13FinalProject.6inu0aq5pt.bundle.scp.css.br
+wwwroot\IT_13FinalProject.nhnwde4ib1.bundle.scp.css.br
 wwwroot\index.html.br
 wwwroot\css\bootstrap\bootstrap.min.css.map.br
 wwwroot\css\bootstrap\bootstrap.min.css.map.gz
@@ -112,7 +113,7 @@ splashSplashScreen.scale-150.png
 splashSplashScreen.scale-200.png
 splashSplashScreen.scale-400.png
 wwwroot\IT_13FinalProject.styles.css
-wwwroot\IT_13FinalProject.6inu0aq5pt.bundle.scp.css
+wwwroot\IT_13FinalProject.nhnwde4ib1.bundle.scp.css
 AboutAssets.txt
 wwwroot\css\app.css
 wwwroot\css\bootstrap\bootstrap.min.css

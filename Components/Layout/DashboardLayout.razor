@@ -155,13 +155,9 @@
 
                 @if (CurrentRole == "Admin")
                 {
-                    <button class="sidebar-subitem">
-                        <span class="sidebar-icon sidebar-icon-role"></span>
-                        Role
-                    </button>
-                    <button class="sidebar-subitem">
-                        <span class="sidebar-icon sidebar-icon-permission"></span>
-                        Permission
+                    <button class="sidebar-subitem @(IsRolesAndPermissionsActive ? "active" : string.Empty)" @onclick="OnRolesAndPermissionsClick">
+                        <span class="sidebar-icon sidebar-icon-role-permission"></span>
+                        Role & Permission
                     </button>
                 }
             }
@@ -169,14 +165,17 @@
 
         <nav class="sidebar-section">
             <div class="sidebar-section-title">SYSTEM</div>
-            <button class="sidebar-item">
-                <span class="sidebar-icon sidebar-icon-audit"></span>
-                Audit Logs
-            </button>
-            <button class="sidebar-item">
-                <span class="sidebar-icon sidebar-icon-sync"></span>
-                Sync Management
-            </button>
+            @if (CurrentRole == "Admin")
+            {
+                <button class="sidebar-item @(IsAuditLogsActive ? "active" : string.Empty)" @onclick="OnAuditLogsClick">
+                    <span class="sidebar-icon sidebar-icon-audit"></span>
+                    Audit Logs
+                </button>
+                <button class="sidebar-item">
+                    <span class="sidebar-icon sidebar-icon-sync"></span>
+                    Sync Management
+                </button>
+            }
             <button class="sidebar-item @(IsSettingsOpen ? "sidebar-item-settings-active" : string.Empty)" @onclick="ToggleSettingsModal">
                 <span class="sidebar-icon sidebar-icon-settings"></span>
                 Settings
@@ -271,11 +270,18 @@
 </div>
 
 @code {
+    [Inject] private NavigationManager Navigation { get; set; } = null!;
+    [Parameter] public string BaseRoute { get; set; } = "/";
+    
+    private string GetRoleSpecificRoute(string route) 
+    {
+        if (string.IsNullOrEmpty(BaseRoute) || BaseRoute == "/")
+            return $"/{route}";
+        return $"{BaseRoute}{route}";
+    }
+
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
-
-    [Inject]
-    private NavigationManager Navigation { get; set; } = default!;
 
     // JS runtime used to show a simple browser confirm dialog
     [Inject]
@@ -402,6 +408,17 @@
 
     private bool IsUserProfileActive =>
         Navigation.Uri.Contains("/user-profile", StringComparison.OrdinalIgnoreCase);
+        
+    private bool IsRolesAndPermissionsActive =>
+        Navigation.Uri.Contains("/roles-permissions", StringComparison.OrdinalIgnoreCase);
+        
+    private bool IsAuditLogsActive =>
+        Navigation.Uri.Contains("/auditlogs", StringComparison.OrdinalIgnoreCase);
+        
+    private void OnAuditLogsClick()
+    {
+        Navigation.NavigateTo("/auditlogs");
+    }
 
     private bool IsUserMenuExpanded { get; set; }
     private bool IsSettingsOpen { get; set; }
@@ -460,7 +477,54 @@
 
     private void OnDoctorPrescriptionsClick() => Navigation.NavigateTo("/doctor-prescriptions");
 
-    private void OnUserProfileClick() => Navigation.NavigateTo("/user-profile");
+  private void OnUserProfileClick()
+{
+    // Get the current role from the URL or use a default
+    var role = GetCurrentRoleFromUrl();
+    
+    // For admin, use the base route, otherwise use the role-prefixed route
+    var route = role.Equals("Admin", StringComparison.OrdinalIgnoreCase) 
+        ? "/user-profile" 
+        : $"/{role.ToLower()}-user-profile";
+    
+    // Force a full page reload to ensure the layout is recreated with the correct role context
+    Navigation.NavigateTo(route, forceLoad: true);
+}
+    
+   private string GetCurrentRoleFromUrl()
+{
+    var uri = Navigation.Uri.ToLower();
+    
+    // Check for role in the URL path
+    if (uri.Contains("/doctor-") || uri.Contains("/doctor/")) return "Doctor";
+    if (uri.Contains("/nurse-") || uri.Contains("/nurse/")) return "Nurse";
+    if (uri.Contains("/billing-") || uri.Contains("/billing/")) return "Billing";
+    if (uri.Contains("/inventory-") || uri.Contains("/inventory/")) return "Inventory";
+    if (uri.Contains("/admin-") || uri.Contains("/admin/")) return "Admin";
+    
+    // Check for role in the user profile path
+    if (uri.Contains("-user-profile") || uri.Contains("user-profile"))
+    {
+        var parts = uri.Split(new[] { '-', '/' }, StringSplitOptions.RemoveEmptyEntries);
+        var roleIndex = Array.IndexOf(parts, "user");
+        if (roleIndex > 0)
+        {
+            var rolePart = parts[roleIndex - 1];
+            if (!string.IsNullOrEmpty(rolePart) && rolePart != "user")
+            {
+                return char.ToUpper(rolePart[0]) + rolePart.Substring(1);
+            }
+        }
+    }
+    
+    // Default to Admin if no role is found
+    return "Admin";
+}
+
+    private void OnRolesAndPermissionsClick()
+    {
+        Navigation.NavigateTo("/roles-permissions");
+    }
 
     private void ToggleUserMenu()
     {

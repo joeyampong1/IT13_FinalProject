@@ -2,6 +2,7 @@
 @using IT_13FinalProject.Components.Layout
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Routing
+@using IT_13FinalProject.Components.Pages
 @inject NavigationManager Navigation
 
 @code {
@@ -253,10 +254,46 @@ else if (path == "patient-ehr-print")
         <PatientEhrPdf />
     </DashboardLayout>
 }
-else if (path == "user-profile")
+// Handle all user profile routes with role prefixes
+else if (path == "user-profile" || 
+         path == "doctor-user-profile" || 
+         path == "nurse-user-profile" || 
+         path == "billing-user-profile" || 
+         path == "inventory-user-profile")
+{
+    // Extract the role name and determine the correct layout
+    string roleName;
+    string baseRoute = "/";
+    
+    if (path == "user-profile")
+    {
+        roleName = "Admin";
+        baseRoute = "/";
+    }
+    else
+    {
+        // Get the role from the path and format it correctly
+        var rolePart = path.Split('-')[0];
+        roleName = char.ToUpper(rolePart[0]) + rolePart.Substring(1).ToLower();
+        // Set base route to the role's dashboard
+        baseRoute = $"/{rolePart.ToLower()}-dashboard";
+    }
+    
+    // Create a new instance of DashboardLayout with the correct BaseRoute
+    <DashboardLayout BaseRoute="@baseRoute">
+        <UserProfile Role="@roleName" />
+    </DashboardLayout>
+}
+else if (path == "roles-permissions")
 {
     <DashboardLayout>
-        <UserProfile />
+        <RolePermission />
+    </DashboardLayout>
+}
+else if (path == "auditlogs")
+{
+    <DashboardLayout>
+        <AuditLogs />
     </DashboardLayout>
 }
 else if (path == "forgot-password")

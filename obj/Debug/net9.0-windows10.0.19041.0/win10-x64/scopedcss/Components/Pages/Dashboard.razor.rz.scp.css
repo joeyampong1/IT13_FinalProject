@@ -12,6 +12,32 @@
     margin: -10px -16px 6px;
     background-color: #f3faf9;
     border-bottom: 1px solid #e0f0ee;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.dashboard-notification-toggle[b-3viwouuks3] {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 6px;
+}
+
+.notification-toggle-icon[b-3viwouuks3] {
+    width: 22px;
+    height: 12px;
+    border-radius: 0 0 999px 999px;
+    background-color: #333333;
+    color: #ffffff;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.notification-toggle-icon:hover[b-3viwouuks3] {
+    background-color: #555555;
 }
 
 .dashboard-title[b-3viwouuks3] {
@@ -56,11 +82,44 @@
     background-color: #ffe8a3;
     border-radius: 12px;
     padding: 10px 16px;
+    position: relative;
+}
+
+.notification-header-row[b-3viwouuks3] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
 }
 
 .notification-title[b-3viwouuks3] {
     font-weight: 600;
-    margin-bottom: 6px;
+}
+
+.notification-controls[b-3viwouuks3] {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: absolute;
+    top: 8px;
+    right: 10px;
+}
+
+.notification-control-icon[b-3viwouuks3] {
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    border: 1px solid #f5c76b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    cursor: pointer;
+    background-color: #ffe19a;
+}
+
+.notification-control-icon:hover[b-3viwouuks3] {
+    background-color: #ffd36b;
 }
 
 .notification-body[b-3viwouuks3] {
@@ -92,11 +151,11 @@
     border-radius: 999px;
     background-color: #00a792;
     color: #ffffff;
-    padding: 6px 18px;
-    font-size: 13px;
-    font-weight: 600;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 500;
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
 .notification-button:hover[b-3viwouuks3] {
@@ -107,6 +166,7 @@
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 14px;
+    margin-top: 4px;
 }
 
 .dashboard-card[b-3viwouuks3] {
@@ -122,18 +182,153 @@
 }
 
 .card-placeholder[b-3viwouuks3] {
-    height: 120px;
+    min-height: 140px;
     border-radius: 10px;
     background: #f4fbfb;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 10px 12px;
     font-size: 12px;
+    color: #333;
+}
+
+.dashboard-no-notification .card-placeholder[b-3viwouuks3] {
+    min-height: 170px;
+}
+
+.card-kpi-value[b-3viwouuks3] {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.card-kpi-subtitle[b-3viwouuks3] {
+    font-size: 11px;
+    color: #666;
+}
+
+.card-kpi-meta[b-3viwouuks3] {
+    margin-top: 4px;
+    font-size: 11px;
+    color: #888;
+}
+
+.card-graph-progress[b-3viwouuks3] {
+    width: 100%;
+    margin-top: 6px;
+}
+
+.graph-track[b-3viwouuks3] {
+    width: 100%;
+    height: 8px;
+    border-radius: 999px;
+    background-color: #d6ecea;
+    overflow: hidden;
+}
+
+.graph-fill[b-3viwouuks3] {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #0f8b8d, #40b6ae);
+}
+
+.graph-caption[b-3viwouuks3] {
+    margin-top: 4px;
+    font-size: 10px;
     color: #777;
 }
 
+.graph-track-demographics[b-3viwouuks3] {
+    display: flex;
+}
+
+.graph-segment-female[b-3viwouuks3],
+.graph-segment-male[b-3viwouuks3] {
+    height: 8px;
+}
+
+.graph-segment-female[b-3viwouuks3] {
+    background: #f28ca1;
+}
+
+.graph-segment-male[b-3viwouuks3] {
+    background: #4c8bf5;
+}
+
+.card-graph-spark[b-3viwouuks3] {
+    width: 100%;
+    margin-top: 6px;
+}
+
+.spark-bars[b-3viwouuks3] {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 56px;
+}
+
+.spark-bar[b-3viwouuks3] {
+    flex: 1;
+    min-width: 5px;
+    border-radius: 4px 4px 0 0;
+    background: linear-gradient(180deg, #0f8b8d, #0b6f70);
+}
+
+.spark-labels[b-3viwouuks3] {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3px;
+    font-size: 9px;
+    color: #777;
+}
+
+.spark-label[b-3viwouuks3] {
+    flex: 1;
+    text-align: center;
+}
+
+.card-graph-departments[b-3viwouuks3] {
+    width: 100%;
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dept-row[b-3viwouuks3] {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+}
+
+.dept-label[b-3viwouuks3] {
+    color: #555;
+}
+
+.dept-bar-track[b-3viwouuks3] {
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background-color: #d6ecea;
+    overflow: hidden;
+}
+
+.dept-bar-fill[b-3viwouuks3] {
+    height: 100%;
+    border-radius: 999px;
+    background-color: #0f8b8d;
+}
+
+.dept-value[b-3viwouuks3] {
+    color: #555;
+}
+
 .dashboard-activity[b-3viwouuks3] {
-    margin-top: 8px;
+    margin-top: 16px;
 }
 
 .activity-header[b-3viwouuks3] {
@@ -177,32 +372,49 @@
     color: #0f8b8d;
 }
 
-.activity-table[b-3viwouuks3] {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #ffffff;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-}
-
 .activity-table-wrapper[b-3viwouuks3] {
-    max-height: 260px;
+    max-height: 260px; /* fixed box height so only rows scroll when there are many */
     overflow-y: auto;
     border-radius: 16px;
+    padding: 4px 0;
+}
+
+.activity-table[b-3viwouuks3] {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px; /* vertical gap to look like separate cards */
+    background-color: transparent;
 }
 
 .activity-table th[b-3viwouuks3],
 .activity-table td[b-3viwouuks3] {
-    padding: 10px 14px;
+    padding: 8px 14px;
     font-size: 13px;
     text-align: left;
 }
 
-.activity-table thead[b-3viwouuks3] {
-    background-color: #f4fbfb;
+/* Make activity rows look a bit taller like cards */
+.activity-table tbody td[b-3viwouuks3] {
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
 
-.activity-table tbody tr:nth-child(even)[b-3viwouuks3] {
-    background-color: #f9fcfc;
+.activity-table thead[b-3viwouuks3] {
+    background-color: transparent;
+}
+
+/* Card-style rows for recent activity */
+.activity-table tbody tr[b-3viwouuks3] {
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.activity-table tbody tr td:first-child[b-3viwouuks3] {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.activity-table tbody tr td:last-child[b-3viwouuks3] {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
 }

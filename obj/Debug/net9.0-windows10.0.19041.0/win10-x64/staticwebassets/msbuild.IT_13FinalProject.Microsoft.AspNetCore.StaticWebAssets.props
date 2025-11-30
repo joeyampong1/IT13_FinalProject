@@ -152,12 +152,12 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName>ScopedCss</AssetTraitName>
       <AssetTraitValue>ApplicationBundle</AssetTraitValue>
-      <Fingerprint>6inu0aq5pt</Fingerprint>
-      <Integrity>guXTirdKnLnAA300yndnvuzB4QFM0B80vrcKX8ZkbFo=</Integrity>
+      <Fingerprint>nhnwde4ib1</Fingerprint>
+      <Integrity>6yOlygE3MCh2lY4jw6H3MoDkQh+2TnYN+Dm0GC1Nexs=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>265564</FileLength>
-      <LastWriteTime>Sat, 29 Nov 2025 15:32:30 GMT</LastWriteTime>
+      <FileLength>321223</FileLength>
+      <LastWriteTime>Sun, 30 Nov 2025 18:18:47 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\IT_13FinalProject.styles.css'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>

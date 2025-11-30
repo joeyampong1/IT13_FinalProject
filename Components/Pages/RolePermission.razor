@@ -4,455 +4,500 @@
 @using Microsoft.AspNetCore.Components.Routing
 @inject NavigationManager Navigation
 
-<div class="roles-permissions-page">
-    <div class="rp-header">
-        <div>
-            <h1>Roles & Permissions</h1>
-            <p>Manage user roles and their access permissions</p>
-        </div>
-        <div class="rp-header-actions">
-            <div class="rp-search-box">
-                <span class="rp-search-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.33333 12.6667C10.2789 12.6667 12.6667 10.2789 12.6667 7.33333C12.6667 4.38781 10.2789 2 7.33333 2C4.38781 2 2 4.38781 2 7.33333C2 10.2789 4.38781 12.6667 7.33333 12.6667Z" stroke="#718096" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M14 14L11.1 11.1" stroke="#718096" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </span>
-                <input type="text" class="rp-search-input" placeholder="Search roles..." />
-            </div>
-            <button class="rp-add-btn" @onclick="ShowAddRoleModal">
-                <span class="rp-icon rp-icon-add">+</span>
-                Add New Role
-            </button>
-        </div>
-    </div>
-
-    <div class="rp-table-container">
-        <table class="rp-table">
-            <thead>
-                <tr>
-                    <th>ROLE NAME</th>
-                    <th>DESCRIPTION</th>
-                    <th>USERS</th>
-                    <th>PERMISSIONS</th>
-                    <th>ACTIONS</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var role in roles)
-                {
-                    <tr>
-                        <td>
-                            <div class="rp-role-info">
-                                <span class="rp-role-icon">
-                                    @GetRoleIcon(role.Name)
-                                </span>
-                                <span>@role.Name</span>
-                            </div>
-                        </td>
-                        <td>@role.Description</td>
-                        <td>@role.UserCount users</td>
-                        <td>
-                            <div class="rp-permissions">
-                                @foreach (var permission in role.Permissions.Take(3))
-                                {
-                                    <span class="rp-permission-tag">@permission</span>
-                                }
-                                @if (role.Permissions.Count > 3)
-                                {
-                                    <span class="rp-more-permissions">+@(role.Permissions.Count - 3) more</span>
-                                }
-                            </div>
-                        </td>
-                        <td>
-                            <div class="rp-actions-cell">
-                                <button class="rp-action-btn rp-edit" @onclick="() => EditRole(role)">
-                                    <span class="rp-icon rp-icon-edit"></span>
-                                </button>
-                                @if (role.Name != "Admin")
-                                {
-                                    <button class="rp-action-btn rp-delete" @onclick="() => ShowDeleteConfirm(role)">
-                                        <span class="rp-icon rp-icon-delete"></span>
-                                    </button>
-                                }
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-
-@if (showAddEditModal)
-{
-    <div class="rp-modal-overlay" @onclick="CloseModal">
-        <div class="rp-modal" @onclick:stopPropagation>
-            <div class="rp-modal-header">
-                <h3>@(editingRole == null ? "Add New Role" : "Edit Role")</h3>
-                <button class="rp-close-btn" @onclick="CloseModal">&times;</button>
-            </div>
-            <div class="rp-modal-body">
-                <div class="rp-form-group">
-                    <label>Role Name</label>
-                    <input type="text" class="rp-form-control" @bind="roleName" />
-                </div>
-                <div class="rp-form-group">
-                    <label>Description</label>
-                    <textarea class="rp-form-control" @bind="roleDescription"></textarea>
-                </div>
-                <div class="rp-form-group">
-                    <label>Permissions</label>
-                    <div class="rp-permissions-grid">
-                        @foreach (var permission in allPermissions)
-                        {
-                            <label class="rp-checkbox-container">
-                                <input type="checkbox" 
-                                       checked="@(selectedPermissions.Contains(permission))"
-                                       @onchange="(e) => TogglePermission(permission, (bool)e.Value)" />
-                                <span class="rp-checkmark"></span>
-                                @permission
-                            </label>
-                        }
-                    </div>
-                </div>
-            </div>
-            <div class="rp-modal-footer">
-                <button class="rp-btn rp-btn-secondary" @onclick="CloseModal">Cancel</button>
-                <button class="rp-btn rp-btn-primary" @onclick="SaveRole">
-                    @(editingRole == null ? "Create Role" : "Save Changes")
-                </button>
-            </div>
-        </div>
-    </div>
-}
-
-@if (showDeleteModal)
-{
-    <div class="rp-modal-overlay" @onclick="CloseDeleteModal">
-        <div class="rp-delete-modal" @onclick:stopPropagation>
-            <div class="rp-delete-icon">
-                <span class="rp-icon rp-icon-warning"></span>
-            </div>
-            <h3>Delete Role</h3>
-            <p>Are you sure you want to delete the role <strong>@roleToDelete?.Name</strong>? This action cannot be undone.</p>
-            <div class="rp-delete-actions">
-                <button class="rp-btn rp-btn-secondary" @onclick="CloseDeleteModal">Cancel</button>
-                <button class="rp-btn rp-btn-danger" @onclick="DeleteRole">Delete</button>
-            </div>
-        </div>
-    </div>
-}
-</div>
-
 @code {
-    [Inject] 
-    private string CurrentRole
+    private Dictionary<string, bool> roleStatus = new()
     {
-        get
-        {
-            try
-            {
-                var uri = Navigation?.Uri?.ToLowerInvariant() ?? string.Empty;
-                if (uri.Contains("doctor-")) return "Doctor";
-                if (uri.Contains("nurse-")) return "Nurse";
-                if (uri.Contains("billing-")) return "Billing";
-                if (uri.Contains("inventory-")) return "Inventory";
-                return "Admin";
-            }
-            catch
-            {
-                return "Admin"; // Default to Admin if there's any error
-            }
-        }
-    }
-
-    private void GoToUserProfile()
-    {
-        try 
-        {
-            if (Navigation == null) return;
-            
-            var role = (CurrentRole ?? string.Empty).ToLowerInvariant();
-            var target = "/user-profile";
-            
-            switch (role)
-            {
-                case "doctor":
-                    target = "/doctor-user-profile";
-                    break;
-                case "nurse":
-                    target = "/nurse-user-profile";
-                    break;
-                case "billing":
-                    target = "/billing-user-profile";
-                    break;
-                case "inventory":
-                    target = "/inventory-user-profile";
-                    break;
-            }
-            
-            Navigation.NavigateTo(target, forceLoad: true);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Navigation error: {ex.Message}");
-            Navigation?.NavigateTo("/user-profile", forceLoad: true);
-        }
-    }
-
-    private List<Role> roles = new();
-    private bool showAddEditModal = false;
-    private bool showDeleteModal = false;
-    private Role? editingRole = null;
-    private Role? roleToDelete = null;
-    private string roleName = "";
-    private string roleDescription = "";
-    private List<string> selectedPermissions = new();
-    
-    private List<string> allPermissions = new()
-    {
-        // Patient Management
-        "Patient Registration",
-        "Patient Records",
-        "Patient History",
-        "Patient Billing",
-        "Patient Discharge",
-        "Patient Transfer",
-        "Patient Admission",
-        "Patient Appointment",
-        "Patient Prescription",
-        "Patient Test",
-        "Patient Diagnosis",
-        "Patient Treatment",
-        "Patient Vitals",
-        "Patient Notes",
-        "Patient Documents",
-        "Patient Reports",
-        
-        // Doctor
-        "Doctor Appointment",
-        "Doctor Prescription",
-        "Doctor Test",
-        "Doctor Diagnosis",
-        "Doctor Treatment",
-        "Doctor Vitals",
-        "Doctor Notes",
-        "Doctor Documents",
-        "Doctor Reports",
-        
-        // Nurse
-        "Nurse Appointment",
-        "Nurse Prescription",
-        "Nurse Test",
-        "Nurse Diagnosis",
-        "Nurse Treatment",
-        "Nurse Vitals",
-        "Nurse Notes",
-        "Nurse Documents",
-        "Nurse Reports",
-        
-        // Billing
-        "Billing",
-        "Payment",
-        "Invoice",
-        "Expense",
-        "Tax",
-        "Discount",
-        "Refund",
-        "Insurance",
-        "Payment Report",
-        "Expense Report",
-        "Tax Report",
-        "Income Report",
-        
-        // Inventory
-        "Inventory",
-        "Purchase",
-        "Supplier",
-        "Stock",
-        "Stock Transfer",
-        "Stock Adjustment",
-        "Stock Report",
-        "Purchase Report",
-        "Supplier Report",
-        
-        // User Management
-        "User Management",
-        "Role Management",
-        "Permission Management",
-        "User Activity",
-        "User Report",
-        
-        // Settings
-        "General Settings",
-        "Email Settings",
-        "SMS Settings",
-        "Notification Settings",
-        "Payment Settings",
-        "Tax Settings",
-        "Backup & Restore",
-        "Update System"
+        { "admin", true },
+        { "doctor", true },
+        { "nurse", true },
+        { "billing", true },
+        { "pharmacist", true }
     };
 
-    protected override void OnInitialized()
+    private string selectedRole = "admin";
+    private bool showPermissionPanel = false; // Permission panel hidden by default
+
+    private Dictionary<string, Dictionary<string, bool>> permissions = new()
     {
-        // Sample data - replace with actual data from your backend
-        roles = new()
-        {
-            new()
+        { "admin", new Dictionary<string, bool>
             {
-                Name = "Admin",
-                Description = "Full system access with all permissions",
-                UserCount = 3,
-                Permissions = allPermissions
-            },
-            new()
-            {
-                Name = "Doctor",
-                Description = "Medical staff with full patient care access",
-                UserCount = 8,
-                Permissions = allPermissions.Where(p => p.Contains("Patient") || p.Contains("Doctor") || p == "Appointment").ToList()
-            },
-            new()
-            {
-                Name = "Nurse",
-                Description = "Nursing staff with patient care support access",
-                UserCount = 15,
-                Permissions = allPermissions.Where(p => p.Contains("Patient") || p.Contains("Nurse") || p == "Appointment").ToList()
-            },
-            new()
-            {
-                Name = "Billing Staff",
-                Description = "Handles financial transactions and billing",
-                UserCount = 5,
-                Permissions = allPermissions.Where(p => p.Contains("Billing") || p.Contains("Payment") || p.Contains("Invoice") || p.Contains("Expense") || p.Contains("Tax") || p.Contains("Report")).ToList()
-            },
-            new()
-            {
-                Name = "Inventory Staff",
-                Description = "Manages medical supplies, inventory and purchases",
-                UserCount = 4,
-                Permissions = allPermissions.Where(p => p.Contains("Inventory") || p.Contains("Stock") || p.Contains("Purchase") || p.Contains("Supplier") || p.Contains("Report")).ToList()
-            },
-            new()
-            {
-                Name = "Receptionist",
-                Description = "Handles front desk operations and appointments",
-                UserCount = 6,
-                Permissions = new() { "Patient Registration", "Patient Appointment", "Patient Records", "Appointment" }
+                { "addPatient", true },
+                { "viewPatient", true },
+                { "appointments", true },
+                { "addHealthRecord", true },
+                { "viewVitalSigns", true },
+                { "medicationSchedule", true },
+                { "createPrescription", true },
+                { "labResult", true },
+                { "viewHealthRecord", true },
+                { "updateVitalSigns", true },
+                { "viewPrescriptions", true },
+                { "addMedicationNotes", true },
+                { "generateReports", true },
+                { "viewReports", true },
+                { "request", true },
+                { "insuranceClaims", true },
+                { "viewPharmacyInventory", true },
+                { "generateBillingInvoicing", true },
+                { "managePharmacyInventory", true },
+                { "viewBillingInvoicing", true },
+                { "userProfile", true },
+                { "auditLogs", true },
+                { "syncManagement", true },
+                { "settings", true }
             }
-        };
-    }
-
-    private void ShowAddRoleModal()
-    {
-        editingRole = null;
-        roleName = "";
-        roleDescription = "";
-        selectedPermissions.Clear();
-        showAddEditModal = true;
-    }
-
-    private void EditRole(Role role)
-    {
-        editingRole = role;
-        roleName = role.Name;
-        roleDescription = role.Description;
-        selectedPermissions = new List<string>(role.Permissions);
-        showAddEditModal = true;
-    }
-
-    private void CloseModal()
-    {
-        showAddEditModal = false;
-    }
-
-    private void SaveRole()
-    {
-        // Here you would typically save to your backend
-        if (editingRole == null)
-        {
-            // Add new role
-            roles.Add(new Role
+        },
+        { "doctor", new Dictionary<string, bool>
             {
-                Name = roleName,
-                Description = roleDescription,
-                Permissions = new List<string>(selectedPermissions),
-                UserCount = 0
-            });
-        }
-        else
-        {
-            // Update existing role
-            var existingRole = roles.FirstOrDefault(r => r.Name == editingRole.Name);
-            if (existingRole != null)
+                { "addPatient", true },
+                { "viewPatient", true },
+                { "appointments", true },
+                { "addHealthRecord", true },
+                { "viewVitalSigns", true },
+                { "medicationSchedule", true },
+                { "createPrescription", true },
+                { "labResult", true },
+                { "viewHealthRecord", true },
+                { "updateVitalSigns", true },
+                { "viewPrescriptions", true },
+                { "addMedicationNotes", true },
+                { "generateReports", false },
+                { "viewReports", true },
+                { "request", true },
+                { "insuranceClaims", false },
+                { "viewPharmacyInventory", true },
+                { "generateBillingInvoicing", false },
+                { "managePharmacyInventory", false },
+                { "viewBillingInvoicing", false },
+                { "userProfile", true },
+                { "auditLogs", false },
+                { "syncManagement", false },
+                { "settings", false }
+            }
+        },
+        { "nurse", new Dictionary<string, bool>
             {
-                existingRole.Name = roleName;
-                existingRole.Description = roleDescription;
-                existingRole.Permissions = new List<string>(selectedPermissions);
+                { "addPatient", false },
+                { "viewPatient", true },
+                { "appointments", true },
+                { "addHealthRecord", true },
+                { "viewVitalSigns", true },
+                { "medicationSchedule", true },
+                { "createPrescription", false },
+                { "labResult", true },
+                { "viewHealthRecord", true },
+                { "updateVitalSigns", true },
+                { "viewPrescriptions", true },
+                { "addMedicationNotes", true },
+                { "generateReports", false },
+                { "viewReports", false },
+                { "request", true },
+                { "insuranceClaims", false },
+                { "viewPharmacyInventory", true },
+                { "generateBillingInvoicing", false },
+                { "managePharmacyInventory", false },
+                { "viewBillingInvoicing", false },
+                { "userProfile", true },
+                { "auditLogs", false },
+                { "syncManagement", false },
+                { "settings", false }
+            }
+        },
+        { "billing", new Dictionary<string, bool>
+            {
+                { "addPatient", false },
+                { "viewPatient", true },
+                { "appointments", false },
+                { "addHealthRecord", false },
+                { "viewVitalSigns", false },
+                { "medicationSchedule", false },
+                { "createPrescription", false },
+                { "labResult", false },
+                { "viewHealthRecord", false },
+                { "updateVitalSigns", false },
+                { "viewPrescriptions", false },
+                { "addMedicationNotes", false },
+                { "generateReports", true },
+                { "viewReports", true },
+                { "request", true },
+                { "insuranceClaims", true },
+                { "viewPharmacyInventory", true },
+                { "generateBillingInvoicing", true },
+                { "managePharmacyInventory", false },
+                { "viewBillingInvoicing", true },
+                { "userProfile", true },
+                { "auditLogs", false },
+                { "syncManagement", false },
+                { "settings", false }
+            }
+        },
+        { "pharmacist", new Dictionary<string, bool>
+            {
+                { "addPatient", false },
+                { "viewPatient", true },
+                { "appointments", false },
+                { "addHealthRecord", false },
+                { "viewVitalSigns", true },
+                { "medicationSchedule", true },
+                { "createPrescription", false },
+                { "labResult", false },
+                { "viewHealthRecord", true },
+                { "updateVitalSigns", false },
+                { "viewPrescriptions", true },
+                { "addMedicationNotes", true },
+                { "generateReports", false },
+                { "viewReports", false },
+                { "request", true },
+                { "insuranceClaims", false },
+                { "viewPharmacyInventory", true },
+                { "generateBillingInvoicing", false },
+                { "managePharmacyInventory", true },
+                { "viewBillingInvoicing", false },
+                { "userProfile", true },
+                { "auditLogs", false },
+                { "syncManagement", false },
+                { "settings", false }
             }
         }
-        
-        showAddEditModal = false;
-        StateHasChanged();
-    }
+    };
 
-    private void TogglePermission(string permission, bool isSelected)
+    private void ToggleRoleStatus(string role)
     {
-        if (isSelected && !selectedPermissions.Contains(permission))
+        // Admin role cannot be disabled
+        if (role == "admin")
         {
-            selectedPermissions.Add(permission);
+            return;
         }
-        else if (!isSelected && selectedPermissions.Contains(permission))
+
+        roleStatus[role] = !roleStatus[role];
+
+        // If currently editing permissions for a disabled role, hide the panel
+        if (selectedRole == role && !roleStatus[role])
         {
-            selectedPermissions.Remove(permission);
+            showPermissionPanel = false;
+        }
+
+        // In future: This will control if the user can login
+        // When disabled, users with this role won't be able to access their dashboard
+    }
+
+    private void SetPermissionForRole(string role)
+    {
+        // Only allow setting permissions if the role is enabled
+        if (!roleStatus[role])
+        {
+            return;
+        }
+
+        // When "Set Permission" button is clicked, load that role's permissions
+        selectedRole = role;
+        showPermissionPanel = true; // Show the permission panel
+        StateHasChanged(); // Update the UI to show the new role badge
+    }
+
+    private void TogglePermission(string permission)
+    {
+        if (permissions.ContainsKey(selectedRole))
+        {
+            permissions[selectedRole][permission] = !permissions[selectedRole][permission];
         }
     }
 
-    private void ShowDeleteConfirm(Role role)
+    private void SavePermissions()
     {
-        roleToDelete = role;
-        showDeleteModal = true;
+        // Save logic here - will save the permissions for the currently selected role
+        Console.WriteLine($"Saving permissions for {selectedRole}");
+        showPermissionPanel = false; // Hide the panel after saving
     }
 
-    private void CloseDeleteModal()
+    private void CancelChanges()
     {
-        showDeleteModal = false;
-        roleToDelete = null;
+        // Cancel logic here - hide the panel without saving
+        showPermissionPanel = false;
     }
 
-    private void DeleteRole()
+    private string GetRoleBadgeText()
     {
-        if (roleToDelete != null)
-        {
-            roles.RemoveAll(r => r.Name == roleToDelete.Name);
-            showDeleteModal = false;
-            roleToDelete = null;
-            StateHasChanged();
-        }
+        return selectedRole.ToUpper() + " Role";
     }
-
-    private string GetRoleIcon(string roleName)
-    {
-        return roleName switch
-        {
-            "Admin" => "👑",
-            "Doctor" => "👨‍⚕️",
-            "Nurse" => "👩‍⚕️",
-            "Billing" => "💵",
-            "Inventory" => "📦",
-            _ => "👤"
-        };
-    }
-
-    public class Role
-    {
-        public string Name { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
-        public int UserCount { get; set; }
-        public List<string> Permissions { get; set; } = new();
-    }
-
-
-
 }
+
+<div class="dashboard-page role-permission-page">
+    <header class="dashboard-header">
+        <div>
+            <h1 class="dashboard-title">Roles and Permission</h1>
+            <p class="dashboard-subtitle">Welcome back Admin!</p>
+        </div>
+
+        <div class="dashboard-user-info">
+            <span class="dashboard-user-email">admin@gmail.com</span>
+            <div class="dashboard-user-avatar">A</div>
+            <span class="dashboard-user-name">Admin</span>
+        </div>
+    </header>
+
+    <!-- Section Title -->
+    <div class="section-title">
+        <i class="fas fa-shield-alt"></i>
+        <h2>Roles & Permission</h2>
+    </div>
+
+    <!-- Role Cards -->
+    <div class="role-cards">
+        <!-- Admin Card -->
+        <div class="role-card @(selectedRole == "admin" ? "active" : "")">
+            <div class="role-icon admin">
+                <i class="fas fa-user-shield"></i>
+            </div>
+            <div class="card-content">
+                <h3>Admin</h3>
+                <p>Full system Access</p>
+                <div class="status-toggle">
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked disabled>
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label">Enabled</span>
+                </div>
+            </div>
+            <button class="set-permission-btn" @onclick='() => SetPermissionForRole("admin")'>Set Permission</button>
+        </div>
+
+        <!-- Doctor Card -->
+        <div class="role-card @(selectedRole == "doctor" ? "active" : "")">
+            <div class="role-icon doctor">
+                <i class="fas fa-user-md"></i>
+            </div>
+            <div class="card-content">
+                <h3>Doctor</h3>
+                <p>Clinical</p>
+                <div class="status-toggle">
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked="@roleStatus["doctor"]" @onchange='() => ToggleRoleStatus("doctor")'>
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label">@(roleStatus["doctor"] ? "Enabled" : "Disabled")</span>
+                </div>
+            </div>
+            <button class="set-permission-btn" @onclick='() => SetPermissionForRole("doctor")'>Set Permission</button>
+        </div>
+
+        <!-- Nurse Card -->
+        <div class="role-card @(selectedRole == "nurse" ? "active" : "")">
+            <div class="role-icon nurse">
+                <i class="fas fa-user-nurse"></i>
+            </div>
+            <div class="card-content">
+                <h3>Nurse</h3>
+                <p>Patient care</p>
+                <div class="status-toggle">
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked="@roleStatus["nurse"]" @onchange='() => ToggleRoleStatus("nurse")'>
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label">@(roleStatus["nurse"] ? "Enabled" : "Disabled")</span>
+                </div>
+            </div>
+            <button class="set-permission-btn" @onclick='() => SetPermissionForRole("nurse")'>Set Permission</button>
+        </div>
+
+        <!-- Billing Card -->
+        <div class="role-card @(selectedRole == "billing" ? "active" : "")">
+            <div class="role-icon billing">
+                <i class="fas fa-file-invoice-dollar"></i>
+            </div>
+            <div class="card-content">
+                <h3>Billing</h3>
+                <p>Financial</p>
+                <div class="status-toggle">
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked="@roleStatus["billing"]" @onchange='() => ToggleRoleStatus("billing")'>
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label">@(roleStatus["billing"] ? "Enabled" : "Disabled")</span>
+                </div>
+            </div>
+            <button class="set-permission-btn" @onclick='() => SetPermissionForRole("billing")'>Set Permission</button>
+        </div>
+
+        <!-- Pharmacist Card -->
+        <div class="role-card @(selectedRole == "pharmacist" ? "active" : "")">
+            <div class="role-icon pharmacist">
+                <i class="fas fa-pills"></i>
+            </div>
+            <div class="card-content">
+                <h3>Pharmacist</h3>
+                <p>Medications</p>
+                <div class="status-toggle">
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked="@roleStatus["pharmacist"]" @onchange='() => ToggleRoleStatus("pharmacist")'>
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label">@(roleStatus["pharmacist"] ? "Enabled" : "Disabled")</span>
+                </div>
+            </div>
+            <button class="set-permission-btn" @onclick='() => SetPermissionForRole("pharmacist")'>Set Permission</button>
+        </div>
+    </div>
+
+    <!-- Permission Details Section -->
+    <div class="permission-section">
+        <div class="permission-header">
+            <h2>Permission</h2>
+            <span class="role-badge">@GetRoleBadgeText()</span>
+        </div>
+
+        <div class="permission-grid">
+            <!-- Patient Management Column -->
+            <div class="permission-category">
+                <h3>Patient management</h3>
+                <div class="permission-items">
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["addPatient"]"
+                               @onchange='_ => TogglePermission("addPatient")'>
+                        <span>Add Patient</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["viewPatient"]"
+                               @onchange='_ => TogglePermission("viewPatient")'>
+                        <span>View Patient</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["appointments"]"
+                               @onchange='_ => TogglePermission("appointments")'>
+                        <span>Appointments</span>
+                    </label>
+                </div>
+
+                <h3>Medication Management</h3>
+                <div class="permission-items">
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["addHealthRecord"]"
+                               @onchange='_ => TogglePermission("addHealthRecord")'>
+                        <span>Add Health Record</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["viewVitalSigns"]"
+                               @onchange='_ => TogglePermission("viewVitalSigns")'>
+                        <span>View Vital Signs Monitoring</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["medicationSchedule"]"
+                               @onchange='_ => TogglePermission("medicationSchedule")'>
+                        <span>Medication Schedule</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["createPrescription"]"
+                               @onchange='_ => TogglePermission("createPrescription")'>
+                        <span>Create Prescription</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["labResult"]"
+                               @onchange='_ => TogglePermission("labResult")'>
+                        <span>Laboratory Result</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["viewHealthRecord"]"
+                               @onchange='_ => TogglePermission("viewHealthRecord")'>
+                        <span>View Health Record</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["updateVitalSigns"]"
+                               @onchange='_ => TogglePermission("updateVitalSigns")'>
+                        <span>Update Vital Signs Monitoring</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["viewPrescriptions"]"
+                               @onchange='_ => TogglePermission("viewPrescriptions")'>
+                        <span>View Prescriptions</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["addMedicationNotes"]"
+                               @onchange='_ => TogglePermission("addMedicationNotes")'>
+                        <span>Add Medication Notes</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Reports / Analytics and Transactions Column -->
+            <div class="permission-category">
+                <h3>Reports / Analytics</h3>
+                <div class="permission-items">
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["generateReports"]"
+                               @onchange='_ => TogglePermission("generateReports")'>
+                        <span>Generate Reports</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["viewReports"]"
+                               @onchange='_ => TogglePermission("viewReports")'>
+                        <span>View Reports</span>
+                    </label>
+                </div>
+
+                <h3>Transactions</h3>
+                <div class="permission-items">
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["request"]"
+                               @onchange='_ => TogglePermission("request")'>
+                        <span>Request</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["insuranceClaims"]"
+                               @onchange='_ => TogglePermission("insuranceClaims")'>
+                        <span>Insurance & Claims</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["viewPharmacyInventory"]"
+                               @onchange='_ => TogglePermission("viewPharmacyInventory")'>
+                        <span>View Pharmacy & Inventory</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["generateBillingInvoicing"]"
+                               @onchange='_ => TogglePermission("generateBillingInvoicing")'>
+                        <span>Generate Billing & Invoicing</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["managePharmacyInventory"]"
+                               @onchange='_ => TogglePermission("managePharmacyInventory")'>
+                        <span>Manage Pharmacy Inventory</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["viewBillingInvoicing"]"
+                               @onchange='_ => TogglePermission("viewBillingInvoicing")'>
+                        <span>View Billing & Invoicing</span>
+                    </label>
+                </div>
+
+                <h3>System</h3>
+                <div class="permission-items">
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["userProfile"]"
+                               @onchange='_ => TogglePermission("userProfile")'>
+                        <span>User Profile</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["auditLogs"]"
+                               @onchange='_ => TogglePermission("auditLogs")'>
+                        <span>Audit Logs</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["syncManagement"]"
+                               @onchange='_ => TogglePermission("syncManagement")'>
+                        <span>Sync Management</span>
+                    </label>
+                    <label class="permission-checkbox">
+                        <input type="checkbox" checked="@permissions[selectedRole]["settings"]"
+                               @onchange='_ => TogglePermission("settings")'>
+                        <span>Settings</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn-cancel" @onclick="CancelChanges">Cancel</button>
+            <button class="btn-save" @onclick="SavePermissions">Save</button>
+        </div>
+    </div>
+</div>

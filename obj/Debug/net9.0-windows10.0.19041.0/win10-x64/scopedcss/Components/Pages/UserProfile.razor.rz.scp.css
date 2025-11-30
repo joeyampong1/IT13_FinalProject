@@ -165,9 +165,9 @@
     gap: 6px;
 }
 
-.up-upload-btn:hover[b-d7ogikadee] {
-    background-color: #e9f3f6;
-}
+    .up-upload-btn:hover[b-d7ogikadee] {
+        background-color: #e9f3f6;
+    }
 
 .up-file-input[b-d7ogikadee] {
     position: absolute;
@@ -219,9 +219,9 @@
     text-decoration: none;
 }
 
-.up-field-link:hover[b-d7ogikadee] {
-    text-decoration: underline;
-}
+    .up-field-link:hover[b-d7ogikadee] {
+        text-decoration: underline;
+    }
 
 .up-actions[b-d7ogikadee] {
     margin-top: 12px;
@@ -238,9 +238,9 @@
     cursor: pointer;
 }
 
-.up-action-link:hover[b-d7ogikadee] {
-    text-decoration: underline;
-}
+    .up-action-link:hover[b-d7ogikadee] {
+        text-decoration: underline;
+    }
 
 .up-more-overlay[b-d7ogikadee] {
     position: fixed;
@@ -283,14 +283,14 @@
     background-color: #ffffff;
 }
 
-.up-more-input:focus[b-d7ogikadee] {
-    outline: none;
-    border-color: #0f8b8d;
-}
+    .up-more-input:focus[b-d7ogikadee] {
+        outline: none;
+        border-color: #0f8b8d;
+    }
 
-.up-more-input[b-d7ogikadee]::placeholder {
-    color: #777;
-}
+    .up-more-input[b-d7ogikadee]::placeholder {
+        color: #777;
+    }
 
 .up-more-actions[b-d7ogikadee] {
     display: flex;
@@ -338,9 +338,9 @@
     cursor: pointer;
 }
 
-.up-reset-option-btn:hover[b-d7ogikadee] {
-    background-color: #e9f6f5;
-}
+    .up-reset-option-btn:hover[b-d7ogikadee] {
+        background-color: #e9f6f5;
+    }
 
 @media (max-width: 900px) {
     .up-card-inner[b-d7ogikadee] {

@@ -165,9 +165,9 @@
     gap: 6px;
 }
 
-.up-upload-btn:hover {
-    background-color: #e9f3f6;
-}
+    .up-upload-btn:hover {
+        background-color: #e9f3f6;
+    }
 
 .up-file-input {
     position: absolute;
@@ -219,9 +219,9 @@
     text-decoration: none;
 }
 
-.up-field-link:hover {
-    text-decoration: underline;
-}
+    .up-field-link:hover {
+        text-decoration: underline;
+    }
 
 .up-actions {
     margin-top: 12px;
@@ -238,9 +238,9 @@
     cursor: pointer;
 }
 
-.up-action-link:hover {
-    text-decoration: underline;
-}
+    .up-action-link:hover {
+        text-decoration: underline;
+    }
 
 .up-more-overlay {
     position: fixed;
@@ -283,14 +283,14 @@
     background-color: #ffffff;
 }
 
-.up-more-input:focus {
-    outline: none;
-    border-color: #0f8b8d;
-}
+    .up-more-input:focus {
+        outline: none;
+        border-color: #0f8b8d;
+    }
 
-.up-more-input::placeholder {
-    color: #777;
-}
+    .up-more-input::placeholder {
+        color: #777;
+    }
 
 .up-more-actions {
     display: flex;
@@ -338,9 +338,9 @@
     cursor: pointer;
 }
 
-.up-reset-option-btn:hover {
-    background-color: #e9f6f5;
-}
+    .up-reset-option-btn:hover {
+        background-color: #e9f6f5;
+    }
 
 @media (max-width: 900px) {
     .up-card-inner {
