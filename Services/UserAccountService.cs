@@ -18,6 +18,7 @@ namespace IT_13FinalProject.Services
         bool UserExists(string userName);
         void AddUser(UserAccount user);
         UserAccount? ValidateUser(string userName, string password);
+        Task LogoutAsync();
     }
 
     public class InMemoryUserAccountService : IUserAccountService
@@ -54,6 +55,13 @@ namespace IT_13FinalProject.Services
             return _users.FirstOrDefault(u =>
                 string.Equals(u.UserName, userName, StringComparison.OrdinalIgnoreCase) &&
                 u.Password == password);
+        }
+
+        public Task LogoutAsync()
+        {
+            // For in-memory service, we don't need to do anything special for logout
+            // In a real app, this would clear session data, tokens, etc.
+            return Task.CompletedTask;
         }
     }
 }
