@@ -294,6 +294,18 @@
     {
         get
         {
+            // First check if we're on the user profile page
+            if (Navigation.Uri.Contains("/user-profile/role/", StringComparison.OrdinalIgnoreCase))
+            {
+                var segments = Navigation.Uri.Split(new[] { "/user-profile/role/" }, StringSplitOptions.None);
+                if (segments.Length > 1)
+                {
+                    var role = segments[1].Split('/')[0];
+                    if (!string.IsNullOrEmpty(role))
+                        return char.ToUpper(role[0]) + role.Substring(1).ToLower();
+                }
+            }
+
             var uri = Navigation.Uri.ToLowerInvariant();
 
             // Nurse: dashboard + nurse-specific pages
@@ -481,41 +493,44 @@
 
     private void OnDoctorPrescriptionsClick() => Navigation.NavigateTo("/doctor-prescriptions");
 
-  private void OnUserProfileClick()
-{
-    var role = GetCurrentRoleFromUrl();
-    Navigation.NavigateTo($"/user-profile/role/{role}", forceLoad: true);
-}
-    
-   private string GetCurrentRoleFromUrl()
-{
-    var uri = Navigation.Uri.ToLower();
-    
-    // Check for role in the URL path
-    if (uri.Contains("/doctor-") || uri.Contains("/doctor/")) return "Doctor";
-    if (uri.Contains("/nurse-") || uri.Contains("/nurse/")) return "Nurse";
-    if (uri.Contains("/billing-") || uri.Contains("/billing/")) return "Billing";
-    if (uri.Contains("/inventory-") || uri.Contains("/inventory/")) return "Inventory";
-    if (uri.Contains("/admin-") || uri.Contains("/admin/")) return "Admin";
-    
-    // Check for role in the user profile path
-    if (uri.Contains("-user-profile") || uri.Contains("user-profile"))
+    private void OnUserProfileClick()
     {
-        var parts = uri.Split(new[] { '-', '/' }, StringSplitOptions.RemoveEmptyEntries);
-        var roleIndex = Array.IndexOf(parts, "user");
-        if (roleIndex > 0)
+        // Get the current role from the URL or use the current role
+        var role = GetCurrentRoleFromUrl();
+        if (string.IsNullOrEmpty(role) || role == "null")
         {
-            var rolePart = parts[roleIndex - 1];
-            if (!string.IsNullOrEmpty(rolePart) && rolePart != "user")
-            {
-                return char.ToUpper(rolePart[0]) + rolePart.Substring(1);
-            }
+            // If role not in URL, use the current role from the URL path
+            role = CurrentRole;
         }
+        Navigation.NavigateTo($"/user-profile/role/{role}", forceLoad: true);
     }
     
-    // Default to Admin if no role is found
-    return "Admin";
-}
+    private string GetCurrentRoleFromUrl()
+    {
+        var uri = Navigation.Uri.ToLower();
+        
+        // Check if we're already on the user profile page
+        if (uri.Contains("/user-profile/role/"))
+        {
+            var segments = Navigation.Uri.Split(new[] { "/user-profile/role/" }, StringSplitOptions.None);
+            if (segments.Length > 1)
+            {
+                var role = segments[1].Split('/')[0];
+                if (!string.IsNullOrEmpty(role))
+                    return char.ToUpper(role[0]) + role.Substring(1).ToLower();
+            }
+        }
+        
+        // Fall back to detecting role from URL patterns
+        if (uri.Contains("/nurse-") || uri.Contains("/nurse/")) return "Nurse";
+        if (uri.Contains("/doctor-") || uri.Contains("/doctor/")) return "Doctor";
+        if (uri.Contains("/billing-") || uri.Contains("/billing/")) return "Billing";
+        if (uri.Contains("/inventory-") || uri.Contains("/inventory/")) return "Inventory";
+        if (uri.Contains("/admin-") || uri.Contains("/admin/")) return "Admin";
+        
+        // If no role detected in URL, return the current role
+        return CurrentRole;
+    }
 
     private void OnRolesAndPermissionsClick()
     {

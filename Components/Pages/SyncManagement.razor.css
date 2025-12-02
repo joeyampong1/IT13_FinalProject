@@ -254,8 +254,12 @@
     text-decoration: none;
 }
 
-    .manual-sync-btn:hover {
+    .manual-sync-btn {
         color: #40b6ae;
+    }
+    
+    .manual-sync-btn:hover {
+        color: #359a92;
     }
 
 .sync-status-badge {
@@ -272,6 +276,11 @@
     .sync-status-badge.synced {
         background-color: #e8f5e9;
         color: #2e7d32;
+    }
+
+    /* Update checkmark color */
+    .sync-status-badge.synced i {
+        color: #40b6ae;
     }
 
     .sync-status-badge.syncing {
