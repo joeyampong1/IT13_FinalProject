@@ -1,0 +1,13 @@
+@inject NavigationManager Navigation
+@inject IUserAccountService UserAccountService
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        // Clear any existing user session
+        await UserAccountService.LogoutAsync();
+        
+        // Redirect to login page
+        Navigation.NavigateTo("/login");
+    }
+}

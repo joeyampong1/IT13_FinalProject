@@ -1,10 +1,23 @@
 @page "/user-profile"
-@page "/{role}user-profile"
+@page "/user-profile/role/{role?}"
 @layout Layout.DashboardLayout
 
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Logging
 @inject NavigationManager Navigation
+@inject ILogger<UserProfile> Logger
+
+@if (hasError)
+{
+    <div class="error-message">
+        <h3>An error occurred while loading the profile.</h3>
+        <p>@errorMessage</p>
+        <button class="btn btn-primary" @onclick="NavigateToHome">Return to Home</button>
+    </div>
+}
+else
+{
 
 <div class="dashboard-page up-page">
     <header class="dashboard-header">
@@ -14,9 +27,9 @@
         </div>
 
         <div class="dashboard-user-info">
-            <span class="dashboard-user-email">admin@gmail.com</span>
-            <div class="dashboard-user-avatar">U</div>
-            <span class="dashboard-user-name">Admin</span>
+            <span class="dashboard-user-email">@(string.IsNullOrEmpty(Role) ? "user@example.com" : $"{Role.ToLower()}@example.com")</span>
+            <div class="dashboard-user-avatar">@(string.IsNullOrEmpty(Role) ? "U" : Role[0].ToString().ToUpper())</div>
+            <span class="dashboard-user-name">@(string.IsNullOrEmpty(Role) ? "User" : Role)</span>
         </div>
     </header>
 
@@ -163,9 +176,16 @@
     }
 </div>
 
+}
+
 @code {
+    private bool hasError = false;
+    private string errorMessage = string.Empty;
     [Parameter]
     public string? Role { get; set; }
+
+    [Parameter]
+    public EventCallback<string> RoleChanged { get; set; }
 
     // State variables
     private bool ShowMoreDetails { get; set; }
@@ -178,36 +198,112 @@
     // Methods
     private void OnProfileImageSelected(InputFileChangeEventArgs e)
     {
-        var file = e.File;
-        _selectedFileName = file?.Name;
-        // Handle file upload here
+        try
+        {
+            var file = e.File;
+            _selectedFileName = file?.Name;
+            // Handle file upload here
+        }
+        catch (Exception ex)
+        {
+            hasError = true;
+            errorMessage = $"An error occurred: {ex.Message}";
+            Logger.LogError(ex, "Error selecting profile image");
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            Logger.LogInformation("Initializing UserProfile component");
+            base.OnInitialized();
+        }
+        catch (Exception ex)
+        {
+            hasError = true;
+            errorMessage = $"An error occurred: {ex.Message}";
+            Logger.LogError(ex, "Error initializing UserProfile component");
+            StateHasChanged();
+        }
     }
 
     private void SaveMoreDetails()
     {
-        // Save more details logic
-        ShowMoreDetails = false;
-        // Show success message
+        try
+        {
+            // Save more details logic
+            ShowMoreDetails = false;
+            // Show success message
+        }
+        catch (Exception ex)
+        {
+            hasError = true;
+            errorMessage = $"An error occurred: {ex.Message}";
+            Logger.LogError(ex, "Error saving more details");
+        }
     }
 
     private void SaveEditDetails()
     {
-        // Save edit details logic
-        ShowEditDetails = false;
-        // Show success message
+        try
+        {
+            // Save edit details logic
+            ShowEditDetails = false;
+            // Show success message
+        }
+        catch (Exception ex)
+        {
+            hasError = true;
+            errorMessage = $"An error occurred: {ex.Message}";
+            Logger.LogError(ex, "Error saving edit details");
+        }
     }
 
     private void SaveChangeUsername()
     {
-        // Save username logic
-        ShowChangeUsername = false;
-        // Show success message
+        try
+        {
+            // Save username logic
+            ShowChangeUsername = false;
+            // Show success message
+        }
+        catch (Exception ex)
+        {
+            hasError = true;
+            errorMessage = $"An error occurred: {ex.Message}";
+            Logger.LogError(ex, "Error saving change username");
+        }
     }
 
     private void SaveChangePassword()
     {
-        // Save password logic
-        ShowChangePassword = false;
-        // Show success message
+        try
+        {
+            // Save password logic
+            ShowChangePassword = false;
+            // Show success message
+        }
+        catch (Exception ex)
+        {
+            hasError = true;
+            errorMessage = $"An error occurred: {ex.Message}";
+            Logger.LogError(ex, "Error saving change password");
+        }
+    }
+
+    private void NavigateToHome()
+    {
+        try
+        {
+            Navigation.NavigateTo("/");
+        }
+        catch (Exception ex)
+        {
+            hasError = true;
+            errorMessage = $"Error navigating to home: {ex.Message}";
+            Logger.LogError(ex, "Error navigating to home");
+            StateHasChanged();
+        }
     }
 }

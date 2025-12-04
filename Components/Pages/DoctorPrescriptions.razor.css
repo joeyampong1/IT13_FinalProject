@@ -4,58 +4,6 @@
     gap: 16px;
 }
 
-/* Pagination styles */
-.pm-pagination {
-    margin-top: 40px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 6px;
-    padding: 0;
-    border-radius: 0;
-    background: transparent;
-    box-shadow: none;
-    border: none;
-}
-
-.pm-page-btn,
-.pm-page-number {
-    min-width: 32px;
-    height: 32px;
-    padding: 0 8px;
-    border-radius: 6px;
-    border: 1px solid #e5e7eb;
-    background-color: #ffffff;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.pm-page-number.active {
-    background-color: #0f8b8d;
-    color: #ffffff;
-    border-color: #0f8b8d;
-    font-weight: 600;
-}
-
-.pm-page-btn:hover,
-.pm-page-number:hover {
-    background-color: #f8fafc;
-    border-color: #0f8b8d;
-    color: #0f8b8d;
-}
-
-.pm-page-dots {
-    font-size: 14px;
-    color: #6b7280;
-    padding: 0 4px;
-    font-weight: 500;
-}
-
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -361,6 +309,67 @@
 
 .ip-status-pending .ip-status-dot {
     background-color: #eab308;
+}
+
+.ip-pagination-toggle {
+    position: fixed;
+    right: 24px;
+    bottom: 18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: none;
+    background-color: transparent;
+    color: #222222;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    cursor: pointer;
+    z-index: 6;
+}
+
+.ip-pagination-toggle:hover {
+    background-color: transparent;
+    color: #000000;
+}
+
+.ip-pagination {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    margin-top: 32px;
+
+    position: fixed;
+    right: 80px;
+    bottom: 20px;
+    padding: 0;
+    border-radius: 999px;
+    background: transparent;
+    box-shadow: none;
+}
+
+.ip-page-btn,
+.ip-page-number {
+    padding: 3px 8px;
+    border-radius: 8px;
+    border: 1px solid #c9d9dd;
+    background-color: #ffffff;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.ip-page-number.active {
+    background-color: #0f8b8d;
+    color: #ffffff;
+    border-color: #0f8b8d;
+}
+
+.ip-page-dots {
+    display: flex;
+    align-items: center;
 }
 
 /* Prescription Form panel */

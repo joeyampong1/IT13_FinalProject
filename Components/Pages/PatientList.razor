@@ -1,16 +1,16 @@
-@page "/nurse-patient-list"
+@page "/patient-list"
 @layout Layout.DashboardLayout
 
 <div class="pm-page">
     <header class="dashboard-header">
         <div>
-            <h1 class="dashboard-title">Patient Management</h1>
+            <h1 class="dashboard-title">Patient List</h1>
             <p class="dashboard-subtitle">Welcome back Clinical Staff!</p>
         </div>
 
         <div class="dashboard-user-info">
-            <span class="dashboard-user-email">nurse@gmail.com</span>
-            <div class="dashboard-user-avatar">👤</div>
+            <span class="dashboard-user-email">doctor@gmail.com</span>
+            <div class="dashboard-user-avatar">U</div>
             <span class="dashboard-user-name">Clinical</span>
         </div>
     </header>
@@ -50,10 +50,12 @@
                         <tr>
                             <th class="pm-col-id">ID</th>
                             <th>Patient Name<br /><span class="pm-subcol">Email</span></th>
+                            <th>Nurse Assist<br /><span class="pm-subcol">Email</span></th>
                             <th>Assessment Status</th>
                             <th class="pm-col-date">Date of Visit</th>
                             <th class="pm-col-action">Patient Info</th>
-                            <th class="pm-col-vitals">Vital Sign Monitoring</th>
+                            <th class="pm-col-vitals">Vital Signs</th>
+                            <th class="pm-col-vitals">Health Records</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,15 +67,24 @@
                                     <div class="pm-patient-name">@p.Name</div>
                                     <div class="pm-patient-email">@p.Email</div>
                                 </td>
+                                <td>
+                                    <div class="pm-patient-name">@p.NurseAssistName</div>
+                                    <div class="pm-patient-email">@p.NurseAssistEmail</div>
+                                </td>
                                 <td>@p.AssessmentStatus</td>
                                 <td class="pm-col-date">@p.DateOfVisit</td>
                                 <td class="pm-col-action">
-                                    <button class="pm-view-btn" aria-label="View patient record" @onclick="() => GoToPatientProfile(p.Id)">
+                                    <button class="pm-view-btn" aria-label="View patient info" @onclick="() => GoToPatientProfile(p.Id)">
                                         <span class="pm-view-icon"></span>
                                     </button>
                                 </td>
                                 <td class="pm-col-vitals">
-                                    <button class="pm-add-btn" @onclick="() => GoToVitalsForm(p.Id)">+ Add</button>
+                                    <button class="pm-view-btn" aria-label="View vital signs" @onclick="() => ViewVitals(p.Id)">
+                                        <span class="pm-view-icon"></span>
+                                    </button>
+                                </td>
+                                <td class="pm-col-vitals">
+                                    <button class="pm-add-btn" @onclick="() => GoToHealthRecords(p.Id)">+ Add</button>
                                 </td>
                             </tr>
                         }
@@ -102,9 +113,11 @@
 </div>
 
 @code {
-    
+    [Inject]
+    private NavigationManager Navigation { get; set; } = default!;
 
-    private record NursePatientRow(string Id, string Name, string Email, string AssessmentStatus, string DateOfVisit);
+    
+    private record DoctorPatientRow(string Id, string Name, string Email, string NurseAssistName, string NurseAssistEmail, string AssessmentStatus, string DateOfVisit);
 
     
     
@@ -115,20 +128,25 @@
     private readonly char[] Alphabet =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
-    private List<NursePatientRow> Patients = new()
+    private List<DoctorPatientRow> Patients = new()
     {
-        new NursePatientRow("01", "Himeko Murata", "himeko_murata@gmail.com", "New Patient", "03/09/24"),
-        new NursePatientRow("02", "Yae Miko", "miko.yae@mail.com", "New Patient", "03/09/24"),
-        new NursePatientRow("03", "Black Swan", "ms.blkswan@mail.com", "New Patient", "03/09/24"),
-        new NursePatientRow("04", "Ruan Mei", "theRM_ei@gmail.com", "New Patient", "03/09/24"),
-        new NursePatientRow("05", "Bronya Rand", "bronya.rr@mail.com", "New Patient", "03/09/24"),
+        new DoctorPatientRow("01", "Himeko Murata", "himeko_murata@gmail.com", "Himeko Murata", "himeko_murata@gmail.com", "Awaiting Consultation", "03/09/24"),
+        new DoctorPatientRow("02", "Yae Miko", "miko.yae@mail.com", "Yae Miko", "miko.yae@gmail.com", "Vital Signs Taken", "03/09/24"),
+        new DoctorPatientRow("03", "Black Swan", "ms.blkswan@mail.com", "Black Swan", "ms.blkswan@mail.com", "For Doctor Evaluation", "03/09/24"),
+        new DoctorPatientRow("04", "Ruan Mei", "theRM_ei@gmail.com", "Ruan Mei", "theRM_ei@gmail.com", "For Doctor Evaluation", "03/09/24"),
+        new DoctorPatientRow("05", "Bronya Rand", "bronya.rr@mail.com", "Bronya Rand", "bronya.rr@mail.com", "Awaiting Consultation", "03/09/24"),
+        new DoctorPatientRow("06", "Kafka", "kafka@mail.com", "Kafka", "kafka@mail.com", "Completed Consultation", "04/09/24"),
+        new DoctorPatientRow("07", "Dan Heng", "danheng@mail.com", "Dan Heng", "danheng@mail.com", "Follow-up Required", "04/09/24"),
+        new DoctorPatientRow("08", "March 7th", "march7@mail.com", "March 7th", "march7@mail.com", "Awaiting Consultation", "05/09/24"),
+        new DoctorPatientRow("09", "Gepard", "gepard@mail.com", "Gepard", "gepard@mail.com", "Completed Consultation", "05/09/24"),
+        new DoctorPatientRow("10", "Serval", "serval@mail.com", "Serval", "serval@mail.com", "Awaiting Consultation", "05/09/24"),
     };
 
     
 
     
 
-    private IEnumerable<NursePatientRow> GetOrderedPatients(char letter)
+    private IEnumerable<DoctorPatientRow> GetOrderedPatients(char letter)
     {
         if (string.IsNullOrEmpty(letter.ToString()))
         {
@@ -146,28 +164,35 @@
         return startsWithLetter.Concat(others);
     }
 
-    private void TogglePagination()
-    {
-        ShowPagination = !ShowPagination;
-    }
-
-    [Inject]
-    private NavigationManager Navigation { get; set; } = default!;
-
-    private void GoToPatientProfile(string patientId)
-    {
-        Navigation.NavigateTo("/patient-profile");
-    }
-
     private void GoToVitalsForm(string patientId)
     {
         Navigation.NavigateTo("/nurse-vitals");
+    }
+
+    private void GoToPatientProfile(string patientId)
+    {
+        Navigation.NavigateTo("/doctor-patient-profile");
+    }
+
+    private void ViewVitals(string patientId)
+    {
+        Navigation.NavigateTo("/doctor-vitals-info");
+    }
+
+    private void GoToHealthRecords(string patientId)
+    {
+        Navigation.NavigateTo("/doctor-consultation");
     }
 
     private void SelectLetter(char letter)
     {
         ShowLetters = true;
         ActiveLetter = letter;
+    }
+
+    private void TogglePagination()
+    {
+        ShowPagination = !ShowPagination;
     }
 }
 

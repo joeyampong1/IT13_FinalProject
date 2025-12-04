@@ -1,23 +1,26 @@
-@page "/doctor-health-records"
+@page "/health-records"
 @layout Layout.DashboardLayout
+@using IT_13FinalProject.Services
 
 <div class="pm-page">
+    <!-- Header reusing the same style as Dashboard/Patient Management -->
     <header class="dashboard-header">
         <div>
-            <h1 class="dashboard-title">Health Record List</h1>
-            <p class="dashboard-subtitle">Welcome back Clinical Staff!</p>
+            <h1 class="dashboard-title">Health Records</h1>
+            <p class="dashboard-subtitle">Welcome back Admin!</p>
         </div>
 
         <div class="dashboard-user-info">
-            <span class="dashboard-user-email">doctor@gmail.com</span>
+            <span class="dashboard-user-email">admin@gmail.com</span>
             <div class="dashboard-user-avatar">👤</div>
-            <span class="dashboard-user-name">Clinical</span>
+            <span class="dashboard-user-name">Admin</span>
         </div>
     </header>
 
+    <!-- ===================== PATIENT RECORDS OVERVIEW ===================== -->
     <section class="pm-overview">
         <div class="pm-overview-header">
-            <h2 class="pm-section-title">Health Record List</h2>
+            <h2 class="pm-section-title">Patient Records Overview</h2>
             <div class="pm-show-entries">
                 <span>Show</span>
                 <select>
@@ -50,24 +53,35 @@
                         <tr>
                             <th class="pm-col-id">ID</th>
                             <th>Patient Name<br /><span class="pm-subcol">Email</span></th>
-                            <th>Assessment Status</th>
-                            <th class="pm-col-date">Date of Visit</th>
-                            <th class="pm-col-action">More Health Records</th>
+                            <th>Doctor's Name<br /><span class="pm-subcol">Email</span></th>
+                            <th>Nurse Assist<br /><span class="pm-subcol">Email</span></th>
+                            <th class="pm-col-date">Date of Check-up</th>
+                            <th class="pm-col-status">Visit Status</th>
+                            <th class="pm-col-action">More Info</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var r in ActiveLetter.HasValue ? GetOrderedRecords(ActiveLetter.Value) : Records)
+                        @foreach (var row in ActiveLetter.HasValue ? GetOrderedRecords(ActiveLetter.Value).Select((record, index) => new { Record = record, Index = index + 1 }) : Records.Select((record, index) => new { Record = record, Index = index + 1 }))
                         {
+                            var r = row.Record;
                             <tr>
-                                <td class="pm-col-id">@r.Id</td>
+                                <td class="pm-col-id">@row.Index.ToString("00")</td>
                                 <td>
                                     <div class="pm-patient-name">@r.PatientName</div>
                                     <div class="pm-patient-email">@r.PatientEmail</div>
                                 </td>
-                                <td>@r.AssessmentStatus</td>
-                                <td class="pm-col-date">@r.DateOfVisit</td>
+                                <td>
+                                    <div class="pm-patient-name">@r.DoctorName</div>
+                                    <div class="pm-patient-email">@r.DoctorEmail</div>
+                                </td>
+                                <td>
+                                    <div class="pm-patient-name">@r.NurseName</div>
+                                    <div class="pm-patient-email">@r.NurseEmail</div>
+                                </td>
+                                <td class="pm-col-date">@r.DateOfCheckup</td>
+                                <td class="pm-col-status">@r.VisitStatus</td>
                                 <td class="pm-col-action">
-                                    <button class="pm-view-btn" aria-label="View more health records" @onclick="() => ViewHealthRecords(r.Id)">
+                                    <button class="pm-view-btn" @onclick="() => ViewRecord(r)" aria-label="View patient record">
                                         <span class="pm-view-icon"></span>
                                     </button>
                                 </td>
@@ -100,8 +114,6 @@
 @code {
     
 
-    private record DoctorHealthRecordRow(string Id, string PatientName, string PatientEmail, string AssessmentStatus, string DateOfVisit);
-
     
     
     private bool ShowPagination { get; set; } = true;
@@ -111,21 +123,25 @@
     private readonly char[] Alphabet =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
-    private readonly DoctorHealthRecordRow[] Records = new DoctorHealthRecordRow[]
-    {
-        new DoctorHealthRecordRow("01", "Himeko Murata", "himeko_murata@gmail.com", "Pending Assessment", "03/09/24"),
-        new DoctorHealthRecordRow("02", "Yae Miko", "miko.yae@mail.com", "Vital Signs Taken", "03/09/24"),
-        new DoctorHealthRecordRow("03", "Black Swan", "ms.blkswan@mail.com", "For Doctor Evaluation", "03/09/24"),
-        new DoctorHealthRecordRow("04", "Ruan Mei", "theRM_ei@gmail.com", "Follow-up Required", "03/09/24"),
-        new DoctorHealthRecordRow("05", "Bronya Rand", "bronya.rr@mail.com", "Completed", "03/09/24"),
-    };
+    private List<HealthRecord> Records { get; set; } = new();
+
+    [Inject]
+    private IHealthRecordService HealthRecordService { get; set; } = default!;
 
     [Inject]
     private NavigationManager Navigation { get; set; } = default!;
 
-    private void ViewHealthRecords(string id)
+    protected override void OnInitialized()
     {
-        Navigation.NavigateTo("/doctor-consultation-edit");
+        Records = HealthRecordService
+            .GetAll()
+            .OrderBy(r => r.PatientName)
+            .ToList();
+    }
+
+    private void ViewRecord(HealthRecord record)
+    {
+        Navigation.NavigateTo($"/patient-records/{record.Id}");
     }
 
     private void SelectLetter(char letter)
@@ -143,7 +159,7 @@
 
     
 
-    private IEnumerable<DoctorHealthRecordRow> GetOrderedRecords(char letter)
+    private IEnumerable<HealthRecord> GetOrderedRecords(char letter)
     {
         if (string.IsNullOrEmpty(letter.ToString()))
         {

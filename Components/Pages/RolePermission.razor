@@ -15,6 +15,7 @@
     };
 
     private string selectedRole = "admin";
+    private bool showPermissionPanel = false; // Permission panel hidden by default
 
     private Dictionary<string, Dictionary<string, bool>> permissions = new()
     {
@@ -173,7 +174,7 @@
         // If currently editing permissions for a disabled role, hide the panel
         if (selectedRole == role && !roleStatus[role])
         {
-            // Panel would be hidden here if showPermissionPanel was used
+            showPermissionPanel = false;
         }
 
         // In future: This will control if the user can login
@@ -190,7 +191,7 @@
 
         // When "Set Permission" button is clicked, load that role's permissions
         selectedRole = role;
-        // Panel would be shown here if showPermissionPanel was used
+        showPermissionPanel = true; // Show the permission panel
         StateHasChanged(); // Update the UI to show the new role badge
     }
 
@@ -206,13 +207,13 @@
     {
         // Save logic here - will save the permissions for the currently selected role
         Console.WriteLine($"Saving permissions for {selectedRole}");
-        // Panel would be hidden here if showPermissionPanel was used
+        showPermissionPanel = false; // Hide the panel after saving
     }
 
     private void CancelChanges()
     {
         // Cancel logic here - hide the panel without saving
-        // Panel would be hidden here if showPermissionPanel was used
+        showPermissionPanel = false;
     }
 
     private string GetRoleBadgeText()

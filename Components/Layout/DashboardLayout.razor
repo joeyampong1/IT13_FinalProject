@@ -140,7 +140,7 @@
             <div class="sidebar-section-title">USER MANAGEMENT</div>
 
             @* Admin: full user submenu; others: only User Profile *@
-            <button class="sidebar-item sidebar-item-expand" @onclick="ToggleUserMenu">
+            <button class="sidebar-item sidebar-item-expand" @onclick:stopPropagation @onclick="ToggleUserMenu">
                 <span class="sidebar-icon sidebar-icon-user"></span>
                 User
                 <span class="sidebar-chevron">@(IsUserMenuExpanded ? "▾" : "▸")</span>
@@ -148,7 +148,10 @@
 
             @if (IsUserMenuExpanded)
             {
-                <button class="sidebar-subitem @(IsUserProfileActive ? "active" : string.Empty)" @onclick="OnUserProfileClick">
+                <button class="sidebar-subitem @(IsUserProfileActive ? "active" : string.Empty)" 
+                        @onclick:stopPropagation
+                        @onclick:preventDefault
+                        @onclick="OnUserProfileClick">
                     <span class="sidebar-icon sidebar-icon-user-profile"></span>
                     User Profile
                 </button>
@@ -171,7 +174,7 @@
                     <span class="sidebar-icon sidebar-icon-audit"></span>
                     Audit Logs
                 </button>
-                <button class="sidebar-item">
+                <button class="sidebar-item @(IsSyncManagementActive ? "active" : string.Empty)" @onclick="OnSyncManagementClick">
                     <span class="sidebar-icon sidebar-icon-sync"></span>
                     Sync Management
                 </button>
@@ -309,7 +312,6 @@
                 || uri.Contains("/doctor-vitals-info")
                 || uri.Contains("/doctor-consultation")
                 || uri.Contains("/doctor-consultation-edit")
-                || uri.Contains("/doctor-health-record-view")
                 || uri.Contains("/doctor-health-records")
                 || uri.Contains("/doctor-prescriptions"))
                 return "Doctor";
@@ -415,10 +417,12 @@
     private bool IsAuditLogsActive =>
         Navigation.Uri.Contains("/auditlogs", StringComparison.OrdinalIgnoreCase);
         
-    private void OnAuditLogsClick()
-    {
-        Navigation.NavigateTo("/auditlogs");
-    }
+    private bool IsSyncManagementActive =>
+        Navigation.Uri.Contains("/syncmanagement", StringComparison.OrdinalIgnoreCase);
+        
+    private void OnAuditLogsClick() => Navigation.NavigateTo("/auditlogs");
+    
+    private void OnSyncManagementClick() => Navigation.NavigateTo("/syncmanagement");
 
     private bool IsUserMenuExpanded { get; set; }
     private bool IsSettingsOpen { get; set; }
@@ -479,16 +483,8 @@
 
   private void OnUserProfileClick()
 {
-    // Get the current role from the URL or use a default
     var role = GetCurrentRoleFromUrl();
-    
-    // For admin, use the base route, otherwise use the role-prefixed route
-    var route = role.Equals("Admin", StringComparison.OrdinalIgnoreCase) 
-        ? "/user-profile" 
-        : $"/{role.ToLower()}-user-profile";
-    
-    // Force a full page reload to ensure the layout is recreated with the correct role context
-    Navigation.NavigateTo(route, forceLoad: true);
+    Navigation.NavigateTo($"/user-profile/role/{role}", forceLoad: true);
 }
     
    private string GetCurrentRoleFromUrl()

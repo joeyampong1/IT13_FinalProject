@@ -1,10 +1,12 @@
-/* Reuse HealthRecords / PatientManagement table & filter styles for nurse vitals list */
+/* Reuse Patient Management overview styles for Health Records */
+
 .pm-page {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
+/* Header matches Dashboard/Patient Management */
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -56,6 +58,7 @@
     font-weight: 600;
 }
 
+/* Overview section reused */
 .pm-overview {
     background-color: transparent;
 }
@@ -173,17 +176,17 @@
     background-color: #e9f6f5;
 }
 
+/* Table styling */
 .pm-table-outer {
     margin-top: 14px;
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    width: 100%;
 }
 
 .pm-table-wrapper {
+    max-height: 380px;
     overflow-y: auto;
-    width: 100%;
 }
 
 .pm-table {
@@ -211,6 +214,11 @@
     width: 60px;
 }
 
+.pm-col-action {
+    width: 80px;
+    text-align: center;
+}
+
 .pm-col-date {
     width: 110px;
     text-align: right;
@@ -218,11 +226,6 @@
 
 .pm-col-status {
     width: 170px;
-}
-
-.pm-col-action {
-    width: 80px;
-    text-align: center;
 }
 
 .pm-patient-name {
@@ -262,7 +265,7 @@
     background-color: #0b6f70;
 }
 
-/* Floating pagination and toggle, matching other nurse/admin pages */
+/* Pagination reused, but we can keep it simple here */
 .pm-pagination {
     display: flex;
     justify-content: flex-end;

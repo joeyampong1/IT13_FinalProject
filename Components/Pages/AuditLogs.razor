@@ -196,15 +196,15 @@
                     <div class="section-label">Export Format</div>
                     <div class="radio-group">
                         <label class="radio-option">
-                            <input type="radio" name="exportFormat" @bind-value="exportFormat" />
+                            <input type="radio" name="exportFormat" value="csv" checked @onchange="e => exportFormat = e.Value?.ToString()" />
                             <span>CSV (Comma Separated Values)</span>
                         </label>
                         <label class="radio-option">
-                            <input type="radio" name="exportFormat" @bind-value="exportFormat" />
+                            <input type="radio" name="exportFormat" value="pdf" @onchange="e => exportFormat = e.Value?.ToString()" />
                             <span>PDF Document</span>
                         </label>
                         <label class="radio-option">
-                            <input type="radio" name="exportFormat" @bind-value="exportFormat" />
+                            <input type="radio" name="exportFormat" value="excel" @onchange="e => exportFormat = e.Value?.ToString()" />
                             <span>Excel (XLSX)</span>
                         </label>
                     </div>
@@ -229,19 +229,19 @@
                     <div class="checkbox-grid">
                         <div class="checkbox-list">
                             <label class="checkbox-option">
-                                <input type="checkbox" @bind="includeTime" />
+                                <input type="checkbox" checked @onchange="e => includeTime = (bool)e.Value" />
                                 <span>Time</span>
                             </label>
                             <label class="checkbox-option">
-                                <input type="checkbox" @bind="includeUser" />
+                                <input type="checkbox" checked @onchange="e => includeUser = (bool)e.Value" />
                                 <span>User</span>
                             </label>
                             <label class="checkbox-option">
-                                <input type="checkbox" @bind="includeAction" />
+                                <input type="checkbox" checked @onchange="e => includeAction = (bool)e.Value" />
                                 <span>Action</span>
                             </label>
                             <label class="checkbox-option">
-                                <input type="checkbox" @bind="includeDetails" />
+                                <input type="checkbox" checked @onchange="e => includeDetails = (bool)e.Value" />
                                 <span>Details</span>
                             </label>
                         </div>
@@ -298,5 +298,5 @@
     }
 
     [Inject]
-    private IJSRuntime JSRuntime { get; set; } = null!;
+    private IJSRuntime JSRuntime { get; set; }
 }

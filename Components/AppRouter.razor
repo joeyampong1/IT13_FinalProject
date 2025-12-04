@@ -2,6 +2,7 @@
 @using IT_13FinalProject.Components.Layout
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Routing
+@using IT_13FinalProject.Components.Pages
 @inject NavigationManager Navigation
 
 @code {
@@ -70,7 +71,7 @@ else if (path == "billing-dashboard")
 else if (path == "billing-patient-overview")
 {
     <DashboardLayout>
-        <BillingPatientOverview_Admin />
+        <BillingPatientOverview />
     </DashboardLayout>
 }
 else if (path == "billing-computation")
@@ -82,13 +83,13 @@ else if (path == "billing-computation")
 else if (path == "billing-insurance-claims")
 {
     <DashboardLayout>
-        <BillingInsuranceClaims_Admin />
+        <BillingInsuranceClaims />
     </DashboardLayout>
 }
 else if (path == "billing-insurance-request")
 {
     <DashboardLayout>
-        <BillingInsuranceRequest_Admin />
+        <BillingInsuranceRequest />
     </DashboardLayout>
 }
 else if (path == "admin-insurance-claims")
@@ -136,25 +137,25 @@ else if (path == "admin-reports-analytics")
 else if (path == "patient-management")
 {
     <DashboardLayout>
-        <PatientManagement_Admin />
+        <PatientManagement />
     </DashboardLayout>
 }
 else if (path == "patient-list")
 {
-    <DashboardLayout BaseRoute="/doctor-dashboard">
-        <PatientList_DoctorPage />
+    <DashboardLayout>
+        <PatientList />
     </DashboardLayout>
 }
 else if (path == "health-records")
 {
     <DashboardLayout>
-        <HealthRecords_Admin />
+        <HealthRecords />
     </DashboardLayout>
 }
 else if (path == "invoicing-overview")
 {
     <DashboardLayout>
-        <InvoicingOverview_Admin />
+        <InvoicingOverview />
     </DashboardLayout>
 }
 else if (path == "receipt-overview")
@@ -201,43 +202,43 @@ else if (path == "nurse-vitals-edit")
 }
 else if (path == "patient-profile")
 {
-    <DashboardLayout BaseRoute="/doctor-dashboard">
+    <DashboardLayout>
         <PatientProfile />
     </DashboardLayout>
 }
 else if (path == "doctor-patient-profile")
 {
-    <DashboardLayout BaseRoute="/doctor-dashboard">
+    <DashboardLayout>
         <PatientProfile />
     </DashboardLayout>
 }
 else if (path == "doctor-vitals-info")
 {
-    <DashboardLayout BaseRoute="/doctor-dashboard">
+    <DashboardLayout>
         <DoctorVitalsInfo />
     </DashboardLayout>
 }
 else if (path == "doctor-consultation")
 {
-    <DashboardLayout BaseRoute="/doctor-dashboard">
-        <DoctorConsultForm_PatientList />
+    <DashboardLayout>
+        <DoctorConsultForm />
     </DashboardLayout>
 }
-else if (path == "doctor-health-record-view")
+else if (path == "doctor-consultation-edit")
 {
-    <DashboardLayout BaseRoute="/doctor-dashboard">
-        <DoctorConsult_HealthRecordView />
+    <DashboardLayout>
+        <DoctorConsultEdit />
     </DashboardLayout>
 }
 else if (path == "doctor-health-records")
 {
-    <DashboardLayout BaseRoute="/doctor-dashboard">
+    <DashboardLayout>
         <DoctorHealthRecordList />
     </DashboardLayout>
 }
 else if (path == "doctor-prescriptions")
 {
-    <DashboardLayout BaseRoute="/doctor-dashboard">
+    <DashboardLayout>
         <DoctorPrescriptions />
     </DashboardLayout>
 }
@@ -300,6 +301,12 @@ else if (path == "auditlogs")
 {
     <DashboardLayout>
         <AuditLogs />
+    </DashboardLayout>
+}
+else if (path == "syncmanagement")
+{
+    <DashboardLayout>
+        <SyncManagement />
     </DashboardLayout>
 }
 else if (path == "forgot-password")

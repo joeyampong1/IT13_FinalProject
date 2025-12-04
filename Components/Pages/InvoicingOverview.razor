@@ -1,4 +1,4 @@
-@page "/receipt-overview"
+@page "/invoicing-overview"
 @layout Layout.DashboardLayout
 
 <div class="inv-page">
@@ -16,16 +16,16 @@
         </div>
     </header>
 
-    <!-- ===================== RECEIPT OVERVIEW ===================== -->
+    <!-- ===================== INVOICING OVERVIEW ===================== -->
     <section class="inv-card">
         <div class="inv-controls">
-            <h2 class="inv-section-title">Receipt Overview</h2>
+            <h2 class="inv-section-title">Invoicing Overview</h2>
 
             <div class="inv-tabs-row">
                 <span class="inv-tabs-label">Recent</span>
                 <div class="inv-tabs">
-                    <button class="inv-tab" @onclick="GoToBills">Bills</button>
-                    <button class="inv-tab inv-tab-active">Receipt</button>
+                    <button class="inv-tab inv-tab-active" @onclick="GoToBills">Bills</button>
+                    <button class="inv-tab" @onclick="GoToReceipts">Receipt</button>
                 </div>
             </div>
 
@@ -43,30 +43,30 @@
         </div>
 
         <div class="inv-list">
-            @foreach (var receipt in Receipts)
+            @foreach (var invoice in Invoices)
             {
                 <div class="inv-row">
                     <div class="inv-row-main">
                         <div class="inv-row-name">
                             <span class="inv-row-label">Name</span>
-                            <span class="inv-row-value">@receipt.Name</span>
+                            <span class="inv-row-value">@invoice.Name</span>
                         </div>
                     </div>
                     <div class="inv-row-columns">
                         <div class="inv-row-col">
                             <span class="inv-row-label">Amount</span>
-                            <span class="inv-row-value">@receipt.Amount</span>
+                            <span class="inv-row-value">@invoice.Amount</span>
                         </div>
                         <div class="inv-row-col">
                             <span class="inv-row-label">Date</span>
-                            <span class="inv-row-value">@receipt.Date</span>
+                            <span class="inv-row-value">@invoice.Date</span>
                         </div>
                         <div class="inv-row-col">
                             <span class="inv-row-label">Status</span>
-                            <span class="inv-row-value">@receipt.Status</span>
+                            <span class="inv-row-value">@invoice.Status</span>
                         </div>
                         <div class="inv-row-col inv-row-col-action">
-                            <button class="inv-view-btn" @onclick="() => ViewReceipt(receipt)">
+                            <button class="inv-view-btn" @onclick="() => ViewInvoice(invoice)">
                                 <span class="inv-view-icon"></span>
                             </button>
                         </div>
@@ -98,12 +98,12 @@
     [Inject]
     private NavigationManager Navigation { get; set; } = default!;
 
-    private record ReceiptRow(string Name, string Amount, string Date, string Status);
+    private record InvoiceRow(string Name, string Amount, string Date, string Status);
 
-    private readonly ReceiptRow[] Receipts = new ReceiptRow[]
+    private readonly InvoiceRow[] Invoices = new InvoiceRow[]
     {
-        new("Himeko Murata", "15,000 php", "03/09/24", "Paid"),
-        new("Yae Miko", "25,000 php", "03/03/24", "Paid"),
+        new("Himeko Murata", "15,000 php", "03/09/24", "Unpaid"),
+        new("Yae Miko", "25,000 php", "03/03/24", "Unpaid"),
         new("Black Swan", "29,000 php", "03/06/24", "Paid"),
         new("Ruan Mei", "18,000 php", "03/07/24", "Paid"),
         new("Bronya Rand", "60,000 php", "03/01/24", "Paid"),
@@ -116,9 +116,15 @@
         Navigation.NavigateTo("/invoicing-overview");
     }
 
-    private void ViewReceipt(ReceiptRow receipt)
+    private void GoToReceipts()
     {
-        Navigation.NavigateTo("/receipt-pdf?source=admin");
+        Navigation.NavigateTo("/receipt-overview");
+    }
+
+    private void ViewInvoice(InvoiceRow invoice)
+    {
+        // For now, simply navigate to the invoice PDF preview page
+        Navigation.NavigateTo("/invoice-pdf");
     }
 
     private void TogglePagination()
