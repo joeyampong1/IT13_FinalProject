@@ -57,19 +57,11 @@
                     <span class="sidebar-icon sidebar-icon-vitals"></span>
                     Vital Signs Monitoring
                 </button>
-                <button class="sidebar-item">
-                    <span class="sidebar-icon sidebar-icon-medication"></span>
-                    Medication Schedules
-                </button>
-                <button class="sidebar-item">
+                <button class="sidebar-item @(IsNurseNotesActive ? "active" : string.Empty)" @onclick="OnNurseNotesClick">
                     <span class="sidebar-icon sidebar-icon-notes"></span>
                     Nursing Notes
                 </button>
-                <button class="sidebar-item">
-                    <span class="sidebar-icon sidebar-icon-request"></span>
-                    Request
-                </button>
-                <button class="sidebar-item">
+                <button class="sidebar-item @(IsNurseReportsActive ? "active" : string.Empty)" @onclick="OnNurseReportsClick">
                     <span class="sidebar-icon sidebar-icon-reports"></span>
                     Reports
                 </button>
@@ -97,7 +89,7 @@
                     <span class="sidebar-icon sidebar-icon-lab"></span>
                     Laboratory Results
                 </button>
-                <button class="sidebar-item">
+                <button class="sidebar-item @(IsDoctorReportsActive ? "active" : string.Empty)" @onclick="OnDoctorReportsClick">
                     <span class="sidebar-icon sidebar-icon-reports"></span>
                     Reports
                 </button>
@@ -113,7 +105,7 @@
                     <span class="sidebar-icon sidebar-icon-insurance"></span>
                     Insurance &amp; Claims
                 </button>
-                <button class="sidebar-item">
+                <button class="sidebar-item @(IsBillingReportsActive ? "active" : string.Empty)" @onclick="OnBillingReportsClick">
                     <span class="sidebar-icon sidebar-icon-reports"></span>
                     Reports
                 </button>
@@ -129,7 +121,7 @@
                     <span class="sidebar-icon sidebar-icon-prescriptions"></span>
                     Prescriptions
                 </button>
-                <button class="sidebar-item">
+                <button class="sidebar-item @(IsInventoryReportsActive ? "active" : string.Empty)" @onclick="OnInventoryReportsClick">
                     <span class="sidebar-icon sidebar-icon-stock"></span>
                     Stock Reports
                 </button>
@@ -312,9 +304,10 @@
             if (uri.Contains("/nurse-dashboard")
                 || uri.Contains("/nurse-patient-list")
                 || uri.Contains("/nurse-vitals-list")
+                || uri.Contains("/nurse-vitals-edit")
                 || uri.Contains("/nurse-vitals")
-                || uri.Contains("/nurse-patient-profile")
-                || uri.Contains("/patient-profile"))
+                || uri.Contains("/nurse-notes")
+                || uri.Contains("/nurse-reports"))
                 return "Nurse";
 
             // Doctor: dashboard and doctor-specific pages
@@ -325,7 +318,8 @@
                 || uri.Contains("/doctor-consultation")
                 || uri.Contains("/doctor-consultation-edit")
                 || uri.Contains("/doctor-health-records")
-                || uri.Contains("/doctor-prescriptions"))
+                || uri.Contains("/doctor-prescriptions")
+                || uri.Contains("/doctor-reports"))
                 return "Doctor";
 
             // Billing (including PDFs opened from Billing via source=billing)
@@ -335,6 +329,7 @@
                 || uri.Contains("/billing-cashiering")
                 || uri.Contains("/billing-insurance-claims")
                 || uri.Contains("/billing-insurance-request")
+                || uri.Contains("/billing-reports")
                 || (uri.Contains("/receipt-pdf") && uri.Contains("source=billing"))
                 || (uri.Contains("/invoice-pdf") && uri.Contains("source=billing")))
                 return "Billing";
@@ -342,7 +337,8 @@
             // Inventory
             if (uri.Contains("/inventory-dashboard")
                 || uri.Contains("/pharmacy-inventory")
-                || uri.Contains("/inventory-prescriptions"))
+                || uri.Contains("/inventory-prescriptions")
+                || uri.Contains("/inventory-reports"))
                 return "Inventory";
 
             // Default: Admin dashboard and modules
@@ -374,6 +370,12 @@
         Navigation.Uri.Contains("/nurse-vitals-list", StringComparison.OrdinalIgnoreCase)
         || Navigation.Uri.Contains("/nurse-vitals-edit", StringComparison.OrdinalIgnoreCase);
 
+    private bool IsNurseNotesActive =>
+        Navigation.Uri.Contains("/nurse-notes", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsNurseReportsActive =>
+        Navigation.Uri.Contains("/nurse-reports", StringComparison.OrdinalIgnoreCase);
+
     private bool IsDoctorPatientListActive =>
         Navigation.Uri.Contains("/patient-list", StringComparison.OrdinalIgnoreCase)
         || Navigation.Uri.Contains("/doctor-patient-profile", StringComparison.OrdinalIgnoreCase)
@@ -387,6 +389,9 @@
 
     private bool IsDoctorPrescriptionsActive =>
         Navigation.Uri.Contains("/doctor-prescriptions", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsDoctorReportsActive =>
+        Navigation.Uri.Contains("/doctor-reports", StringComparison.OrdinalIgnoreCase);
 
     private bool IsHealthRecordActive =>
         Navigation.Uri.Contains("/health-records", StringComparison.OrdinalIgnoreCase)
@@ -414,11 +419,17 @@
         Navigation.Uri.Contains("/billing-insurance-claims", StringComparison.OrdinalIgnoreCase)
         || Navigation.Uri.Contains("/billing-insurance-request", StringComparison.OrdinalIgnoreCase);
 
+    private bool IsBillingReportsActive =>
+        Navigation.Uri.Contains("/billing-reports", StringComparison.OrdinalIgnoreCase);
+
     private bool IsInventoryPharmacyActive =>
         Navigation.Uri.Contains("/pharmacy-inventory", StringComparison.OrdinalIgnoreCase);
 
     private bool IsInventoryPrescriptionsActive =>
         Navigation.Uri.Contains("/inventory-prescriptions", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsInventoryReportsActive =>
+        Navigation.Uri.Contains("/inventory-reports", StringComparison.OrdinalIgnoreCase);
 
     private bool IsUserProfileActive =>
         Navigation.Uri.Contains("/user-profile", StringComparison.OrdinalIgnoreCase);
@@ -467,6 +478,10 @@
 
     private void OnNurseVitalsClick() => Navigation.NavigateTo("/nurse-vitals-list");
 
+    private void OnNurseNotesClick() => Navigation.NavigateTo("/nurse-notes");
+
+    private void OnNurseReportsClick() => Navigation.NavigateTo("/nurse-reports");
+
     private void OnDoctorPatientListClick()
     {
         Navigation.NavigateTo("/patient-list");
@@ -485,13 +500,19 @@
 
     private void OnBillingInsuranceClick() => Navigation.NavigateTo("/billing-insurance-claims");
 
+    private void OnBillingReportsClick() => Navigation.NavigateTo("/billing-reports");
+
     private void OnAdminInsuranceClick() => Navigation.NavigateTo("/admin-insurance-claims");
 
     private void OnInventoryPharmacyClick() => Navigation.NavigateTo("/pharmacy-inventory");
 
     private void OnInventoryPrescriptionsClick() => Navigation.NavigateTo("/inventory-prescriptions");
 
+    private void OnInventoryReportsClick() => Navigation.NavigateTo("/inventory-reports");
+
     private void OnDoctorPrescriptionsClick() => Navigation.NavigateTo("/doctor-prescriptions");
+
+    private void OnDoctorReportsClick() => Navigation.NavigateTo("/doctor-reports");
 
     private void OnUserProfileClick()
     {
