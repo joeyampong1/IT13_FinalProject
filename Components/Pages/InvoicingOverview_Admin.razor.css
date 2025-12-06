@@ -23,6 +23,29 @@
     font-size: 14px;
 }
 
+/* Table Header Label */
+.inv-table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    margin: 16px 0 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.inv-table-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+    font-family: 'Roboto', sans-serif;
+}
+
+.inv-table-count {
+    font-size: 14px;
+    color: #64748b;
+    font-family: 'Roboto', sans-serif;
+}
+
 .dashboard-user-info {
     display: flex;
     align-items: center;

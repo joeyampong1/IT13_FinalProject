@@ -1,4 +1,4 @@
-@page "/invoicing-overview"
+@* @page "/invoicing-overview" - Removed to use AppRouter routing *@
 @layout Layout.DashboardLayout
 
 <div class="inv-page">
@@ -40,6 +40,11 @@
                     <button class="inv-action-btn">Filters</button>
                 </div>
             </div>
+        </div>
+
+        <div class="inv-table-header">
+            <div class="inv-table-label">Invoice List</div>
+            <div class="inv-table-count">@Invoices.Count() invoices</div>
         </div>
 
         <div class="inv-list">

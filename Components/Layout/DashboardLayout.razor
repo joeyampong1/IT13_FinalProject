@@ -15,8 +15,9 @@
             </button>
         </nav>
 
-        <nav class="sidebar-section">
-            <div class="sidebar-section-title">MODULES</div>
+        <div class="sidebar-nav-container">
+            <nav class="sidebar-section">
+                <div class="sidebar-section-title">MODULES</div>
 
             @* Admin modules *@
             @if (CurrentRole == "Admin")
@@ -176,6 +177,7 @@
                 Settings
             </button>
         </nav>
+        </div>
 
         <button class="sidebar-logout" @onclick="LogoutAsync">LOG OUT</button>
     </aside>
