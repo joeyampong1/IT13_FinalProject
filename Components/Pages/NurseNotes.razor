@@ -1,0 +1,542 @@
+@page "/nurse-notes"
+@layout Layout.DashboardLayout
+
+<div class="nurse-notes-page">
+    <header class="dashboard-header">
+        <div>
+            <h1 class="dashboard-title">Nursing Notes</h1>
+            <p class="dashboard-subtitle">Welcome back Clinical Staff!</p>
+        </div>
+
+        <div class="dashboard-user-info">
+            <span class="dashboard-user-email">nurse@gmail.com</span>
+            <div class="dashboard-user-avatar">
+                👤
+            </div>
+            <span class="dashboard-user-name">Clinical</span>
+        </div>
+    </header>
+
+    <section class="pm-overview">
+        <div class="pm-overview-header">
+            <h2 class="pm-section-title">Nursing Notes</h2>
+            <div class="pm-show-entries">
+                <span>Show</span>
+                <select>
+                    <option>5</option>
+                    <option>10</option>
+                    <option>25</option>
+                </select>
+                <span>entries</span>
+            </div>
+        </div>
+
+        <div class="pm-filters-row">
+            <div class="pm-search-row">
+                <div class="pm-search-box">
+                    <span class="pm-search-icon"></span>
+                    <input class="pm-search-input" placeholder="Search Notes" />
+                </div>
+
+                <div class="pm-actions">
+                    <button class="activity-action-btn">Sort</button>
+                    <button class="activity-action-btn">Filters</button>
+                    <button class="activity-action-btn" @onclick="ShowNewNoteModal">+ New notes</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="nurse-content-scroll">
+            <h2 class="nurse-shift-title">TODAY'S SHIFT NOTES (Morning: 7AM-3PM)</h2>
+
+            <div class="nurse-notes-list">
+                @foreach (var note in Notes)
+                {
+                    <div class="nurse-note-card">
+                        <div class="nurse-note-header">
+                            <span class="nurse-note-time">⏰ @note.Time | @note.Room - @note.PatientName</span>
+                        </div>
+                        <div class="nurse-note-body">
+                            <div class="nurse-note-item">
+                                <span class="nurse-note-icon">💊</span>
+                                <span class="nurse-note-label">Administered:</span>
+                                <span class="nurse-note-text">@note.Administered</span>
+                            </div>
+                            <div class="nurse-note-item">
+                                <span class="nurse-note-icon">👁️</span>
+                                <span class="nurse-note-label">Observation:</span>
+                                <span class="nurse-note-text">@note.Observation</span>
+                            </div>
+                            <div class="nurse-note-item">
+                                <span class="nurse-note-icon">📝</span>
+                                <span class="nurse-note-label">Note:</span>
+                                <span class="nurse-note-text">@note.Note</span>
+                            </div>
+                            <div class="nurse-note-item">
+                                <span class="nurse-note-icon">🏷️</span>
+                                <span class="nurse-note-label">Tags:</span>
+                                <span class="nurse-note-text">@note.Tags</span>
+                            </div>
+                        </div>
+                        <div class="nurse-note-footer">
+                            <button class="nurse-note-edit-btn" @onclick="() => ShowEditNoteModal(note)">✏️ Edit</button>
+                            <button class="nurse-note-view-btn" @onclick="() => ShowViewNoteModal(note)">👁️ View</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</div>
+
+@* New Note Modal *@
+@if (ShowNewNote)
+{
+    <div class="nurse-modal-overlay" @onclick="CloseNewNoteModal">
+        <div class="nurse-modal" @onclick:stopPropagation="true">
+            <h2 class="nurse-modal-title">Add Nursing Entry</h2>
+
+            <div class="nurse-form-group">
+                <label class="nurse-form-label">Patient</label>
+                <div class="nurse-patient-select-wrapper">
+                    <input type="text"
+                           class="nurse-patient-input"
+                           placeholder="Select Patient"
+                           @bind="NewPatientSearch"
+                           @oninput="OnNewPatientSearchInput"
+                           @onfocus="() => ShowNewPatientDropdown = true" />
+                    <span class="nurse-dropdown-icon">▼</span>
+
+                    @if (ShowNewPatientDropdown && FilteredNewPatients.Any())
+                    {
+                        <div class="nurse-patient-dropdown">
+                            @foreach (var patient in FilteredNewPatients)
+                            {
+                                <div class="nurse-patient-option" @onclick="() => SelectNewPatient(patient)">
+                                    @patient
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="nurse-form-group">
+                <label class="nurse-form-label">Vital Signs</label>
+                <div class="nurse-vitals-display">
+                    <span>BP: 130/85 | Temp: 37.0°C | Pulse: 78 | SpO₂: 97%</span>
+                    <div class="nurse-vitals-time">(Last taken: 02:00 PM)</div>
+                </div>
+            </div>
+
+            <div class="nurse-form-group">
+                <label class="nurse-form-label">Category</label>
+                <select class="nurse-form-select" @bind="NewNote.NoteType">
+                    <option value="">Select Category</option>
+                    <option value="Care Provided">Care Provided</option>
+                    <option value="Medication">Medication</option>
+                    <option value="Assessment">Assessment</option>
+                </select>
+            </div>
+
+            <div class="nurse-form-group">
+                <label class="nurse-form-label">Details</label>
+                <textarea class="nurse-form-textarea" rows="4" @bind="NewNote.Content"
+                          placeholder="Enter care details..."></textarea>
+            </div>
+
+            <div class="nurse-form-section">
+                <h3 class="nurse-form-section-title">Additional Info</h3>
+                <div class="nurse-form-row">
+                    <div class="nurse-form-group-inline">
+                        <label class="nurse-form-label">Pain Scale:</label>
+                        <select class="nurse-form-select-small">
+                            <option>2/10</option>
+                            <option>0/10</option>
+                            <option>5/10</option>
+                        </select>
+                    </div>
+                    <div class="nurse-form-group-inline">
+                        <label class="nurse-form-label">Mood:</label>
+                        <select class="nurse-form-select-small">
+                            <option>Comfortable</option>
+                            <option>Anxious</option>
+                            <option>Calm</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="nurse-form-row">
+                    <div class="nurse-form-group-inline">
+                        <label class="nurse-form-label">Activity:</label>
+                        <select class="nurse-form-select-small">
+                            <option>Ambulatory</option>
+                            <option>Bedrest</option>
+                            <option>Limited</option>
+                        </select>
+                    </div>
+                    <div class="nurse-form-group-inline">
+                        <label class="nurse-form-label">Nutrition:</label>
+                        <select class="nurse-form-select-small">
+                            <option>Tolerating</option>
+                            <option>NPO</option>
+                            <option>Poor</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nurse-modal-footer">
+                <button class="nurse-btn-cancel" @onclick="CloseNewNoteModal">Cancel</button>
+                <button class="nurse-btn-save" @onclick="SaveNewNote">Save</button>
+            </div>
+        </div>
+    </div>
+}
+
+@* Edit Note Modal *@
+@if (ShowEditNote)
+{
+    <div class="nurse-modal-overlay" @onclick="CloseEditNoteModal">
+        <div class="nurse-modal" @onclick:stopPropagation="true">
+            <h2 class="nurse-modal-title">Edit Nursing Entry</h2>
+
+            <div class="nurse-form-group">
+                <label class="nurse-form-label">Patient</label>
+                <div class="nurse-patient-select-wrapper">
+                    <input type="text"
+                           class="nurse-patient-input"
+                           placeholder="Select Patient"
+                           @bind="EditPatientSearch"
+                           @oninput="OnEditPatientSearchInput"
+                           @onfocus="() => ShowEditPatientDropdown = true" />
+                    <span class="nurse-dropdown-icon">▼</span>
+
+                    @if (ShowEditPatientDropdown && FilteredEditPatients.Any())
+                    {
+                        <div class="nurse-patient-dropdown">
+                            @foreach (var patient in FilteredEditPatients)
+                            {
+                                <div class="nurse-patient-option" @onclick="() => SelectEditPatient(patient)">
+                                    @patient
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="nurse-form-group">
+                <label class="nurse-form-label">Vital Signs</label>
+                <div class="nurse-vitals-display">
+                    <span>BP: 130/85 | Temp: 37.0°C | Pulse: 78 | SpO₂: 97%</span>
+                    <div class="nurse-vitals-time">(Last taken: 02:00 PM)</div>
+                </div>
+            </div>
+
+            <div class="nurse-form-group">
+                <label class="nurse-form-label">Category</label>
+                <select class="nurse-form-select" @bind="EditingNote.NoteType">
+                    <option value="">Select Category</option>
+                    <option value="Care Provided">Care Provided</option>
+                    <option value="Medication">Medication</option>
+                    <option value="Assessment">Assessment</option>
+                </select>
+            </div>
+
+            <div class="nurse-form-group">
+                <label class="nurse-form-label">Details</label>
+                <textarea class="nurse-form-textarea" rows="4" @bind="EditingNote.Content"
+                          placeholder="Enter care details..."></textarea>
+            </div>
+
+            <div class="nurse-form-section">
+                <h3 class="nurse-form-section-title">Additional Info</h3>
+                <div class="nurse-form-row">
+                    <div class="nurse-form-group-inline">
+                        <label class="nurse-form-label">Pain Scale:</label>
+                        <select class="nurse-form-select-small">
+                            <option>2/10</option>
+                            <option>0/10</option>
+                            <option>5/10</option>
+                        </select>
+                    </div>
+                    <div class="nurse-form-group-inline">
+                        <label class="nurse-form-label">Mood:</label>
+                        <select class="nurse-form-select-small">
+                            <option>Comfortable</option>
+                            <option>Anxious</option>
+                            <option>Calm</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="nurse-form-row">
+                    <div class="nurse-form-group-inline">
+                        <label class="nurse-form-label">Activity:</label>
+                        <select class="nurse-form-select-small">
+                            <option>Ambulatory</option>
+                            <option>Bedrest</option>
+                            <option>Limited</option>
+                        </select>
+                    </div>
+                    <div class="nurse-form-group-inline">
+                        <label class="nurse-form-label">Nutrition:</label>
+                        <select class="nurse-form-select-small">
+                            <option>Tolerating</option>
+                            <option>NPO</option>
+                            <option>Poor</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nurse-modal-footer">
+                <button class="nurse-btn-cancel" @onclick="CloseEditNoteModal">Cancel</button>
+                <button class="nurse-btn-save" @onclick="SaveEditNote">Save</button>
+            </div>
+        </div>
+    </div>
+}
+
+@* View Note Modal *@
+@if (ShowViewNote)
+{
+    <div class="nurse-modal-overlay" @onclick="CloseViewNoteModal">
+        <div class="nurse-modal" @onclick:stopPropagation="true">
+            <h2 class="nurse-modal-title">Nursing Entry</h2>
+
+            <div class="nurse-view-group">
+                <label class="nurse-view-label">Patient</label>
+                <div class="nurse-view-value">@ViewingNote.PatientName</div>
+            </div>
+
+            <div class="nurse-view-group">
+                <label class="nurse-view-label">Vital Signs</label>
+                <div class="nurse-view-value">
+                    BP: 130/85 | Temp: 37.0°C | Pulse: 78 | SpO₂: 97%
+                    <div class="nurse-vitals-time">(Last taken: 02:00 PM)</div>
+                </div>
+            </div>
+
+            <div class="nurse-view-group">
+                <label class="nurse-view-label">Category</label>
+                <div class="nurse-view-value">@ViewingNote.NoteType</div>
+            </div>
+
+            <div class="nurse-view-group">
+                <label class="nurse-view-label">Details</label>
+                <div class="nurse-view-value">@ViewingNote.Content</div>
+            </div>
+
+            <div class="nurse-view-section">
+                <h3 class="nurse-view-section-title">Additional Info</h3>
+                <div class="nurse-view-info-grid">
+                    <div class="nurse-view-info-item">
+                        <span class="nurse-view-info-label">Pain Scale:</span>
+                        <span class="nurse-view-info-value">2/10</span>
+                    </div>
+                    <div class="nurse-view-info-item">
+                        <span class="nurse-view-info-label">Mood:</span>
+                        <span class="nurse-view-info-value">Comfortable</span>
+                    </div>
+                    <div class="nurse-view-info-item">
+                        <span class="nurse-view-info-label">Activity:</span>
+                        <span class="nurse-view-info-value">Ambulatory</span>
+                    </div>
+                    <div class="nurse-view-info-item">
+                        <span class="nurse-view-info-label">Nutrition:</span>
+                        <span class="nurse-view-info-value">Tolerating</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nurse-modal-footer-single">
+                <button class="nurse-btn-close" @onclick="CloseViewNoteModal">Close</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Inject]
+    private NavigationManager Navigation { get; set; } = default!;
+
+    private class NursingNote
+    {
+        public string Id { get; set; } = "";
+        public string PatientName { get; set; } = "";
+        public string PatientEmail { get; set; } = "";
+        public string NoteType { get; set; } = "";
+        public string DateTime { get; set; } = "";
+        public string Status { get; set; } = "";
+        public string Content { get; set; } = "";
+        public string Time { get; set; } = "";
+        public string Room { get; set; } = "";
+        public string Administered { get; set; } = "";
+        public string Observation { get; set; } = "";
+        public string Note { get; set; } = "";
+        public string Tags { get; set; } = "";
+    }
+
+    private bool ShowNewNote { get; set; } = false;
+    private bool ShowEditNote { get; set; } = false;
+    private bool ShowViewNote { get; set; } = false;
+
+    private NursingNote NewNote = new();
+    private NursingNote EditingNote = new();
+    private NursingNote ViewingNote = new();
+
+    // Patient search dropdown states
+    private string NewPatientSearch { get; set; } = "";
+    private string EditPatientSearch { get; set; } = "";
+    private bool ShowNewPatientDropdown { get; set; } = false;
+    private bool ShowEditPatientDropdown { get; set; } = false;
+
+    private readonly string[] AvailablePatients = new string[]
+    {
+        "Juan Dela Cruz - Room 201",
+        "Ana Santos - Room 205",
+        "Himeko Murata - Room 301",
+        "Yae Miko - Room 105",
+        "Black Swan - Room 210",
+        "Ruan Mei - Room 302",
+        "Bronya Rand - Room 401"
+    };
+
+    private IEnumerable<string> FilteredNewPatients =>
+        string.IsNullOrWhiteSpace(NewPatientSearch)
+            ? AvailablePatients
+            : AvailablePatients.Where(p => p.Contains(NewPatientSearch, StringComparison.OrdinalIgnoreCase));
+
+    private IEnumerable<string> FilteredEditPatients =>
+        string.IsNullOrWhiteSpace(EditPatientSearch)
+            ? AvailablePatients
+            : AvailablePatients.Where(p => p.Contains(EditPatientSearch, StringComparison.OrdinalIgnoreCase));
+
+    private readonly NursingNote[] Notes = new NursingNote[]
+    {
+        new() {
+            Id = "01",
+            PatientName = "Juan Dela Cruz",
+            PatientEmail = "juandelacruz@gmail.com",
+            NoteType = "Care Provided",
+            DateTime = "03/09/24",
+            Status = "Complete",
+            Content = "Patient assisted with ambulation to bathroom. Tolerated well, no dizziness reported. Will continue to assist with mobility as needed.",
+            Time = "09:00",
+            Room = "Room 201",
+            Administered = "Paracetamol 500mg",
+            Observation = "Patient reports headache 6/10",
+            Note = "Given medication, will monitor response",
+            Tags = "#medication #pain #monitoring"
+        },
+        new() {
+            Id = "02",
+            PatientName = "Ana Santos",
+            PatientEmail = "anasantos@mail.com",
+            NoteType = "Care Provided",
+            DateTime = "03/09/24",
+            Status = "Complete",
+            Content = "Changed abdominal dressing. Wound clean, no signs of infection.",
+            Time = "10:30",
+            Room = "Room 205",
+            Administered = "Changed abdominal dressing",
+            Observation = "Wound clean, no signs of infection",
+            Note = "Patient tolerated procedure well",
+            Tags = "#woundcare #dressing-change"
+        },
+        new() {
+            Id = "03",
+            PatientName = "Juan Dela Cruz",
+            PatientEmail = "juandelacruz@gmail.com",
+            NoteType = "Communication",
+            DateTime = "03/09/24",
+            Status = "Complete",
+            Content = "Explained discharge instructions to family.",
+            Time = "12:15",
+            Room = "Room 201",
+            Administered = "Communication: Family visited",
+            Observation = "Patient mood improved",
+            Note = "Explained discharge instructions to family",
+            Tags = "#family #education #discharge"
+        }
+    };
+
+    private void ShowNewNoteModal()
+    {
+        NewNote = new();
+        NewPatientSearch = "";
+        ShowNewPatientDropdown = false;
+        ShowNewNote = true;
+    }
+
+    private void CloseNewNoteModal()
+    {
+        ShowNewNote = false;
+        ShowNewPatientDropdown = false;
+    }
+
+    private void SaveNewNote()
+    {
+        // Add save logic here
+        ShowNewNote = false;
+        ShowNewPatientDropdown = false;
+    }
+
+    private void ShowEditNoteModal(NursingNote note)
+    {
+        EditingNote = note;
+        EditPatientSearch = note.PatientName + " - " + note.Room;
+        ShowEditPatientDropdown = false;
+        ShowEditNote = true;
+    }
+
+    private void CloseEditNoteModal()
+    {
+        ShowEditNote = false;
+        ShowEditPatientDropdown = false;
+    }
+
+    private void SaveEditNote()
+    {
+        // Add save logic here
+        ShowEditNote = false;
+        ShowEditPatientDropdown = false;
+    }
+
+    private void ShowViewNoteModal(NursingNote note)
+    {
+        ViewingNote = note;
+        ShowViewNote = true;
+    }
+
+    private void CloseViewNoteModal()
+    {
+        ShowViewNote = false;
+    }
+
+    private void OnNewPatientSearchInput(ChangeEventArgs e)
+    {
+        NewPatientSearch = e.Value?.ToString() ?? "";
+        ShowNewPatientDropdown = true;
+    }
+
+    private void OnEditPatientSearchInput(ChangeEventArgs e)
+    {
+        EditPatientSearch = e.Value?.ToString() ?? "";
+        ShowEditPatientDropdown = true;
+    }
+
+    private void SelectNewPatient(string patient)
+    {
+        NewPatientSearch = patient;
+        NewNote.PatientName = patient;
+        ShowNewPatientDropdown = false;
+    }
+
+    private void SelectEditPatient(string patient)
+    {
+        EditPatientSearch = patient;
+        EditingNote.PatientName = patient;
+        ShowEditPatientDropdown = false;
+    }
+}

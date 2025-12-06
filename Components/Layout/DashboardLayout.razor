@@ -77,7 +77,7 @@
                     <span class="sidebar-icon sidebar-icon-health"></span>
                     Health Record
                 </button>
-                <button class="sidebar-item">
+                <button class="sidebar-item @(IsDoctorAppointmentsActive ? "active" : string.Empty)" @onclick="OnDoctorAppointmentsClick">
                     <span class="sidebar-icon sidebar-icon-appointments"></span>
                     Appointments
                 </button>
@@ -85,7 +85,7 @@
                     <span class="sidebar-icon sidebar-icon-prescriptions"></span>
                     Prescriptions
                 </button>
-                <button class="sidebar-item">
+                <button class="sidebar-item @(IsDoctorLabResultsActive ? "active" : string.Empty)" @onclick="OnDoctorLabResultsClick">
                     <span class="sidebar-icon sidebar-icon-lab"></span>
                     Laboratory Results
                 </button>
@@ -319,6 +319,8 @@
                 || uri.Contains("/doctor-consultation-edit")
                 || uri.Contains("/doctor-health-records")
                 || uri.Contains("/doctor-prescriptions")
+                || uri.Contains("/doctor-appointments")
+                || uri.Contains("/doctor-lab-results")
                 || uri.Contains("/doctor-reports"))
                 return "Doctor";
 
@@ -389,6 +391,12 @@
 
     private bool IsDoctorPrescriptionsActive =>
         Navigation.Uri.Contains("/doctor-prescriptions", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsDoctorAppointmentsActive =>
+        Navigation.Uri.Contains("/doctor-appointments", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsDoctorLabResultsActive =>
+        Navigation.Uri.Contains("/doctor-lab-results", StringComparison.OrdinalIgnoreCase);
 
     private bool IsDoctorReportsActive =>
         Navigation.Uri.Contains("/doctor-reports", StringComparison.OrdinalIgnoreCase);
@@ -511,6 +519,10 @@
     private void OnInventoryReportsClick() => Navigation.NavigateTo("/inventory-reports");
 
     private void OnDoctorPrescriptionsClick() => Navigation.NavigateTo("/doctor-prescriptions");
+
+    private void OnDoctorLabResultsClick() => Navigation.NavigateTo("/doctor-lab-results");
+
+    private void OnDoctorAppointmentsClick() => Navigation.NavigateTo("/doctor-appointments");
 
     private void OnDoctorReportsClick() => Navigation.NavigateTo("/doctor-reports");
 
