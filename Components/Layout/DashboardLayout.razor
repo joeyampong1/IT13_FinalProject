@@ -302,14 +302,15 @@
 
             var uri = Navigation.Uri.ToLowerInvariant();
 
-            // Nurse: dashboard + nurse-specific pages
+            // Nurse: dashboard + nurse-specific pages + shared pages
             if (uri.Contains("/nurse-dashboard")
                 || uri.Contains("/nurse-patient-list")
                 || uri.Contains("/nurse-vitals-list")
                 || uri.Contains("/nurse-vitals-edit")
                 || uri.Contains("/nurse-vitals")
                 || uri.Contains("/nurse-notes")
-                || uri.Contains("/nurse-reports"))
+                || uri.Contains("/nurse-reports")
+                || uri.Contains("/patient-profile")) // Patient profile is used by nurses
                 return "Nurse";
 
             // Doctor: dashboard and doctor-specific pages

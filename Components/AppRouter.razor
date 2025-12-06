@@ -150,25 +150,25 @@ else if (path == "admin-reports-analytics")
 else if (path == "patient-management")
 {
     <DashboardLayout>
-        <PatientManagement_Admin />
+        <AdminPatientManagement />
     </DashboardLayout>
 }
 else if (path == "patient-list")
 {
     <DashboardLayout>
-        <PatientList />
+        <DoctorPagePatientList />
     </DashboardLayout>
 }
 else if (path == "health-records")
 {
     <DashboardLayout>
-        <HealthRecords_Admin />
+        <AdminHealthRecords />
     </DashboardLayout>
 }
 else if (path == "invoicing-overview")
 {
     <DashboardLayout>
-        <InvoicingOverview_Admin />
+        <AdminInvoicingOverview />
     </DashboardLayout>
 }
 else if (path == "receipt-overview")
@@ -180,13 +180,13 @@ else if (path == "receipt-overview")
 else if (path == "invoice-pdf")
 {
     <DashboardLayout>
-        <InvoicePdf />
+        <AdminInvoicePdf />
     </DashboardLayout>
 }
 else if (path == "receipt-pdf")
 {
     <DashboardLayout>
-        <ReceiptPdf />
+        <AdminReceiptPdf />
     </DashboardLayout>
 }
 else if (path == "nurse-patient-list")
@@ -225,22 +225,16 @@ else if (path == "nurse-reports")
         <NurseReports />
     </DashboardLayout>
 }
-else if (path == "nurse-notes")
-{
-    <DashboardLayout>
-        <NurseNotes />
-    </DashboardLayout>
-}
 else if (path == "patient-profile")
 {
     <DashboardLayout>
-        <PatientProfile />
+        <NursePatientProfile />
     </DashboardLayout>
 }
 else if (path == "doctor-patient-profile")
 {
     <DashboardLayout>
-        <PatientProfile />
+        <NursePatientProfile />
     </DashboardLayout>
 }
 else if (path == "doctor-vitals-info")
@@ -252,7 +246,7 @@ else if (path == "doctor-vitals-info")
 else if (path == "doctor-consultation")
 {
     <DashboardLayout>
-        <DoctorConsultForm />
+        <DoctorConsultForm_PatientList />
     </DashboardLayout>
 }
 else if (path == "doctor-consultation-edit")
@@ -295,19 +289,19 @@ else if (path.StartsWith("patient-records/"))
 {
     var id = path.Substring("patient-records/".Length);
     <DashboardLayout>
-        <PatientRecords Id="@id" />
+        <AdminPatientRecords Id="@id" />
     </DashboardLayout>
 }
 else if (path == "patient-records")
 {
     <DashboardLayout>
-        <PatientRecords Id="" />
+        <AdminPatientRecords Id="" />
     </DashboardLayout>
 }
 else if (path == "patient-ehr-print")
 {
     <DashboardLayout>
-        <PatientEhrPdf />
+        <AdminPatient_HRPrint />
     </DashboardLayout>
 }
 // Handle user profile routes with role parameter
@@ -367,7 +361,7 @@ else if (path == "roles-permissions")
 else if (path == "auditlogs")
 {
     <DashboardLayout>
-        <AuditLogs />
+        <AdminAuditLogs />
     </DashboardLayout>
 }
 else if (path == "syncmanagement")

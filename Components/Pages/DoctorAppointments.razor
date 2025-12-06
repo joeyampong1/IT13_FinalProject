@@ -11,7 +11,7 @@
         <div class="dashboard-user-info">
             <span class="dashboard-user-email">doc@gmail.com</span>
             <div class="dashboard-user-avatar">
-                👤
+                <span class="icon-user"></span>
             </div>
             <span class="dashboard-user-name">Clinical</span>
         </div>
@@ -19,7 +19,7 @@
 
     <section class="pm-overview">
         <div class="pm-overview-header">
-            <h2 class="pm-section-title">📅 Doctor's Appointments</h2>
+            <h2 class="pm-section-title"><span class="icon-calendar"></span></h2>
             <div class="pm-show-entries">
                 <span>Show</span>
                 <select @bind="PageSize">
@@ -54,25 +54,25 @@
                 {
                     <div class="nurse-note-card">
                         <div class="nurse-note-header">
-                            <span class="nurse-note-time">⏰ @appt.Time | @appt.Status</span>
+                            <span class="nurse-note-time"><span class="icon-clock"></span> @appt.Time | @appt.Status</span>
                         </div>
                         <div class="nurse-note-body">
                             <div class="nurse-note-item">
-                                <span class="nurse-note-icon">👤</span>
+                                <span class="icon-user"></span>
                                 <span class="nurse-note-label">@appt.PatientName</span>
                             </div>
                             <div class="nurse-note-item">
-                                <span class="nurse-note-icon">📋</span>
+                                <span class="nurse-note-icon"><span class="icon-clipboard"></span></span>
                                 <span class="nurse-note-text">@appt.Reason</span>
                             </div>
                             <div class="nurse-note-item">
-                                <span class="nurse-note-icon">⏲️</span>
+                                <span class="nurse-note-icon"><span class="icon-timer"></span></span>
                                 <span class="nurse-note-text">Duration: @appt.Duration</span>
                             </div>
                             @if (!string.IsNullOrEmpty(appt.Tags))
                             {
                                 <div class="nurse-note-item">
-                                    <span class="nurse-note-icon">🏷️</span>
+                                    <span class="nurse-note-icon"><span class="icon-tag"></span></span>
                                     <span class="nurse-note-text">Tags: @appt.Tags</span>
                                 </div>
                             }
@@ -91,9 +91,9 @@
                 @foreach (var appt in UpcomingAppointments)
                 {
                     <div class="appt-upcoming-card">
-                        <div class="appt-upcoming-text">
-                            📅 @appt.Date @appt.Time - @appt.PatientName (@appt.Reason)
-                        </div>
+                        <span class="appt-upcoming-text">
+                            <span class="icon-calendar"></span> @appt.Date @appt.Time - @appt.PatientName (@appt.Reason)
+                        </span>
                     </div>
                 }
             </div>
@@ -142,7 +142,7 @@
                     <label class="nurse-form-label">Date:</label>
                     <div class="appt-input-with-icon">
                         <input type="text" class="nurse-form-input" placeholder="11/20/2024" @bind="NewAppointment.Date" />
-                        <span class="appt-input-icon">📅</span>
+                        <span class="icon-calendar"></span>
                     </div>
                 </div>
 
@@ -150,7 +150,7 @@
                     <label class="nurse-form-label">Time:</label>
                     <div class="appt-input-with-icon">
                         <input type="text" class="nurse-form-input" placeholder="02:30 PM" @bind="NewAppointment.Time" />
-                        <span class="appt-input-icon">🕐</span>
+                        <span class="icon-time"></span>
                     </div>
                 </div>
             </div>
@@ -255,7 +255,7 @@
                     <label class="nurse-form-label">Date:</label>
                     <div class="appt-input-with-icon">
                         <input type="text" class="nurse-form-input" placeholder="11/20/2024" @bind="ReschedulingAppointment.Date" />
-                        <span class="appt-input-icon">📅</span>
+                        <span class="icon-calendar"></span>
                     </div>
                 </div>
 
@@ -263,7 +263,7 @@
                     <label class="nurse-form-label">Time:</label>
                     <div class="appt-input-with-icon">
                         <input type="text" class="nurse-form-input" placeholder="02:30 PM" @bind="ReschedulingAppointment.Time" />
-                        <span class="appt-input-icon">🕐</span>
+                        <span class="icon-time"></span>
                     </div>
                 </div>
             </div>

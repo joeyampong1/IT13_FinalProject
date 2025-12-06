@@ -1,10 +1,13 @@
+/* Reuse Patient Management overview styles for Health Records */
+
 .pm-page {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    font-family: 'Roboto', sans-serif;
 }
 
-/* Header match other dashboard pages */
+/* Header matches Dashboard/Patient Management */
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -22,6 +25,7 @@
     font-size: 28px;
     font-weight: 700;
     margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 .dashboard-subtitle {
@@ -56,6 +60,7 @@
     font-weight: 600;
 }
 
+/* Overview section reused */
 .pm-overview {
     background-color: transparent;
 }
@@ -173,19 +178,17 @@
     background-color: #e9f6f5;
 }
 
+/* Table styling */
 .pm-table-outer {
     margin-top: 14px;
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    width: 100%;
 }
 
 .pm-table-wrapper {
+    max-height: 380px;
     overflow-y: auto;
-    width: 100%;
-    /* Make only the rows scroll: height adapts to window, controls above stay fixed */
-    max-height: calc(100vh - 260px);
 }
 
 .pm-table {
@@ -199,13 +202,6 @@
     padding: 10px 14px;
     font-size: 13px;
     text-align: left;
-    vertical-align: middle;
-}
-
-/* Force center alignment for the Vital Sign Monitoring column */
-.pm-table th.pm-col-vitals,
-.pm-table td.pm-col-vitals {
-    text-align: center !important;
 }
 
 .pm-table thead {
@@ -220,19 +216,18 @@
     width: 60px;
 }
 
-.pm-col-date {
-    width: 110px;
-    text-align: right;
-}
-
 .pm-col-action {
     width: 80px;
     text-align: center;
 }
 
-.pm-col-vitals {
-    width: 160px;
-    text-align: center;
+.pm-col-date {
+    width: 110px;
+    text-align: right;
+}
+
+.pm-col-status {
+    width: 170px;
 }
 
 .pm-patient-name {
@@ -272,22 +267,7 @@
     background-color: #0b6f70;
 }
 
-.pm-add-btn {
-    padding: 4px 12px;      /* smaller, compact pill like nurse view */
-    border-radius: 999px;
-    border: none;
-    background-color: #0f8b8d;
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 0.72rem;
-    cursor: pointer;
-    margin: 0 auto; /* center inside the cell */
-}
-
-.pm-add-btn:hover {
-    background-color: #0b6f70;
-}
-
+/* Pagination reused, but we can keep it simple here */
 .pm-pagination {
     margin-top: 40px;
     display: flex;
