@@ -201,7 +201,7 @@
                 </div>
 
                 <div class="settings-modal-body">
-                    <button class="settings-item">
+                    <button class="settings-item" @onclick="OnNotificationClick">
                         <span class="sidebar-icon sidebar-icon-request"></span>
                         Notification
                     </button>
@@ -302,6 +302,7 @@
 
             // Nurse: dashboard + nurse-specific pages
             if (uri.Contains("/nurse-dashboard")
+                || uri.Contains("/nurse-notification")
                 || uri.Contains("/nurse-patient-list")
                 || uri.Contains("/nurse-vitals-list")
                 || uri.Contains("/nurse-vitals-edit")
@@ -312,6 +313,7 @@
 
             // Doctor: dashboard and doctor-specific pages
             if (uri.Contains("/doctor-dashboard")
+                || uri.Contains("/doctor-notification")
                 || uri.Contains("/patient-list")
                 || uri.Contains("/doctor-patient-profile")
                 || uri.Contains("/doctor-vitals-info")
@@ -326,6 +328,7 @@
 
             // Billing (including PDFs opened from Billing via source=billing)
             if (uri.Contains("/billing-dashboard")
+                || uri.Contains("/billing-notification")
                 || uri.Contains("/billing-patient-overview")
                 || uri.Contains("/billing-computation")
                 || uri.Contains("/billing-cashiering")
@@ -338,6 +341,7 @@
 
             // Inventory
             if (uri.Contains("/inventory-dashboard")
+                || uri.Contains("/inventory-notification")
                 || uri.Contains("/pharmacy-inventory")
                 || uri.Contains("/inventory-prescriptions")
                 || uri.Contains("/inventory-reports"))
@@ -588,6 +592,20 @@
     {
         IsSettingsOpen = false;
         IsAccessibilityOpen = false;
+    }
+
+    private void OnNotificationClick()
+    {
+        var target = CurrentRole.ToLower() switch
+        {
+            "nurse" => "/nurse-notification",
+            "doctor" => "/doctor-notification",
+            "billing" => "/billing-notification",
+            "inventory" => "/inventory-notification",
+            _ => "/admin-notification"
+        };
+        Navigation.NavigateTo(target);
+        CloseSettingsModal();
     }
 
     private void ToggleAccessibilityPanel()

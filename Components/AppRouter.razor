@@ -376,6 +376,22 @@ else if (path == "create-account")
 {
     <CreateAccount />
 }
+else if (path == "notification" || path.EndsWith("-notification"))
+{
+    var rolePart = path == "notification" ? "admin" : path.Split('-')[0];
+    var roleLower = rolePart.ToLower();
+    string baseRoute = roleLower switch
+    {
+        "nurse" => "/nurse-dashboard",
+        "doctor" => "/doctor-dashboard",
+        "billing" => "/billing-dashboard",
+        "inventory" => "/inventory-dashboard",
+        _ => "/dashboard"
+    };
+    <DashboardLayout BaseRoute="@baseRoute">
+        <Notification role="@roleLower" />
+    </DashboardLayout>
+}
 else
 {
     <Login />
