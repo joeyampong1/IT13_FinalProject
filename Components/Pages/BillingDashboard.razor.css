@@ -215,7 +215,7 @@
 
 .activity-search {
     padding: 6px 10px;
-    border-radius: 999px;
+    border-radius: 8px;
     border: 1px solid #c9e3e1;
     font-size: 13px;
     min-width: 260px;
@@ -228,7 +228,7 @@
 
 .activity-action-btn {
     padding: 6px 10px;
-    border-radius: 999px;
+    border-radius: 8px;
     border: 1px solid #c9e3e1;
     background-color: #ffffff;
     cursor: pointer;
@@ -361,7 +361,7 @@
 
 .pm-actions .activity-action-btn {
     padding: 6px 14px;
-    border-radius: 999px;
+    border-radius: 8px;
     border: 1px solid #0f8b8d;
     background-color: #ffffff;
     font-size: 12px;
@@ -371,5 +371,3 @@
 .pm-actions .activity-action-btn:hover {
     background-color: #e9f6f5;
 }
-
-

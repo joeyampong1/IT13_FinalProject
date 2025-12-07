@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .dashboard-header {
@@ -347,7 +347,7 @@
 
 .activity-search {
     padding: 6px 10px;
-    border-radius: 999px;
+    border-radius: 8px;
     border: 1px solid #c9e3e1;
     font-size: 13px;
     min-width: 260px;
@@ -360,7 +360,7 @@
 
 .activity-action-btn {
     padding: 6px 10px;
-    border-radius: 999px;
+    border-radius: 8px;
     border: 1px solid #c9e3e1;
     background-color: #ffffff;
     cursor: pointer;
@@ -438,7 +438,11 @@
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(135deg, rgba(15, 139, 141, 0.55), rgba(12, 113, 111, 0.55)),
+        linear-gradient(
+            135deg,
+            rgba(15, 139, 141, 0.55),
+            rgba(12, 113, 111, 0.55)
+        ),
         url("/images/Background_login.png") center center no-repeat;
     background-size: cover;
     filter: blur(5px);
@@ -522,7 +526,7 @@
     padding: 9px 16px;
     border-radius: 999px;
     border: none;
-    background-color: #1B7471;
+    background-color: #1b7471;
     color: #ffffff;
     font-weight: 600;
     letter-spacing: 0.6px;
@@ -540,8 +544,8 @@
 
 .dashboard-hero-button-secondary {
     background-color: transparent;
-    color: #1B7471;
-    border: 1px solid #1B7471;
+    color: #1b7471;
+    border: 1px solid #1b7471;
 }
 
 .dashboard-hero-button-secondary:hover {
@@ -564,7 +568,11 @@
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(to bottom, rgba(6, 65, 63, 0.9), rgba(18, 165, 161, 0.7)),
+        linear-gradient(
+            to bottom,
+            rgba(6, 65, 63, 0.9),
+            rgba(18, 165, 161, 0.7)
+        ),
         url("/images/Title_bg_image.png") center center no-repeat;
     background-size: cover;
     filter: blur(3px);
@@ -612,5 +620,3 @@
         font-size: 24px;
     }
 }
-
-

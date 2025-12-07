@@ -215,7 +215,7 @@
 
 .activity-search {
     padding: 6px 10px;
-    border-radius: 999px;
+    border-radius: 8px;
     border: 1px solid #c9e3e1;
     font-size: 13px;
     min-width: 260px;
@@ -228,7 +228,7 @@
 
 .activity-action-btn {
     padding: 6px 10px;
-    border-radius: 999px;
+    border-radius: 8px;
     border: 1px solid #c9e3e1;
     background-color: #ffffff;
     cursor: pointer;
@@ -285,5 +285,3 @@
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
 }
-
-
