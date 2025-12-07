@@ -15,8 +15,9 @@
             </button>
         </nav>
 
-        <nav class="sidebar-section">
-            <div class="sidebar-section-title">MODULES</div>
+        <div class="sidebar-nav-container">
+            <nav class="sidebar-section">
+                <div class="sidebar-section-title">MODULES</div>
 
             @* Admin modules *@
             @if (CurrentRole == "Admin")
@@ -176,6 +177,7 @@
                 Settings
             </button>
         </nav>
+        </div>
 
         <button class="sidebar-logout" @onclick="LogoutAsync">LOG OUT</button>
     </aside>
@@ -300,7 +302,7 @@
 
             var uri = Navigation.Uri.ToLowerInvariant();
 
-            // Nurse: dashboard + nurse-specific pages
+            // Nurse: dashboard + nurse-specific pages + shared pages
             if (uri.Contains("/nurse-dashboard")
                 || uri.Contains("/nurse-notification")
                 || uri.Contains("/nurse-patient-list")
@@ -308,7 +310,8 @@
                 || uri.Contains("/nurse-vitals-edit")
                 || uri.Contains("/nurse-vitals")
                 || uri.Contains("/nurse-notes")
-                || uri.Contains("/nurse-reports"))
+                || uri.Contains("/nurse-reports")
+                || uri.Contains("/patient-profile")) // Patient profile is used by nurses
                 return "Nurse";
 
             // Doctor: dashboard and doctor-specific pages

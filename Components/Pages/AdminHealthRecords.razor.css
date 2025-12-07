@@ -1,4 +1,13 @@
-/* Reuse dashboard header look similar to other pages */
+/* Reuse Patient Management overview styles for Health Records */
+
+.pm-page {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Header matches Dashboard/Patient Management */
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -16,6 +25,7 @@
     font-size: 28px;
     font-weight: 700;
     margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 .dashboard-subtitle {
@@ -50,92 +60,91 @@
     font-weight: 600;
 }
 
-.inv-page {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.inv-card {
-    margin-top: 16px;
-    padding: 16px 20px 24px;
-    border-radius: 16px;
-    background-color: #f6fbfb;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-}
-
-.inv-controls {
-    position: sticky;
-    top: 56px; /* below main dashboard header */
-    z-index: 4;
-    padding-bottom: 8px;
-    background: #f6fbfb;
-}
-
-.inv-section-title {
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 16px;
-}
-
-/* Tabs */
-.inv-tabs-row {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-    margin-bottom: 12px;
-}
-
-.inv-tabs-label {
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.inv-tabs {
-    display: inline-flex;
-    background-color: #ffffff;
-    border-radius: 999px;
-    padding: 3px;
-}
-
-.inv-tab {
-    border: none;
-    padding: 8px 18px;
-    border-radius: 999px;
+/* Overview section reused */
+.pm-overview {
     background-color: transparent;
-    cursor: pointer;
+}
+
+.pm-overview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.pm-section-title {
+    font-size: 22px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pm-show-entries {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     font-size: 13px;
 }
 
-.inv-tab-active {
+.pm-show-entries select {
+    padding: 3px 6px;
+    border-radius: 4px;
+    border: 1px solid #c9d9dd;
+    font-size: 13px;
+}
+
+.pm-filters-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pm-alpha-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.pm-filter-pill {
+    min-width: 26px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background-color: #ffffff;
+    border: 1px solid #c9d9dd;
+    color: #333333;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.pm-filter-pill.active,
+.pm-filter-pill:hover {
     background-color: #0f8b8d;
+    border-color: #0f8b8d;
     color: #ffffff;
 }
 
-/* Search and actions */
-.inv-search-row {
+.pm-search-row {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     gap: 12px;
-    margin-bottom: 16px;
 }
 
-.inv-search-box {
+.pm-search-box {
     flex: 1;
     display: flex;
     align-items: center;
-    border-radius: 999px;
-    border: 1px solid #0f8b8d;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 2px solid #0f8b8d;
     background-color: #ffffff;
-    padding: 4px 10px;
 }
 
-.inv-search-icon {
+.pm-search-icon {
     width: 16px;
     height: 16px;
-    margin-right: 6px;
     display: inline-block;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Ccircle cx='7' cy='7' r='4.5' stroke='%230f8b8d' stroke-width='1.6'/%3E%3Cline x1='9.8' y1='9.8' x2='13' y2='13' stroke='%230f8b8d' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
@@ -143,93 +152,108 @@
     background-size: 16px 16px;
 }
 
-.inv-search-input {
+.pm-search-input {
+    flex: 1;
     border: none;
     outline: none;
-    width: 100%;
     font-size: 13px;
 }
 
-.inv-actions {
+.pm-actions {
     display: flex;
+    align-items: center;
     gap: 8px;
 }
 
-.inv-action-btn {
+.pm-actions .activity-action-btn {
     padding: 6px 14px;
     border-radius: 999px;
-    border: none;
+    border: 1px solid #0f8b8d;
     background-color: #ffffff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-    font-size: 13px;
+    font-size: 12px;
     cursor: pointer;
 }
 
-.inv-action-btn:hover {
-    background-color: #f0f7f7;
+.pm-actions .activity-action-btn:hover {
+    background-color: #e9f6f5;
 }
 
-/* List rows */
-.inv-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+/* Table styling */
+.pm-table-outer {
+    margin-top: 14px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
-.inv-row {
+.pm-table-wrapper {
+    max-height: 380px;
+    overflow-y: auto;
+}
+
+.pm-table {
+    width: 100%;
+    border-collapse: collapse;
     background-color: #ffffff;
-    border-radius: 12px;
+}
+
+.pm-table th,
+.pm-table td {
     padding: 10px 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.inv-row-main {
-    display: flex;
-    justify-content: space-between;
-}
-
-.inv-row-columns {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 8px;
-}
-
-.inv-row-col {
-    display: flex;
-    flex-direction: column;
-}
-
-.inv-row-col-action {
-    align-items: flex-end;
-    justify-content: center;
-}
-
-.inv-row-label {
-    font-size: 11px;
-    color: #777;
-}
-
-.inv-row-value {
     font-size: 13px;
+    text-align: left;
+}
+
+.pm-table thead {
+    background-color: #f4fbfb;
+}
+
+.pm-table tbody tr:nth-child(even) {
+    background-color: #f9fcfc;
+}
+
+.pm-col-id {
+    width: 60px;
+}
+
+.pm-col-action {
+    width: 80px;
+    text-align: center;
+}
+
+.pm-col-date {
+    width: 110px;
+    text-align: right;
+}
+
+.pm-col-status {
+    width: 170px;
+}
+
+.pm-patient-name {
     font-weight: 600;
 }
 
-.inv-view-btn {
+.pm-patient-email {
+    font-size: 12px;
+    color: #666;
+}
+
+.pm-view-btn {
     width: 28px;
     height: 28px;
+    padding: 0;
     border-radius: 50%;
     border: none;
     background-color: #0f8b8d;
-    color: #ffffff;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
 }
 
-.inv-view-icon {
+.pm-view-icon {
     width: 14px;
     height: 14px;
     display: inline-block;
@@ -239,82 +263,60 @@
     background-size: 14px 14px;
 }
 
-.inv-view-btn:hover {
+.pm-view-btn:hover {
     background-color: #0b6f70;
 }
 
-/* Pagination bottom - match nurse vitals style */
-.inv-pagination {
+/* Pagination reused, but we can keep it simple here */
+.pm-pagination {
+    margin-top: 40px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 6px;
-    margin-top: 32px;
-
-    position: fixed;
-    right: 80px;
-    bottom: 20px;
     padding: 0;
-    border-radius: 999px;
+    border-radius: 0;
     background: transparent;
     box-shadow: none;
+    border: none;
 }
 
-.inv-pagination-toggle {
-    position: fixed;
-    right: 24px;
-    bottom: 18px;
-    width: 32px;
+.pm-page-btn,
+.pm-page-number {
+    min-width: 32px;
     height: 32px;
-    border-radius: 999px;
-    border: none;
-    background-color: transparent;
-    color: #222222;
-    font-size: 20px;
+    padding: 0 8px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    background-color: #ffffff;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: none;
-    cursor: pointer;
-    z-index: 6;
 }
 
-.inv-pagination-toggle:hover {
-    background-color: transparent;
-    color: #000000;
-}
-
-.inv-page-btn,
-.inv-page-number {
-    padding: 3px 8px;
-    border-radius: 8px;
-    border: 1px solid #c9d9dd;
-    background-color: #ffffff;
-    font-size: 11px;
-    cursor: pointer;
-}
-
-.inv-page-number-active {
+.pm-page-number.active {
     background-color: #0f8b8d;
     color: #ffffff;
     border-color: #0f8b8d;
+    font-weight: 600;
 }
 
-.inv-page-btn:hover,
-.inv-page-number:hover {
-    background-color: #e9f6f5;
+.pm-page-btn:hover,
+.pm-page-number:hover {
+    background-color: #f8fafc;
     border-color: #0f8b8d;
+    color: #0f8b8d;
 }
 
-.inv-page-dots {
-    display: flex;
-    align-items: center;
-}
-
-@media (max-width: 900px) {
-    .inv-row-columns {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+.pm-page-dots {
+    font-size: 14px;
+    color: #6b7280;
+    padding: 0 4px;
+    font-weight: 500;
 }
 
 
