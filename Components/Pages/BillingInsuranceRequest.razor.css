@@ -124,9 +124,74 @@
     margin-bottom: 6px;
 }
 
-.insreq-patient-row {
+.insreq-patient-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.insreq-patient-field label {
+    min-width: 80px;
     font-size: 13px;
-    margin-bottom: 2px;
+    font-weight: 500;
+}
+
+.insreq-patient-search-container {
+    position: relative;
+    flex: 1;
+}
+
+.insreq-patient-search,
+.insreq-patient-input {
+    width: 100%;
+    padding: 6px 10px;
+    border: 1px solid #9ca3af;
+    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
+}
+
+.insreq-patient-search:focus,
+.insreq-patient-input:focus {
+    border-color: #0f8b8d;
+    box-shadow: 0 0 0 2px rgba(15, 139, 141, 0.1);
+}
+
+.insreq-patient-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.insreq-patient-option {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #f3f4f6;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.insreq-patient-option:hover {
+    background-color: #f8f9fa;
+}
+
+.insreq-patient-option:last-child {
+    border-bottom: none;
+}
+
+.insreq-patient-id {
+    font-size: 11px;
+    color: #6b7280;
 }
 
 .insreq-claim-details {
@@ -310,5 +375,3 @@
 .insreq-insurance-action {
     font-size: 14px;
 }
-
-

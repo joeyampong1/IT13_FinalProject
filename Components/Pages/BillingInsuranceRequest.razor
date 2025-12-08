@@ -31,10 +31,40 @@
                 <h2 class="insreq-form-title">Insurance Request Form</h2>
                 <div class="insreq-patient-info">
                     <h3 class="insreq-patient-title">Patient Information</h3>
-                    <div class="insreq-patient-row">Name:</div>
-                    <div class="insreq-patient-row">Patient ID:</div>
-                    <div class="insreq-patient-row">Insurance:</div>
-                    <div class="insreq-patient-row">Date:</div>
+                    <div class="insreq-patient-field">
+                        <label>Name:</label>
+                        <div class="insreq-patient-search-container">
+                            <input type="text" class="insreq-patient-search"
+                                   placeholder="Search or select patient name..."
+                                   @bind="SearchQuery"
+                                   @oninput="OnSearchInput"
+                                   @onfocus="ShowDropdown" />
+                            @if (ShowPatientDropdown && FilteredPatients.Any())
+                            {
+                                <div class="insreq-patient-dropdown">
+                                    @foreach (var patient in FilteredPatients)
+                                    {
+                                        <div class="insreq-patient-option" @onclick="() => SelectPatient(patient)">
+                                            <strong>@patient.Name</strong>
+                                            <span class="insreq-patient-id">ID: @patient.PatientId</span>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="insreq-patient-field">
+                        <label>Patient ID:</label>
+                        <input type="text" class="insreq-patient-input" @bind="SelectedPatientId" readonly />
+                    </div>
+                    <div class="insreq-patient-field">
+                        <label>Insurance:</label>
+                        <input type="text" class="insreq-patient-input" @bind="SelectedInsurance" />
+                    </div>
+                    <div class="insreq-patient-field">
+                        <label>Date:</label>
+                        <input type="date" class="insreq-patient-input" @bind="SelectedDate" />
+                    </div>
                 </div>
 
                 <div class="insreq-claim-details">
@@ -111,6 +141,38 @@
 
     private readonly Dictionary<string, string> DocumentFileNames = new();
 
+    // Patient search functionality
+    private string SearchQuery { get; set; } = string.Empty;
+    private string SelectedPatientId { get; set; } = string.Empty;
+    private string SelectedInsurance { get; set; } = string.Empty;
+    private DateTime SelectedDate { get; set; } = DateTime.Today;
+    private bool ShowPatientDropdown { get; set; } = false;
+
+    private readonly List<PatientInfo> AllPatients = new()
+    {
+        new PatientInfo { Name = "Juan Dela Cruz", PatientId = "P001", Insurance = "PhilHealth" },
+        new PatientInfo { Name = "Maria Santos", PatientId = "P002", Insurance = "Maxicare" },
+        new PatientInfo { Name = "Jose Rizal", PatientId = "P003", Insurance = "PhilHealth" },
+        new PatientInfo { Name = "Ana Garcia", PatientId = "P004", Insurance = "Medicard" },
+        new PatientInfo { Name = "Pedro Alvarez", PatientId = "P005", Insurance = "PhilHealth" },
+        new PatientInfo { Name = "Carmen Silva", PatientId = "P006", Insurance = "IntelliCare" },
+        new PatientInfo { Name = "Miguel Torres", PatientId = "P007", Insurance = "PhilHealth" },
+        new PatientInfo { Name = "Rosa Martinez", PatientId = "P008", Insurance = "Maxicare" }
+    };
+
+    private IEnumerable<PatientInfo> FilteredPatients =>
+        string.IsNullOrWhiteSpace(SearchQuery)
+            ? AllPatients.Take(5) // Show first 5 when no search
+            : AllPatients.Where(p => p.Name.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase))
+                         .Take(5);
+
+    private class PatientInfo
+    {
+        public string Name { get; set; } = string.Empty;
+        public string PatientId { get; set; } = string.Empty;
+        public string Insurance { get; set; } = string.Empty;
+    }
+
     protected override void OnInitialized()
     {
         foreach (var doc in DocumentItems)
@@ -120,6 +182,27 @@
                 DocumentFileNames[doc] = string.Empty;
             }
         }
+    }
+
+    private void OnSearchInput(ChangeEventArgs e)
+    {
+        SearchQuery = e.Value?.ToString() ?? string.Empty;
+        ShowPatientDropdown = true;
+        StateHasChanged();
+    }
+
+    private void ShowDropdown()
+    {
+        ShowPatientDropdown = true;
+    }
+
+    private void SelectPatient(PatientInfo patient)
+    {
+        SearchQuery = patient.Name;
+        SelectedPatientId = patient.PatientId;
+        SelectedInsurance = patient.Insurance;
+        ShowPatientDropdown = false;
+        StateHasChanged();
     }
 
     private async Task OnFileSelected(InputFileChangeEventArgs e, string docKey)
@@ -147,13 +230,3 @@
 
     private void GoToOverview() => Navigation.NavigateTo("/billing-insurance-claims");
 }
-
-
-
-
-
-
-
-
-
-

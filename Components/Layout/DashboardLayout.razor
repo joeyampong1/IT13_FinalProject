@@ -141,7 +141,7 @@
 
             @if (IsUserMenuExpanded)
             {
-                <button class="sidebar-subitem @(IsUserProfileActive ? "active" : string.Empty)" 
+                <button class="sidebar-subitem @(IsUserProfileActive ? "active" : string.Empty)"
                         @onclick:stopPropagation
                         @onclick:preventDefault
                         @onclick="OnUserProfileClick">
@@ -269,8 +269,8 @@
 @code {
     [Inject] private NavigationManager Navigation { get; set; } = null!;
     [Parameter] public string BaseRoute { get; set; } = "/";
-    
-    private string GetRoleSpecificRoute(string route) 
+
+    private string GetRoleSpecificRoute(string route)
     {
         if (string.IsNullOrEmpty(BaseRoute) || BaseRoute == "/")
             return $"/{route}";
@@ -335,6 +335,7 @@
                 || uri.Contains("/billing-patient-overview")
                 || uri.Contains("/billing-computation")
                 || uri.Contains("/billing-cashiering")
+
                 || uri.Contains("/billing-insurance-claims")
                 || uri.Contains("/billing-insurance-request")
                 || uri.Contains("/billing-reports")
@@ -426,6 +427,7 @@
         Navigation.Uri.Contains("/billing-patient-overview", StringComparison.OrdinalIgnoreCase)
         || Navigation.Uri.Contains("/billing-computation", StringComparison.OrdinalIgnoreCase)
         || Navigation.Uri.Contains("/billing-cashiering", StringComparison.OrdinalIgnoreCase)
+
         || ((Navigation.Uri.Contains("/receipt-pdf", StringComparison.OrdinalIgnoreCase)
              || Navigation.Uri.Contains("/invoice-pdf", StringComparison.OrdinalIgnoreCase))
             && Navigation.Uri.Contains("source=billing", StringComparison.OrdinalIgnoreCase));
@@ -448,18 +450,18 @@
 
     private bool IsUserProfileActive =>
         Navigation.Uri.Contains("/user-profile", StringComparison.OrdinalIgnoreCase);
-        
+
     private bool IsRolesAndPermissionsActive =>
         Navigation.Uri.Contains("/roles-permissions", StringComparison.OrdinalIgnoreCase);
-        
+
     private bool IsAuditLogsActive =>
         Navigation.Uri.Contains("/auditlogs", StringComparison.OrdinalIgnoreCase);
-        
+
     private bool IsSyncManagementActive =>
         Navigation.Uri.Contains("/syncmanagement", StringComparison.OrdinalIgnoreCase);
-        
+
     private void OnAuditLogsClick() => Navigation.NavigateTo("/auditlogs");
-    
+
     private void OnSyncManagementClick() => Navigation.NavigateTo("/syncmanagement");
 
     private bool IsUserMenuExpanded { get; set; }
@@ -544,11 +546,11 @@
         }
         Navigation.NavigateTo($"/user-profile/role/{role}", forceLoad: true);
     }
-    
+
     private string GetCurrentRoleFromUrl()
     {
         var uri = Navigation.Uri.ToLower();
-        
+
         // Check if we're already on the user profile page
         if (uri.Contains("/user-profile/role/"))
         {
@@ -560,14 +562,14 @@
                     return char.ToUpper(role[0]) + role.Substring(1).ToLower();
             }
         }
-        
+
         // Fall back to detecting role from URL patterns
         if (uri.Contains("/nurse-") || uri.Contains("/nurse/")) return "Nurse";
         if (uri.Contains("/doctor-") || uri.Contains("/doctor/")) return "Doctor";
         if (uri.Contains("/billing-") || uri.Contains("/billing/")) return "Billing";
         if (uri.Contains("/inventory-") || uri.Contains("/inventory/")) return "Inventory";
         if (uri.Contains("/admin-") || uri.Contains("/admin/")) return "Admin";
-        
+
         // If no role detected in URL, return the current role
         return CurrentRole;
     }

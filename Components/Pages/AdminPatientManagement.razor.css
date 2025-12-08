@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 /* Match the Dashboard header layout & styling */
@@ -14,7 +14,7 @@
     margin: -10px -16px 6px;
     background-color: #f3faf9;
     border-bottom: 1px solid #e0f0ee;
-    position: sticky;   /* keep header visible on scroll */
+    position: sticky; /* keep header visible on scroll */
     top: 0;
     z-index: 5;
 }
@@ -230,44 +230,44 @@
 
 .pm-table th,
 .pm-table td {
-padding: 6px 10px;
-font-size: 13px;
-text-align: left;
+    padding: 6px 10px;
+    font-size: 13px;
+    text-align: left;
 }
 
 .pm-table thead {
-background-color: #f4fbfb;
+    background-color: #f4fbfb;
 }
 
 .pm-table tbody tr:nth-child(even) {
-background-color: #f9fcfc;
+    background-color: #f9fcfc;
 }
 
 .pm-col-id {
-width: 60px;
+    width: 60px;
 }
 
 .pm-col-name {
-white-space: nowrap;
+    white-space: nowrap;
 }
 
 .pm-col-email {
-white-space: nowrap;
+    white-space: nowrap;
 }
 
 .pm-col-action {
-width: 80px;
-text-align: center;
+    width: 80px;
+    text-align: center;
 }
 
 /* Date of Visit column: keep it compact and right-aligned without forcing a large width */
 .pm-col-date {
-text-align: right;
-white-space: nowrap;
+    text-align: right;
+    white-space: nowrap;
 }
 
 .pm-patient-name {
-font-weight: 600;
+    font-weight: 600;
 }
 
 .pm-patient-email {
@@ -354,6 +354,67 @@ font-weight: 600;
     font-weight: 500;
 }
 
+.inv-pagination-toggle {
+    position: fixed;
+    right: 24px;
+    bottom: 18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: none;
+    background-color: transparent;
+    color: #222222;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    cursor: pointer;
+    z-index: 6;
+}
+
+.inv-pagination-toggle:hover {
+    background-color: transparent;
+    color: #000000;
+}
+
+.inv-pagination {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    margin-top: 32px;
+
+    position: fixed;
+    right: 80px;
+    bottom: 20px;
+    padding: 0;
+    border-radius: 999px;
+    background: transparent;
+    box-shadow: none;
+}
+
+.inv-page-btn,
+.inv-page-number {
+    padding: 3px 8px;
+    border-radius: 8px;
+    border: 1px solid #c9d9dd;
+    background-color: #ffffff;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.inv-page-number-active {
+    background-color: #0f8b8d;
+    color: #ffffff;
+    border-color: #0f8b8d;
+}
+
+.inv-page-dots {
+    display: flex;
+    align-items: center;
+}
+
 /* ===================== PATIENT INFORMATION FORM ===================== */
 .pm-patient-form {
     margin-top: 16px;
@@ -365,14 +426,14 @@ font-weight: 600;
 
 .pm-form-header {
     display: flex;
-    align-items: center;   /* vertically center icon + text */
+    align-items: center; /* vertically center icon + text */
     gap: 6px;
     margin-bottom: 16px;
 }
 
 .pm-form-icon {
     font-size: 20px;
-    line-height: 1;         /* remove extra vertical space around icon */
+    line-height: 1; /* remove extra vertical space around icon */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -503,5 +564,3 @@ font-weight: 600;
 .pm-form-save:hover {
     background-color: #0b6f70;
 }
-
-

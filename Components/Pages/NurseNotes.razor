@@ -1,10 +1,32 @@
 @page "/nurse-notes"
 @layout Layout.DashboardLayout
 
-<div class="nn-page">
-        <div class="nn-header">
-            <h1 class="nn-title">Nursing Notes</h1>
-            <p class="nn-subtitle">Manage and view patient nursing notes and observations</p>
+<div class="pm-page">
+    <header class="dashboard-header">
+        <div>
+            <h1 class="dashboard-title">Nursing Notes</h1>
+            <p class="dashboard-subtitle">Welcome back Clinical Staff!</p>
+        </div>
+
+        <div class="dashboard-user-info">
+            <span class="dashboard-user-email">nurse@gmail.com</span>
+            <div class="dashboard-user-avatar">👤</div>
+            <span class="dashboard-user-name">Clinical</span>
+        </div>
+    </header>
+
+    <section class="pm-overview">
+        <div class="pm-overview-header">
+            <h2 class="pm-section-title">Patient Notes Overview</h2>
+            <div class="pm-show-entries">
+                <span>Show</span>
+                <select>
+                    <option>5</option>
+                    <option>10</option>
+                    <option>25</option>
+                </select>
+                <span>entries</span>
+            </div>
         </div>
 
         <div class="nn-content">
@@ -14,16 +36,21 @@
                     <button class="nn-btn nn-btn-primary">Add New Note</button>
                 </div>
 
-                <div class="nn-filters">
-                    <div class="nn-search-box">
-                        <input type="text" placeholder="Search notes..." class="nn-search-input" />
+                <div class="pm-filters-row">
+                    <div class="pm-search-row">
+                        <div class="pm-search-box">
+                            <span class="pm-search-icon"></span>
+                            <input class="pm-search-input" placeholder="Search Notes" />
+                        </div>
+
+                        <div class="pm-actions">
+                            <button class="activity-action-btn">Sort</button>
+                            <button class="activity-action-btn">Filters</button>
+                        </div>
                     </div>
-                    <select class="nn-filter-select">
-                        <option>All Patients</option>
-                        <option>My Patients</option>
-                        <option>Recent</option>
-                    </select>
                 </div>
+
+
 
                 <div class="nn-notes-list">
                     @for (int i = 1; i <= 5; i++)
@@ -53,4 +80,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+</div>

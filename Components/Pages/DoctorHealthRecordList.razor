@@ -78,36 +78,36 @@
             </div>
         </div>
 
-        <button type="button" class="pm-pagination-toggle" @onclick="TogglePagination" aria-label="Hide or show page buttons">
+        <button type="button" class="inv-pagination-toggle" @onclick="TogglePagination" aria-label="Hide or show page buttons">
             <span>@(ShowPagination ? "›" : "‹")</span>
         </button>
 
         @if (ShowPagination)
         {
-            <div class="pm-pagination">
-                <button class="pm-page-btn">Previous</button>
-                <button class="pm-page-number active">1</button>
-                <button class="pm-page-number">2</button>
-                <button class="pm-page-number">3</button>
-                <span class="pm-page-dots">...</span>
-                <button class="pm-page-number">8</button>
-                <button class="pm-page-btn">Next</button>
+            <div class="inv-pagination">
+                <button class="inv-page-btn">Previous</button>
+                <button class="inv-page-number inv-page-number-active">1</button>
+                <button class="inv-page-number">2</button>
+                <button class="inv-page-number">3</button>
+                <span class="inv-page-dots">...</span>
+                <button class="inv-page-number">8</button>
+                <button class="inv-page-btn">Next</button>
             </div>
         }
     </section>
 </div>
 
 @code {
-    
+
 
     private record DoctorHealthRecordRow(string Id, string PatientName, string PatientEmail, string AssessmentStatus, string DateOfVisit);
 
-    
-    
+
+
     private bool ShowPagination { get; set; } = true;
     private bool ShowLetters { get; set; } = false;
     private char? ActiveLetter { get; set; }
-    
+
     private readonly char[] Alphabet =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
@@ -139,9 +139,9 @@
         ShowPagination = !ShowPagination;
     }
 
-    
 
-    
+
+
 
     private IEnumerable<DoctorHealthRecordRow> GetOrderedRecords(char letter)
     {
@@ -161,13 +161,3 @@
         return startsWithLetter.Concat(others);
     }
 }
-
-
-
-
-
-
-
-
-
-

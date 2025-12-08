@@ -171,6 +171,7 @@ else if (path == "invoicing-overview")
         <AdminInvoicingOverview />
     </DashboardLayout>
 }
+
 else if (path == "receipt-overview")
 {
     <DashboardLayout>
@@ -310,7 +311,7 @@ else if (path.StartsWith("user-profile/role/"))
     var role = path.Substring("user-profile/role/".Length).ToLower();
     string baseRoute = "/";
     string roleName = "";
-    
+
     // Set the base route based on the role
     switch (role.ToLower())
     {
@@ -335,16 +336,16 @@ else if (path.StartsWith("user-profile/role/"))
             roleName = "Admin";
             break;
     }
-    
+
     <DashboardLayout BaseRoute="@baseRoute">
         <UserProfile Role="@roleName" />
     </DashboardLayout>
 }
 // Fallback for old user profile routes
-else if (path == "user-profile" || 
-         path == "doctor-user-profile" || 
-         path == "nurse-user-profile" || 
-         path == "billing-user-profile" || 
+else if (path == "user-profile" ||
+         path == "doctor-user-profile" ||
+         path == "nurse-user-profile" ||
+         path == "billing-user-profile" ||
          path == "inventory-user-profile")
 {
     // For backward compatibility, redirect to the new URL format

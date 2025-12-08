@@ -397,7 +397,7 @@
     background-color: #ef4444;
 }
 
-.pi-pagination-toggle {
+.inv-pagination-toggle {
     position: fixed;
     right: 24px;
     bottom: 18px;
@@ -416,12 +416,12 @@
     z-index: 6;
 }
 
-.pi-pagination-toggle:hover {
+.inv-pagination-toggle:hover {
     background-color: transparent;
     color: #000000;
 }
 
-.pi-pagination {
+.inv-pagination {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -437,8 +437,8 @@
     box-shadow: none;
 }
 
-.pi-page-btn,
-.pi-page-number {
+.inv-page-btn,
+.inv-page-number {
     padding: 3px 8px;
     border-radius: 8px;
     border: 1px solid #c9d9dd;
@@ -447,13 +447,13 @@
     cursor: pointer;
 }
 
-.pi-page-number.active {
+.inv-page-number-active {
     background-color: #0f8b8d;
     color: #ffffff;
     border-color: #0f8b8d;
 }
 
-.pi-page-dots {
+.inv-page-dots {
     display: flex;
     align-items: center;
 }

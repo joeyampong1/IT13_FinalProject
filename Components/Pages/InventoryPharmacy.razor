@@ -111,20 +111,20 @@
             </div>
         </div>
 
-        <button type="button" class="pi-pagination-toggle" @onclick="TogglePagination" aria-label="Hide or show page buttons">
+        <button type="button" class="inv-pagination-toggle" @onclick="TogglePagination" aria-label="Hide or show page buttons">
             <span>@(ShowPagination ? "›" : "‹")</span>
         </button>
 
         @if (ShowPagination)
         {
-            <div class="pi-pagination">
-                <button class="pi-page-btn">Previous</button>
-                <button class="pi-page-number active">1</button>
-                <button class="pi-page-number">2</button>
-                <button class="pi-page-number">3</button>
-                <span class="pi-page-dots">...</span>
-                <button class="pi-page-number">8</button>
-                <button class="pi-page-btn">Next</button>
+            <div class="inv-pagination">
+                <button class="inv-page-btn">Previous</button>
+                <button class="inv-page-number inv-page-number-active">1</button>
+                <button class="inv-page-number">2</button>
+                <button class="inv-page-number">3</button>
+                <span class="inv-page-dots">...</span>
+                <button class="inv-page-number">8</button>
+                <button class="inv-page-btn">Next</button>
             </div>
         }
     </section>
@@ -434,7 +434,7 @@
     private bool ShowStockOutPanel { get; set; }
     private bool ShowLetters { get; set; } = false;
     private char? ActiveLetter { get; set; }
-    
+
     private readonly char[] Alphabet =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
@@ -516,13 +516,3 @@
         ShowStockOutPanel = false;
     }
 }
-
-
-
-
-
-
-
-
-
-

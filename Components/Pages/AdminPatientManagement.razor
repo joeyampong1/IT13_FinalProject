@@ -83,16 +83,20 @@
                 </div>
             </div>
 
+            <button type="button" class="inv-pagination-toggle" @onclick="TogglePagination" aria-label="Hide or show page buttons">
+                <span>@(ShowPagination ? "›" : "‹")</span>
+            </button>
+
             @if (ShowPagination)
             {
-                <div class="pm-pagination">
-                    <button class="pm-page-btn">Previous</button>
-                    <button class="pm-page-number active">1</button>
-                    <button class="pm-page-number">2</button>
-                    <button class="pm-page-number">3</button>
-                    <span class="pm-page-dots">...</span>
-                    <button class="pm-page-number">8</button>
-                    <button class="pm-page-btn">Next</button>
+                <div class="inv-pagination">
+                    <button class="inv-page-btn">Previous</button>
+                    <button class="inv-page-number inv-page-number-active">1</button>
+                    <button class="inv-page-number">2</button>
+                    <button class="inv-page-number">3</button>
+                    <span class="inv-page-dots">...</span>
+                    <button class="inv-page-number">8</button>
+                    <button class="inv-page-btn">Next</button>
                 </div>
             }
         </section>
@@ -200,11 +204,11 @@
     private bool IsEditMode { get; set; }
     private bool ShowPagination { get; set; } = true;
 
-    
+
     private record PatientRow(string Id, string Name, string Email, string DateOfVisit);
 
-    
-    
+
+
 
     private List<PatientRow> Patients = new()
     {
@@ -313,9 +317,9 @@
         FirstName = MiddleName = LastName = Address = ContactNumber = EmailAddress = Gender = CivilStatus = Occupation = Nationality = Religion = EmergencyContactName = EmergencyContactRelationship = EmergencyContactNumber = string.Empty;
     }
 
-    
 
-    
+
+
 
     private IEnumerable<PatientRow> GetOrderedPatients()
     {
@@ -327,13 +331,3 @@
         ShowPagination = !ShowPagination;
     }
 }
-
-
-
-
-
-
-
-
-
-
