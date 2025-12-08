@@ -104,6 +104,7 @@
     border: 1px solid #0f8b8d;
     background: #ffffff;
     cursor: pointer;
+    accent-color: #0f8b8d;
 }
 
 .admin-company-name {
@@ -249,10 +250,21 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 12px;
+    padding: 4px 12px;
     border-radius: 10px;
     border: 2px solid #0f8b8d;
     background-color: #ffffff;
+}
+
+.inv-search-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    display: inline-block;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Ccircle cx='7' cy='7' r='4.5' stroke='%230f8b8d' stroke-width='1.6'/%3E%3Cline x1='9.8' y1='9.8' x2='13' y2='13' stroke='%230f8b8d' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px 16px;
 }
 
 .inv-search-input {
@@ -359,6 +371,28 @@
     align-items: center;
     justify-content: flex-end;
     gap: 8px;
+}
+
+.inv-decision-btn-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.inv-decision-label {
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.inv-decision-label-reject {
+    color: #e55353;
+}
+
+.inv-decision-label-accept {
+    color: #3bb273;
 }
 
 .inv-decision-btn {
